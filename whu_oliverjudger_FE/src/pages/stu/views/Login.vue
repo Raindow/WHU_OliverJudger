@@ -11,6 +11,12 @@
       <div id="PW" class="item">
       密码: <input type="password" v-model.trim="inputContent" placeholder=" 请输入 ... ">
       </div>
+      <div class="item">
+        <el-radio-group v-model="radio">
+        <el-radio v-model="radio" label="stu">学生</el-radio>
+        <el-radio v-model="radio" label="tea">老师</el-radio>
+        </el-radio-group>
+      </div>
       <el-button class="login_bt" type="primary" @click="login" round :loading="isBtnLoading">登录</el-button>
       <el-button class="login_bt" type="primary" @click="cancel" round>取消</el-button>
     </div>
@@ -59,7 +65,9 @@ export default {
     return {
       userName: '',
       passWord: '',
-      isBtnLoading: false
+      isBtnLoading: false,
+      radio: '1'
+
     }
   }
 }

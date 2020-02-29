@@ -18,6 +18,12 @@
       邮箱:
       <input v-model.trim="inputContent" placeholder=" 请输入 ... ">
     </div>
+    <div class="item">
+      <el-radio-group v-model="radio">
+        <el-radio v-model="radio" label="stu">学生</el-radio>
+        <el-radio v-model="radio" label="tea">老师</el-radio>
+      </el-radio-group>
+    </div>
     <div>
       <el-button type="primary" @click="register">注册</el-button>
       <el-button type="primary" @click="cancel">取消</el-button>
@@ -46,6 +52,7 @@ export default {
   },
   data () {
     return {
+      radio: '1'
 
     }
   }
