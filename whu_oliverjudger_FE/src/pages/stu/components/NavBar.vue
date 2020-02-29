@@ -7,8 +7,8 @@
       {{ item.navItem }}
     </el-menu-item>
     <el-menu-item type="flex" justify="end">
-      <el-button type="info">注册</el-button>
-      <el-button type="info">登陆</el-button>
+      <el-button type="info" @click="register">注册</el-button>
+      <el-button type="info" @click="login">登陆</el-button>
 
     </el-menu-item>
   </el-menu>
@@ -18,6 +18,16 @@
 <script>
 export default {
   name: 'NavBar',
+  methods: {
+    // 上方注册按钮函数
+    register () {
+      this.$router.push({path: '../Register'})
+    },
+    // 上方登录按钮函数
+    login () {
+      this.$router.push({path: '../Login'})
+    }
+  },
   data () {
     return {
       navList: [
