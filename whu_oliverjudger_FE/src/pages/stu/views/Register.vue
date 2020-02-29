@@ -1,27 +1,27 @@
 //注册界面
 <template>
-  <div>
+  <div class="register_form">
     <!--     input 框: trim 自动过滤用户输入的首尾空格 -->
-    <p>
+    <div class="item">
       账号:
       <input v-model.trim="ID" placeholder=" 请输入 ... ">
-    </p>
-    <p>
+    </div>
+    <div class="item">
       密码:
       <input type="password" v-model.trim="inputContent" placeholder=" 请输入 ... ">
-    </p>
-    <p>
+    </div>
+    <div class="item">
       再次输入密码:
       <input type="password" v-model.trim="inputContent" placeholder=" 请输入 ... ">
-    </p>
-    <p>
+    </div>
+    <div class="item">
       邮箱:
       <input v-model.trim="inputContent" placeholder=" 请输入 ... ">
-    </p>
-    <p>
+    </div>
+    <div>
       <el-button type="primary" @click="register">注册</el-button>
       <el-button type="primary" @click="cancel">取消</el-button>
-    </p>
+    </div>
   </div>
 </template>
 
@@ -53,5 +53,13 @@ export default {
 </script>
 
 <style scoped>
+  .register_form {
+    padding-top: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+.item {
+  margin:10px 5px 15px 20px;
 
+}
 </style>
