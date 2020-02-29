@@ -1,19 +1,17 @@
 //登录界面
 <template>
-  <div>
+  <div class="login">
     <!--     input 框: trim 自动过滤用户输入的首尾空格 -->
-    <p>
+    <div>
       账号:
       <input v-model.trim="ID" placeholder=" 请输入 ... ">
-    </p>
-    <p>
-      密码:
-      <input type="password" v-model.trim="inputContent" placeholder=" 请输入 ... ">
-    </p>
-    <p>
-      <el-button type="info" @click="login">登陆</el-button>
-      <el-button type="info" @click="cancel">取消</el-button>
-    </p>
+    </div>
+
+    <div>
+      密码: <input type="password" v-model.trim="inputContent" placeholder=" 请输入 ... ">
+    </div>
+      <el-button type="primary" @click="login">登陆</el-button>
+      <el-button type="primary" @click="cancel">取消</el-button>
   </div>
 
 </template>

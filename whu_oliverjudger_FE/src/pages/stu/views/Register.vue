@@ -19,8 +19,8 @@
       <input v-model.trim="inputContent" placeholder=" 请输入 ... ">
     </p>
     <p>
-      <el-button type="info" @click="register">注册</el-button>
-      <el-button type="info" @click="cancel">取消</el-button>
+      <el-button type="primary" @click="register">注册</el-button>
+      <el-button type="primary" @click="cancel">取消</el-button>
     </p>
   </div>
 </template>
