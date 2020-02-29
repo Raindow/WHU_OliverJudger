@@ -1,13 +1,10 @@
 <template>
-  <nav>
-    <ul>
-      <li>
-        <router-link to="/" exact>Home</router-link>
-        <router-link to="/Contests" exact>Contest</router-link>
-        <router-link to="/Problems" exact>Problems</router-link>
-      </li>
-    </ul>
-  </nav>
+  <el-menu :default-active="this.$route.path" router mode="horizontal">
+    <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name">
+      {{ item.navItem }}
+    </el-menu-item>
+  </el-menu>
+
 </template>
 
 <script>
@@ -15,35 +12,15 @@ export default {
   name: 'NavBar',
   data () {
     return {
-
+      navList: [
+        {name: '/', navItem: 'Home'},
+        {name: '/Contests', navItem: 'Contests'},
+        {name: '/Problems', navItem: 'Problems'}
+      ]
     }
   }
 }
 </script>
 
 <style scoped>
-  ul{
-    list-style-type: none;/*消除黑点*/
-    text-align: center;
-    margin:0;
-  }
-  li{
-    display: inline-block;
-    margin: 0 10px;
-  }
-  a{
-    color: #fff;/*设置字体颜色*/
-    text-decoration: none;/*消除下划线*/
-    padding: 12px;
-    border-radius: 5px;
-  }
-  nav{
-    background: grey;
-    padding: 30px 0;
-  }
-  /*选中则发生一些变化*/
-  .router-link-active{
-    background: rgba(255,255,255,0.8);
-    color: #444;
-  }
 </style>
