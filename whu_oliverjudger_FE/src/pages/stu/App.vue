@@ -15,7 +15,7 @@
 
 <script>
 import NavBar from '@/pages/stu/components/NavBar.vue'
-import Home from './views/Home'
+import Home from './views/general/Home'
 import Problems from './views/Problems'
 import Contests from './views/Contests'
 export default {
@@ -38,4 +38,5 @@ export default {
   color: #2c3e50;
   margin-top: 10px;
 }
+
 </style>

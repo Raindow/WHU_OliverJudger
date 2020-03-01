@@ -1,4 +1,4 @@
-import Home from '../views/Home'
+import Home from '../views/general/Home'
 import Problems from '../views/Problems'
 import Contests from '../views/Contests'
 import Login from '../views/Login'
