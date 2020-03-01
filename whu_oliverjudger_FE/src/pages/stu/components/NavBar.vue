@@ -5,9 +5,20 @@
     </el-menu-item>
     <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name">
       {{ item.navItem }}
-    </el-menu-item>
-    <el-button type="primary" @click="register">注册</el-button>
-    <el-button type="primary" @click="login">登陆</el-button>
+    </el-menu-item >
+    <el-button v-show="!LogCondition" type="primary" @click="register">注册</el-button>
+    <el-button v-show="!LogCondition" type="primary" @click="login">登陆</el-button>
+    <el-dropdown>
+    <span class="el-dropdown-link" v-show="!LogCondition">
+    Stu_Name<i class="el-icon-arrow-down el-icon--right"></i>
+    </span>
+    <el-dropdown-menu slot="dropdown">
+      <el-dropdown-item>Home</el-dropdown-item>
+      <el-dropdown-item>Submissions</el-dropdown-item>
+      <el-dropdown-item>Setting</el-dropdown-item>
+      <el-dropdown-item divided>Log out</el-dropdown-item>
+    </el-dropdown-menu>
+    </el-dropdown>
   </el-menu>
 
 </template>
@@ -31,7 +42,8 @@ export default {
         {name: '/', navItem: 'Home'},
         {name: '/Contests', navItem: 'Contests'},
         {name: '/Problems', navItem: 'Problems'}
-      ]
+      ],
+      LogCondition: false
     }
   }
 }
