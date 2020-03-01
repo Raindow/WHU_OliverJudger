@@ -6,10 +6,10 @@
     </div>
     <div class="login_form">
       <div id="ID" class="item">
-      账号: <input v-model.trim="ID" placeholder=" 请输入 ... ">
+      <input v-model.trim="ID" placeholder=" 请输入账号">
       </div>
       <div id="PW" class="item">
-      密码: <input type="password" v-model.trim="inputContent" placeholder=" 请输入 ... ">
+      密码: <input type="password" v-model.trim="inputContent" placeholder=" 请输入密码">
       </div>
       <div class="item">
         <el-radio-group v-model="radio">
@@ -41,6 +41,7 @@ export default {
     // 登录界面登录按钮函数
     login () {
       if (!this.userName) {
+        // this.$message.error 常用于主动操作的反馈提示
         this.$message.error('请输入用户名')
         return
       }
@@ -56,17 +57,13 @@ export default {
   //   }
   // },
   computed: {
-    btnText () {
-      if (this.isBtnLoading) return '登录中...'
-      return '登录'
-    }
   },
   data () {
     return {
       userName: '',
       passWord: '',
       isBtnLoading: false,
-      radio: '1'
+      radio: 'stu'
 
     }
   }

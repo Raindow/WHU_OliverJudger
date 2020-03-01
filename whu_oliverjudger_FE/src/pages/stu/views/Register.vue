@@ -3,23 +3,21 @@
   <div class="register_form">
     <!--     input 框: trim 自动过滤用户输入的首尾空格 -->
     <div class="item">
-      账号:
-      <input v-model.trim="ID" placeholder=" 请输入 ... ">
+      <input v-model.trim="ID" placeholder=" 请输入账号 ">
     </div>
     <div class="item">
-      密码:
-      <input type="password" v-model.trim="inputContent" placeholder=" 请输入 ... ">
+      <input type="password" v-model.trim="inputContent" placeholder=" 请输入密码">
     </div>
     <div class="item">
-      再次输入密码:
-      <input type="password" v-model.trim="inputContent" placeholder=" 请输入 ... ">
+      <input type="password" v-model.trim="inputContent" placeholder=" 请再次输入密码">
     </div>
     <div class="item">
-      邮箱:
-      <input v-model.trim="inputContent" placeholder=" 请输入 ... ">
+      <input v-model.trim="inputContent" placeholder=" 请输入邮箱">
     </div>
     <div class="item">
       <el-radio-group v-model="radio">
+        // v-model 绑定变量，意味着其值为Radio的label属性的值
+        // label 可以是String、Number或Boolean
         <el-radio v-model="radio" label="stu">学生</el-radio>
         <el-radio v-model="radio" label="tea">老师</el-radio>
       </el-radio-group>
@@ -46,13 +44,13 @@ export default {
       }
     },
     // 注册界面登录按钮函数
-    login () {
-
+    register () {
     }
   },
   data () {
     return {
-      radio: '1'
+      // 新建了名为radio的数据模型，通过v-model把两个单选按钮都绑定radio
+      radio: 'stu'
 
     }
   }
