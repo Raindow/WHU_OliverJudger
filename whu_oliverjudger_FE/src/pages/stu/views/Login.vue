@@ -9,7 +9,7 @@
       <input v-model.trim="ID" placeholder=" 请输入账号">
       </div>
       <div id="PW" class="item">
-      密码: <input type="password" v-model.trim="inputContent" placeholder=" 请输入密码">
+      <input type="password" v-model.trim="inputContent" placeholder=" 请输入密码">
       </div>
       <div class="item">
         <el-radio-group v-model="radio">
