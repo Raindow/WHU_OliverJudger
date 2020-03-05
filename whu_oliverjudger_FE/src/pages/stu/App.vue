@@ -15,16 +15,10 @@
 
 <script>
 import NavBar from '@/pages/stu/components/NavBar.vue'
-import Home from './views/general/Home'
-import Problems from './views/Problems'
-import Contests from './views/Contests'
 export default {
   name: 'App',
   components: {
-    'NavBar': NavBar,
-    'Home': Home,
-    'Problems': Problems,
-    'Contests': Contests
+    'NavBar': NavBar
   }
 }
 </script>
