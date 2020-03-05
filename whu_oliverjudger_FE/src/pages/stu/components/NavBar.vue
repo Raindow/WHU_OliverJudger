@@ -10,8 +10,8 @@
     </el-menu-item >
     <div class="right_part">
 
-    <el-button v-show="!LogCondition" type="primary" @click="registerVisible = true">注册</el-button>
-    <el-button v-show="!LogCondition" type="primary" @click="loginVisible = true">登录</el-button>
+    <el-button v-show="LogCondition" type="primary" @click="registerVisible = true">注册</el-button>
+    <el-button v-show="LogCondition" type="primary" @click="loginVisible = true">登录</el-button>
 
     <el-dialog title="登录" :visible.sync="loginVisible" :before-close="handleClose">
         <login></login>
@@ -22,7 +22,7 @@
     </el-dialog>
 
     <el-dropdown>
-    <span class="el-dropdown-link" v-if="LogCondition">
+    <span class="el-dropdown-link" v-if="!LogCondition">
     Stu_Name<i class="el-icon-arrow-down el-icon--right"></i>
     </span>
     <el-dropdown-menu slot="dropdown">
