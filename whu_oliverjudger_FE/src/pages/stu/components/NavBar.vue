@@ -9,10 +9,20 @@
       {{ item.navItem }}
     </el-menu-item >
     <div class="right_part">
-    <el-button v-if="LogCondition" type="info" plain @click="register">注册</el-button>
-    <el-button v-if="LogCondition" type="info" plain @click="login">登陆</el-button>
+
+    <el-button v-show="!LogCondition" type="primary" @click="registerVisible = true">注册</el-button>
+    <el-button v-show="!LogCondition" type="primary" @click="loginVisible = true">登录</el-button>
+
+    <el-dialog title="登录" :visible.sync="loginVisible" :before-close="handleClose">
+        <login></login>
+    </el-dialog>
+
+    <el-dialog title="注册" :visible.sync="registerVisible" :before-close="handleClose">
+        <register></register>
+    </el-dialog>
+
     <el-dropdown>
-    <span class="el-dropdown-link" v-if="!LogCondition">
+    <span class="el-dropdown-link" v-if="LogCondition">
     Stu_Name<i class="el-icon-arrow-down el-icon--right"></i>
     </span>
     <el-dropdown-menu slot="dropdown">
@@ -28,6 +38,8 @@
 </template>
 
 <script>
+import Login from '@/pages/stu/views/Login.vue'
+import Register from '@/pages/stu/views/Register.vue'
 export default {
   name: 'NavBar',
   methods: {
@@ -47,6 +59,10 @@ export default {
       this.$router.push({path: '/Stu_Home'})
     }
   },
+  components: {
+    'login': Login,
+    'register': Register
+  },
   data () {
     return {
       navList: [
@@ -54,7 +70,9 @@ export default {
         {name: '/Contests', navItem: 'Contests'},
         {name: '/Problems', navItem: 'Problems'}
       ],
-      LogCondition: false // use this to judge whether it have been login
+      LogCondition: false, // use this to judge whether it have been login
+      registerVisible: false,
+      loginVisible: false
     }
   }
 }
