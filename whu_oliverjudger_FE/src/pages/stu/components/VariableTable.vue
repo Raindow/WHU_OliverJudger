@@ -4,6 +4,7 @@
     :show-header="showHeader"
     :data="tableData"
     stripe
+    @row-click="clickEvent"
   >
 <!--    在el-table-column中用prop属性来对应对象中的键名即可填入数据，-->
 <!--    用label属性来定义表格的列名。-->
@@ -30,30 +31,32 @@ export default {
       type: Boolean,
       default: true
     }
-  }
+  },
   // mounted () {
   //   this.init()
-  // },
-  // methods: {
-  //   init () {
-  //     this.setTableContent()
-  //   },
-  //   setTableContent () {
-  //     this.columnHeaders = [
-  //       {prop: 'announcement', label: '公告'},
-  //       {prop: 'date', label: '日期'}
-  //     ]
-  //     this.tableData = [
-  //       {announcement: 'OliverJudger', date: '2020-20-20'},
-  //       {announcement: 'OliverJudger', date: '2020-20-20'},
-  //       {announcement: 'OliverJudger', date: '2020-20-20'},
-  //       {announcement: 'OliverJudger', date: '2020-20-20'}
-  //     ]
-  //   },
-  //   clickEvent () {
-  //     console.log('clickSuccessful')
-  //   }
   // }
+  methods: {
+    // init () {
+    //   this.setTableContent()
+    // },
+    // setTableContent () {
+    //   this.columnHeaders = [
+    //     {prop: 'announcement', label: '公告'},
+    //     {prop: 'date', label: '日期'}
+    //   ]
+    //   this.tableData = [
+    //     {announcement: 'OliverJudger', date: '2020-20-20'},
+    //     {announcement: 'OliverJudger', date: '2020-20-20'},
+    //     {announcement: 'OliverJudger', date: '2020-20-20'},
+    //     {announcement: 'OliverJudger', date: '2020-20-20'}
+    //   ]
+    // },
+    clickEvent (row) {
+      // 注意这里比较特殊 用 row获取到了行后
+      // 用row.announcement获得对应的名字
+      alert(row.announcement)
+    }
+  }
 }
 </script>
 
