@@ -26,8 +26,8 @@ const router = new VueRouter({
 })
 // eslint-disable-next-line no-new
 new Vue({
-  el: '#app',
-  components: { App },
+  el: '#app', // 将所有视图放到id值为app的这个dom元素中
+  components: { App }, // components表明引入的文件即App.vue
   template: '<App/>',
   router: router
 })
