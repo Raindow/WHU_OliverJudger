@@ -41,6 +41,11 @@ import Register from '@/pages/stu/views/Register.vue'
 export default {
   name: 'NavBar',
   methods: {
+    // 弹窗退出函数
+    handleClose () {
+
+    },
+
     // 上方注册按钮函数
     register () {
       this.$router.push({path: '/Register'})
