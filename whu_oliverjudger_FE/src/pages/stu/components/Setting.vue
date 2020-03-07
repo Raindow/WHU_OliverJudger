@@ -1,7 +1,7 @@
 <template>
   <el-row class="tac">
   <el-col :span="8">
-    <side-bar></side-bar>
+    <SideBar></SideBar>
   </el-col>
     <el-col :span="8">
       <router-view></router-view>
