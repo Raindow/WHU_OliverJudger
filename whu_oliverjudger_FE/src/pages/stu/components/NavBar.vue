@@ -26,7 +26,7 @@
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item @click.native="Stu_Home">Home</el-dropdown-item>
       <el-dropdown-item>Submissions</el-dropdown-item>
-      <el-dropdown-item>Setting</el-dropdown-item>
+      <el-dropdown-item @click.native="Setting">Setting</el-dropdown-item>
       <el-dropdown-item divided>Log out</el-dropdown-item>
     </el-dropdown-menu>
     </el-dropdown>
@@ -60,6 +60,9 @@ export default {
     },
     Stu_Home () {
       this.$router.push({path: '/Stu_Home'})
+    },
+    Setting () {
+      this.$router.push({path: '/Setting'})
     }
   },
   components: {
