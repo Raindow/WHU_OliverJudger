@@ -2,10 +2,10 @@
   <div id="app">
     <el-container>
       <el-header>
-    <NavBar></NavBar>
+        <NavBar></NavBar>
       </el-header>
       <el-main>
-    <router-view></router-view>
+        <router-view></router-view>
       </el-main>
       <el-footer>
       </el-footer>

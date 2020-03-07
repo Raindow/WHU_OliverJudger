@@ -1,5 +1,6 @@
 <template>
-  <div class="announcement">
+  <div class="announcement"
+  :style="announcementsHeight">
     <span>
       <span class="announcementHeader">Announcement</span>
 <!--      clearable是否可清空-->
@@ -8,22 +9,22 @@
         v-model="search"
         placeholder="标题或日期 进行搜索"
         clearable
-        @change="inputSearchChanged"></el-input>
+      ></el-input>
     </span>
-    <div :style="tableHeight">
       <VariableTable
-      :table-data="showTableContent()"
+      :table-data="pageData"
       :column-headers="columnHeaders"
       :show-header="false"
       ></VariableTable>
-    </div>
-<!--    page-size 每页显示条目个数  total 总条目数-->
+<!-- page-size 每页显示条目个数  total 总条目数 -->
     <el-pagination
+      class="announcementPagination"
       background
       layout="prev, pager, next"
       :page-size="pageSize"
-      :total="totalTableLength"
-      @current-change="handleCurrentChange"></el-pagination>
+      :total="showTableDta.length"
+      @current-change="handleCurrentChange"
+      ></el-pagination>
   </div>
 
 </template>
@@ -37,14 +38,11 @@ export default {
   },
   data () {
     return {
-      tableHeight: {
-        height: ''
-      },
-      totalTableLength: 0, // 获取通告总数目
+      announcementsHeight: {height: ''},
+      // totalTableLength: 0, // 获取通告总数目
       pageSize: 8, // page-size 每页显示条目个数
       currentPage: 1,
       search: '',
-      searchChanged: false,
       columnHeaders: [ // 列表的头标签
         {prop: 'announcement', label: '公告'},
         {prop: 'date', label: '日期'}
@@ -54,19 +52,40 @@ export default {
   },
   mounted () {
     this.init()
-    // 用于固定分页栏的位置
+    // 计算公告高度
     window.onresize = () => {
-      this.calculateTableHeight()
+      this.calculateAnnouncementsHeight()
+    }
+  },
+  computed: {
+    showTableDta: {
+      get () {
+        return this.tableData.filter(data => !this.search ||
+                                     data.announcement.toLowerCase().includes(this.search.toLowerCase()) ||
+                                     data.date.includes(this.search))
+      },
+      set () {
+        this.currentPage = 1
+        console.log(this.currentPage + 'a')
+      }
+    },
+    pageData: function () {
+      return this.showTableDta.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
+    }
+  },
+  watch: {
+    search: function () {
+      this.handleCurrentChange(1)
     }
   },
   methods: {
     init () {
       this.setTableContent()
-      this.calculateTableHeight()
+      this.calculateAnnouncementsHeight()
     },
-    calculateTableHeight () {
-      // innerheight 返回窗口的文档显示区的高度。
-      this.tableHeight.height = (0.6 * window.innerHeight) + 'px'
+    calculateAnnouncementsHeight () {
+      // innerHeight 返回窗口的文档显示区的高度。
+      this.announcementsHeight.height = (0.65 * window.innerHeight) + 'px'
     },
     setTableContent () {
       this.tableData = [{announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
@@ -81,23 +100,6 @@ export default {
         {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
         {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'}
       ]
-      this.totalTableLength = this.tableData.length // 设置总通告数目
-    },
-    showTableContent () {
-      // temp接收三类型的数据
-      // 第一类是search没出现即展现所有数据，第二类是announcement中包含了search内容的，第三类是date中包含了的
-      let temp = this.tableData.filter(data => !this.search ||
-        data.announcement.toLowerCase().includes(this.search.toLowerCase()) ||
-        data.date.includes(this.search))
-      if (this.searchChanged) {
-        this.currentPage = 1
-        this.totalTableLength = temp.length
-        this.searchChanged = false
-      }
-      return temp.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
-    },
-    inputSearchChanged () {
-      this.searchChanged = true
     },
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage
@@ -107,10 +109,8 @@ export default {
 </script>
 <style scoped>
   .announcement{
-    text-align: center;
     position: relative;
-    margin-top: 5%;
-    left: 10%;
+    margin: 5% auto 0 auto;
     width: 80%;
     border-right: solid aliceblue 2px;
     border-radius: 5px;
@@ -126,5 +126,11 @@ export default {
     float: right;
     width: 60%;
     margin-right: 1%;
+  }
+  .announcementPagination{
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    width: 100%
   }
 </style>
