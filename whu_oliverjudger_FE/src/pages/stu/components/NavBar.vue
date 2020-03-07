@@ -62,7 +62,7 @@ export default {
       this.$router.push({path: '/Stu_Home'})
     },
     Setting () {
-      this.$router.push({path: '/Setting'})
+      this.$router.push({path: '/Setting/Profile'})
     }
   },
   components: {

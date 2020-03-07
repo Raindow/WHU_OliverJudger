@@ -3,7 +3,7 @@
   <el-col :span="8">
     <SideBar></SideBar>
   </el-col>
-    <el-col :span="8">
+    <el-col :span="16">
       <router-view></router-view>
     </el-col>
   </el-row>
