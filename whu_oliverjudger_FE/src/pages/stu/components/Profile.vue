@@ -1,5 +1,10 @@
 <template>
-  <div>ddex</div>
+  <div>
+    <el-container>
+    <el-header>个人信息</el-header>
+    <el-main>Main</el-main>
+  </el-container>
+  </div>
 </template>
 
 <script>

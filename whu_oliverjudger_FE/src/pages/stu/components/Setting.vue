@@ -13,14 +13,6 @@
 import SideBar from '@/pages/stu/components/SideBar'
 export default {
   name: 'Setting',
-  methods: {
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath)
-    }
-  },
   components: {
     'SideBar': SideBar
   }
