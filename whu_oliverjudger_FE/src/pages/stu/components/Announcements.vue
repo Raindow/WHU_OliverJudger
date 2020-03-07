@@ -22,7 +22,7 @@
       background
       layout="prev, pager, next"
       :page-size="pageSize"
-      :total="showTableDta.length"
+      :total="showTableData.length"
       @current-change="handleCurrentChange"
       ></el-pagination>
   </div>
@@ -58,7 +58,7 @@ export default {
     }
   },
   computed: {
-    showTableDta: {
+    showTableData: {
       get () {
         return this.tableData.filter(data => !this.search ||
                                      data.announcement.toLowerCase().includes(this.search.toLowerCase()) ||
@@ -66,7 +66,7 @@ export default {
       }
     },
     pageData: function () {
-      return this.showTableDta.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
+      return this.showTableData.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
     }
   },
   watch: {
