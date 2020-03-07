@@ -1,4 +1,4 @@
-# whu_oliverjudger_fe
+# Whu_OliverJudger_FE
 
 > A Vue.js project
 
