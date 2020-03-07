@@ -63,10 +63,6 @@ export default {
         return this.tableData.filter(data => !this.search ||
                                      data.announcement.toLowerCase().includes(this.search.toLowerCase()) ||
                                      data.date.includes(this.search))
-      },
-      set () {
-        this.currentPage = 1
-        console.log(this.currentPage + 'a')
       }
     },
     pageData: function () {
