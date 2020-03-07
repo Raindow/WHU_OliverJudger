@@ -5,6 +5,7 @@
     @open="handleOpen"
     @close="handleClose"
     router>
+    <slot name="stu_picture"></slot>
     <el-menu-item index="/Setting/Profile">
       <i class="el-icon-menu"></i>
       <span slot="title">个人信息</span>
