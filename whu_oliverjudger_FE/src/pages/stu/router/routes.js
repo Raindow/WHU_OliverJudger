@@ -1,8 +1,8 @@
-import Home from '../views/general/Home'
+import Home from '../views/Home'
 import Problems from '../views/Problems'
 import Contests from '../views/Contests'
-import Login from '../views/Login'
-import Register from '../views/Register'
+import Login from '../components/Login'
+import Register from '../components/Register'
 // eslint-disable-next-line camelcase
 import Stu_home from '@/pages/stu/components/Stu_Home.vue'
 export default[

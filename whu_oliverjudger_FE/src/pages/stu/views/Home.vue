@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Announcements from '../../components/Announcements'
+import Announcements from '../components/Announcements'
 export default {
   name: 'Home',
   components: {

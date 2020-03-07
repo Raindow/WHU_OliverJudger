@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import Login from '@/pages/stu/views/Login.vue'
-import Register from '@/pages/stu/views/Register.vue'
+import Login from '@/pages/stu/components/Login.vue'
+import Register from '@/pages/stu/components/Register.vue'
 export default {
   name: 'NavBar',
   methods: {
