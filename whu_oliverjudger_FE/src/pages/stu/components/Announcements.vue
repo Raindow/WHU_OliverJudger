@@ -22,7 +22,7 @@
       background
       layout="prev, pager, next"
       :page-size="pageSize"
-      :total="showTableDta.length"
+      :total="showTableData.length"
       @current-change="handleCurrentChange"
       ></el-pagination>
   </div>
@@ -59,6 +59,7 @@ export default {
     // }
   },
   computed: {
+    showTableData: {
     // 计算需要显示的的条目总量
     showTableDta: {
       get () {
@@ -69,7 +70,7 @@ export default {
     },
     // 设置当前页的显示
     pageData: function () {
-      return this.showTableDta.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
+      return this.showTableData.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
     }
   },
   watch: {

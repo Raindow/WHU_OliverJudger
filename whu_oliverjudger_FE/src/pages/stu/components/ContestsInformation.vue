@@ -13,7 +13,7 @@
     <div :style="tableHeight">
 
       <VariableTable
-        :table-data="showTableContent()"
+        :table-data="pageData"
         :column-headers="columnHeaders"
         :show-header="true"
       ></VariableTable>
@@ -41,7 +41,7 @@ export default {
         height: ''
       },
       totalTableLength: 0, // 获取通告总数目
-      pageSize: 8, // page-size 每页显示条目个数
+      pageSize: 7, // page-size 每页显示条目个数
       currentPage: 1,
       search: '',
       searchChanged: false,
@@ -62,6 +62,28 @@ export default {
       this.calculateTableHeight()
     }
   },
+  computed: {
+    showTableData: {
+      get () {
+        return this.tableData.filter(data => !this.search ||
+        data.date.includes(this.search) ||
+        data.contestName.toLowerCase().includes(this.search.toLowerCase()) ||
+        data.usingTime.toLowerCase().includes(this.search.toLowerCase()) ||
+        data.ruleType.toLowerCase().includes(this.search.toLowerCase()) ||
+        data.availability.toLowerCase().includes(this.search.toLowerCase())
+        )
+      }
+    },
+    pageData: function () {
+      return this.showTableData.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
+    }
+  },
+  watch: {
+    search: function () {
+      this.handleCurrentChange(1)
+    }
+  },
+
   methods: {
     init () {
       this.setTableContent()
@@ -69,36 +91,23 @@ export default {
     },
     calculateTableHeight () {
       // innerheight 返回窗口的文档显示区的高度。
-      this.tableHeight.height = (0.6 * window.innerHeight) + 'px'
+      this.tableHeight.height = (0.6 * (window.innerHeight)) + 'px'
     },
     setTableContent () {
       this.tableData = [
         {contestName: 'contest1', date: '2020-1-1', usingTime: '3 days', ruleType: 'OI', availability: 'underway'},
         {contestName: 'contest2', date: '2020-1-2', usingTime: '4 days', ruleType: 'OI', availability: 'enable'},
         {contestName: 'contest3', date: '2020-1-3', usingTime: '5 days', ruleType: 'OI', availability: 'enable'},
+        {contestName: 'contest4', date: '2020-1-4', usingTime: '6 days', ruleType: 'OI', availability: 'enable'},
+        {contestName: 'contest4', date: '2020-1-4', usingTime: '6 days', ruleType: 'OI', availability: 'enable'},
+        {contestName: 'contest4', date: '2020-1-4', usingTime: '6 days', ruleType: 'OI', availability: 'enable'},
+        {contestName: 'contest4', date: '2020-1-4', usingTime: '6 days', ruleType: 'OI', availability: 'enable'},
+        {contestName: 'contest4', date: '2020-1-4', usingTime: '6 days', ruleType: 'OI', availability: 'enable'},
+        {contestName: 'contest4', date: '2020-1-4', usingTime: '6 days', ruleType: 'OI', availability: 'enable'},
+        {contestName: 'contest4', date: '2020-1-4', usingTime: '6 days', ruleType: 'OI', availability: 'enable'},
         {contestName: 'contest4', date: '2020-1-4', usingTime: '6 days', ruleType: 'OI', availability: 'enable'}
       ]
       this.totalTableLength = this.tableData.length // 设置总通告数目
-    },
-    showTableContent () {
-      // temp接收三类型的数据
-      // 第一类是search没出现即展现所有数据，第二类是announcement中包含了search内容的，第三类是date中包含了的
-      let temp = this.tableData.filter(data => !this.search ||
-        data.date.includes(this.search) ||
-        data.contestName.toLowerCase().includes(this.search.toLowerCase()) ||
-        data.usingTime.toLowerCase().includes(this.search.toLowerCase()) ||
-        data.ruleType.toLowerCase().includes(this.search.toLowerCase()) ||
-        data.availability.toLowerCase().includes(this.search.toLowerCase())
-      )
-      if (this.searchChanged) {
-        this.currentPage = 1
-        this.totalTableLength = temp.length
-        this.searchChanged = false
-      }
-      return temp.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
-    },
-    inputSearchChanged () {
-      this.searchChanged = true
     },
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage
