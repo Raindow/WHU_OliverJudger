@@ -10,7 +10,7 @@
         </el-row>
         <el-row gutter="24">
           <el-col :span="12" >Old Password<el-input
-            placeholder="Old_Password"
+            placeholder="请输入Old_Password"
             v-model="input_Old_Password"
             clearable>
           </el-input></el-col>
