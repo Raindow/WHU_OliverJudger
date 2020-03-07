@@ -53,11 +53,13 @@ export default {
   mounted () {
     this.init()
     // 计算公告高度
-    window.onresize = () => {
-      this.calculateAnnouncementsHeight()
-    }
+    window.addEventListener('resize', this.calculateAnnouncementsHeight, false)
+    // window.onresize = () => {
+    //   this.calculateAnnouncementsHeight()
+    // }
   },
   computed: {
+    // 计算需要显示的的条目总量
     showTableDta: {
       get () {
         return this.tableData.filter(data => !this.search ||
@@ -65,11 +67,13 @@ export default {
                                      data.date.includes(this.search))
       }
     },
+    // 设置当前页的显示
     pageData: function () {
       return this.showTableDta.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
     }
   },
   watch: {
+    // 监听search变量，当search变化时，设置当前页数
     search: function () {
       this.handleCurrentChange(1)
     }
@@ -108,6 +112,7 @@ export default {
     position: relative;
     margin: 5% auto 0 auto;
     width: 80%;
+    min-height: 475px;
     border-right: solid aliceblue 2px;
     border-radius: 5px;
   }

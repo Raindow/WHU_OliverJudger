@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header>
+      <el-header height="auto">
         <NavBar></NavBar>
       </el-header>
       <el-main>

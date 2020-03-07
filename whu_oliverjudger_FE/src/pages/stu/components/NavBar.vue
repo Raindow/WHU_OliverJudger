@@ -1,8 +1,10 @@
 <template>
-  <el-menu :default-active="this.$route.path" router mode="horizontal">
-    <el-menu-item>
-      <el-image  :src="require('@/assets/logo.png')" fit="fit"></el-image>
-    </el-menu-item>
+  <div>
+    <el-image  :src="require('@/assets/logo.png')" fit="fit" class="barImg"></el-image>
+  <el-menu :default-active="this.$route.path" router mode="horizontal" :style="{float: 'left', width: barWidth, 'min-width': '650px'}">
+<!--    <el-menu-item>-->
+<!--      <a href="https://www.whu.edu.cn/"><el-image  :src="require('@/assets/logo.png')" fit="fit" style="height: 65px"></el-image></a>-->
+<!--    </el-menu-item>-->
 <!--    el-menu-item的index设为要跳转的路由（并且点击菜单项，会直接push到点击的页面)。-->
 <!--    注意：一定要设置el-submenu的index属性（1，2，3…）。不然会出bug-->
     <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name" :class="item.navItemIcon">
@@ -32,7 +34,7 @@
     </el-dropdown>
     </div>
   </el-menu>
-
+  </div>
 </template>
 
 <script>
@@ -63,6 +65,9 @@ export default {
     },
     Setting () {
       this.$router.push({path: '/Setting/Profile'})
+    },
+    setBarWidth () {
+      this.barWidth = window.innerWidth > 1230 ? 80 + '%' : 100 + '%'
     }
   },
   components: {
@@ -92,13 +97,22 @@ export default {
       ],
       LogCondition: false, // use this to judge whether it have been login
       registerVisible: false,
-      loginVisible: false
+      loginVisible: false,
+      barWidth: '80%'
     }
+  },
+  mounted () {
+    window.addEventListener('resize', this.setBarWidth, false)
   }
 }
 </script>
 
 <style scoped>
+  .barImg{
+    height: 65px;
+    float: left;
+    margin-right: 2%
+  }
   .right_part{
     float:right
   }
