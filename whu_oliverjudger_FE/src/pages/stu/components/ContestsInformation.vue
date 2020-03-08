@@ -1,13 +1,22 @@
 <template>
   <div class="contestsInformation">
     <span>
+<!--       <el-switch-->
+<!--         v-model="scope.row.on"-->
+<!--         on-color="#00A854"-->
+<!--         on-text="启动"-->
+<!--         on-value="1"-->
+<!--         off-color="#F04134"-->
+<!--         off-text="禁止"-->
+<!--         off-value="0"-->
+<!--         @change="changeSwitch(scope.row)">-->
+<!--    </el-switch>-->
       <span class="contestsInformationHeader">Contest</span>
       <!--      clearable是否可清空-->
       <el-input class="contestsInformationSearch"
         v-model="search"
         placeholder="请按照比赛信息进行搜索"
-        clearable
-        @change="inputSearchChanged">
+        clearable>
       </el-input>
     </span>
     <div :style="tableHeight">
@@ -27,6 +36,7 @@
       :total="totalTableLength"
       @current-change="handleCurrentChange"></el-pagination>
   </div>
+
 </template>
 
 <script>
