@@ -20,6 +20,7 @@
     </div>
     <!--    page-size 每页显示条目个数  total 总条目数-->
     <el-pagination
+      class="contestsInformationPagination"
       background
       layout="prev, pager, next"
       :page-size="pageSize"
@@ -118,11 +119,10 @@ export default {
 
 <style scoped>
   .contestsInformation{
-    text-align: center;
     position: relative;
-    margin-top: 5%;
-    left: 10%;
+    margin: 5% auto 0 auto;
     width: 80%;
+    min-height: 475px;
     border-right: solid aliceblue 2px;
     border-radius: 5px;
   }
@@ -137,5 +137,11 @@ export default {
     float: right;
     width: 60%;
     margin-right: 1%;
+  }
+  .contestsInformationPagination{
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    width: 100%
   }
 </style>

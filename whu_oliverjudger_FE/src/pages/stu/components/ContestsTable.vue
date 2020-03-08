@@ -40,6 +40,7 @@ export default {
       // 注意这里比较特殊 用 row获取到了行后
       // 用row.announcement获得对应的名字
       alert(row.contestName)
+      this.$router.push('/Home/' + row.contestName)
     }
   }
 }
