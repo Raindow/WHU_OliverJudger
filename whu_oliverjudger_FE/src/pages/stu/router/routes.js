@@ -8,10 +8,16 @@ import Stu_home from '@/pages/stu/components/Stu_Home.vue'
 import Setting from '@/pages/stu/components/Setting'
 import Account from '@/pages/stu/components/Account'
 import Profile from '@/pages/stu/components/Profile'
+// eslint-disable-next-line camelcase
+import Announcements_Detail from '@/pages/stu/views/Announcements_Detail'
 export default[
   {
     path: '/Home',
     component: Home
+  },
+  {
+    path: '/Home/:id',
+    component: Announcements_Detail
   },
   {
     path: '/Problems',
