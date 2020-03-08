@@ -7,9 +7,16 @@
 <!--    </el-menu-item>-->
 <!--    el-menu-item的index设为要跳转的路由（并且点击菜单项，会直接push到点击的页面)。-->
 <!--    注意：一定要设置el-submenu的index属性（1，2，3…）。不然会出bug-->
-    <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name" :class="item.navItemIcon">
+    <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name" >
+      <i :class="item.navItemIcon"></i>
       {{ item.navItem }}
     </el-menu-item >
+    <el-submenu index="/Contests" >
+      <template slot="title"><i class="el-icon-star-on"></i>
+        <span>About</span></template>
+      <el-menu-item index="/Judger"><i class="el-icon-question"></i><span>About</span></el-menu-item>
+      <el-menu-item index="/Us"><i class="el-icon-info"></i><span>Us</span></el-menu-item>
+      </el-submenu>
     <div class="right_part">
     <el-button v-show="LogCondition" type="primary" @click="registerVisible = true">注册</el-button>
     <el-button v-show="LogCondition" type="primary" @click="loginVisible = true">登录</el-button>
