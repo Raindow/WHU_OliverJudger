@@ -10,6 +10,8 @@ import Account from '@/pages/stu/components/Account'
 import Profile from '@/pages/stu/components/Profile'
 // eslint-disable-next-line camelcase
 import Announcements_Detail from '@/pages/stu/views/Announcements_Detail'
+import Judger from '@/pages/stu/views/Judger'
+import Us from '@/pages/stu/views/Us'
 export default[
   {
     path: '/Home',
@@ -21,19 +23,24 @@ export default[
   },
   {
     path: '/Problems',
-    component: Problems},
+    component: Problems
+  },
   {
     path: '/Contests',
-    component: Contests},
+    component: Contests
+  },
   {
     path: '/Login',
-    component: Login},
+    component: Login
+  },
   {
     path: '/Register',
-    component: Register},
+    component: Register
+  },
   {
     path: '/Stu_Home',
-    component: Stu_home},
+    component: Stu_home
+  },
   {
     path: '/Setting',
     component: Setting,
@@ -47,6 +54,14 @@ export default[
         component: Profile
       }
     ]
+  },
+  {
+    path: '/Judger',
+    component: Judger
+  },
+  {
+    path: '/Us',
+    component: Us
   }
 
 ]
