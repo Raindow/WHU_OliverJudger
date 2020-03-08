@@ -54,9 +54,6 @@ export default {
     this.init()
     // 计算公告高度
     window.addEventListener('resize', this.calculateAnnouncementsHeight, false)
-    // window.onresize = () => {
-    //   this.calculateAnnouncementsHeight()
-    // }
   },
   computed: {
     showTableData: {
@@ -88,8 +85,8 @@ export default {
       this.announcementsHeight.height = (0.65 * window.innerHeight) + 'px'
     },
     setTableContent () {
-      this.tableData = [{announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-        {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
+      this.tableData = [{announcement: '武汉大学Oline Judger', date: '2020-3-8'}, {announcement: '武汉大学计算机学院', date: '1010-10-10'},
+        {announcement: '武汉大学国软', date: '2020-5-20'}, {announcement: '珞珈山', date: '1010-10-10'},
         {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
         {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
         {announcement: 'OliverJudger', date: '3020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
