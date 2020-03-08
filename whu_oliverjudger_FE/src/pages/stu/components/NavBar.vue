@@ -78,7 +78,7 @@ export default {
     return {
       navList: [
         {
-          name: '/',
+          name: '/Home',
           navItem: 'Home',
           navItemIcon: 'el-icon-s-home'
         },

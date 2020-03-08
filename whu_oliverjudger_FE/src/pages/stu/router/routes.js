@@ -10,7 +10,7 @@ import Account from '@/pages/stu/components/Account'
 import Profile from '@/pages/stu/components/Profile'
 export default[
   {
-    path: '/',
+    path: '/Home',
     component: Home
   },
   {

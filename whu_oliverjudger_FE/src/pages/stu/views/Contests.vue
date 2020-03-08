@@ -1,20 +1,6 @@
 
 <template>
-<!--  <div id="Contests">-->
-<!--    <h1>我是Contests</h1>-->
-<!--  </div>-->
   <ContestsInformation></ContestsInformation>
-<!--  <vue-waterfall-easy :imgsArr="imgsArr" @scrollLoadImg="fetchImgsData">-->
-<!--&lt;!&ndash;    <template slot-scope="props">&ndash;&gt;-->
-<!--&lt;!&ndash;    <div class="player_info">&ndash;&gt;-->
-<!--&lt;!&ndash;      <div class="title"><i class="tt tt-quanburen"></i>{{props.value.info}}</div>&ndash;&gt;-->
-<!--&lt;!&ndash;      <div class="ticket">&ndash;&gt;-->
-<!--&lt;!&ndash;        <mt-button @click="upLoadTicket(props.value.id)" size="small"><i class="tt tt-quanburen"></i>投票</mt-button>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--&lt;!&ndash;      <p class="num">{{props.index+1}}票</p>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;</template>&ndash;&gt;-->
-<!--  </vue-waterfall-easy>-->
 </template>
 
 <script>
@@ -58,12 +44,4 @@ export default {
 </script>
 
 <style scoped>
-
-  /*#Contests{*/
-  /*  margin: 0;*/
-  /*  padding: 0;*/
-  /*  background: lightyellow;*/
-  /*  height: 600px;*/
-  /*  width: 100%;*/
-  /*}*/
 </style>
