@@ -12,11 +12,11 @@
     </span>
     <div :style="tableHeight">
 
-      <VariableTable
+      <ContestsTable
         :table-data="pageData"
         :column-headers="columnHeaders"
         :show-header="true"
-      ></VariableTable>
+      ></ContestsTable>
     </div>
     <!--    page-size 每页显示条目个数  total 总条目数-->
     <el-pagination
@@ -29,11 +29,11 @@
 </template>
 
 <script>
-import VariableTable from './VariableTable'
+import ContestsTable from './ContestsTable'
 export default {
   name: 'ContestInformation',
   components: {
-    VariableTable
+    ContestsTable
   },
   data () {
     return {

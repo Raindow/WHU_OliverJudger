@@ -61,7 +61,6 @@ export default {
   computed: {
     showTableData: {
     // 计算需要显示的的条目总量
-    showTableDta: {
       get () {
         return this.tableData.filter(data => !this.search ||
                                      data.announcement.toLowerCase().includes(this.search.toLowerCase()) ||
