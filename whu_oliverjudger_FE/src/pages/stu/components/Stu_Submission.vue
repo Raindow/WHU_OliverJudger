@@ -1,12 +1,10 @@
 <template>
-  <div>
-Made by Zekun Shi, Tian Chen, Wenke Huang
-  </div>
+  <div>武大第一诺手-SZK</div>
 </template>
 
 <script>
 export default {
-  name: 'Us'
+  name: 'Stu_Submission'
 }
 </script>
 

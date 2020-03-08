@@ -5,6 +5,8 @@ import Login from '../components/Login'
 import Register from '../components/Register'
 // eslint-disable-next-line camelcase
 import Stu_home from '@/pages/stu/components/Stu_Home.vue'
+// eslint-disable-next-line camelcase
+import Stu_Submission from '@/pages/stu/components/Stu_Submission'
 import Setting from '@/pages/stu/components/Setting'
 import Account from '@/pages/stu/components/Account'
 import Profile from '@/pages/stu/components/Profile'
@@ -40,6 +42,10 @@ export default[
   {
     path: '/Stu_Home',
     component: Stu_home
+  },
+  {
+    path: '/Stu_Submission',
+    component: Stu_Submission
   },
   {
     path: '/Setting',
