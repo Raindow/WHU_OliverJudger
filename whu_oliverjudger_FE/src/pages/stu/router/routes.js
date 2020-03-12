@@ -10,6 +10,7 @@ import Stu_Submission from '@/pages/stu/components/Stu_Submission'
 import Setting from '@/pages/stu/components/Setting'
 import Account from '@/pages/stu/components/Account'
 import Profile from '@/pages/stu/components/Profile'
+import Courses from '@/pages/stu/views/Course'
 // eslint-disable-next-line camelcase
 import Announcements_Detail from '@/pages/stu/views/Announcements_Detail'
 import Judger from '@/pages/stu/views/Judger'
@@ -30,6 +31,10 @@ export default[
   {
     path: '/Contests',
     component: Contests
+  },
+  {
+    path: '/Courses',
+    component: Courses
   },
   {
     path: '/Login',

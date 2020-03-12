@@ -11,12 +11,13 @@
       <i :class="item.navItemIcon"></i>
       {{ item.navItem }}
     </el-menu-item >
-    <el-submenu index="/Contests" >
+
+    <el-submenu >
       <template slot="title"><i class="el-icon-star-on"></i>
         <span>About</span></template>
       <el-menu-item index="/Judger"><i class="el-icon-question"></i><span>About</span></el-menu-item>
       <el-menu-item index="/Us"><i class="el-icon-info"></i><span>Us</span></el-menu-item>
-      </el-submenu>
+    </el-submenu>
     <div class="right_part">
     <el-button v-show="LogCondition" type="primary" @click="registerVisible = true">注册</el-button>
     <el-button v-show="LogCondition" type="primary" @click="loginVisible = true">登录</el-button>
@@ -102,7 +103,11 @@ export default {
           name: '/Problems',
           navItem: 'Problems',
           navItemIcon: 'el-icon-s-promotion'
-
+        },
+        {
+          name: '/Courses',
+          navItem: 'Courses',
+          navItemIcon: 'el-icon-s-flag'
         }
       ],
       LogCondition: false, // use this to judge whether it have been login
