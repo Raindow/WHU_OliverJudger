@@ -1,16 +1,6 @@
 <template>
   <div class="contestsInformation">
     <span>
-<!--       <el-switch-->
-<!--         v-model="scope.row.on"-->
-<!--         on-color="#00A854"-->
-<!--         on-text="启动"-->
-<!--         on-value="1"-->
-<!--         off-color="#F04134"-->
-<!--         off-text="禁止"-->
-<!--         off-value="0"-->
-<!--         @change="changeSwitch(scope.row)">-->
-<!--    </el-switch>-->
       <span class="contestsInformationHeader">Contest</span>
       <!--      clearable是否可清空-->
       <el-input class="contestsInformationSearch"
@@ -25,6 +15,7 @@
         :table-data="pageData"
         :column-headers="columnHeaders"
         :show-header="true"
+        :click-event="clickEvent"
       ></ContestsTable>
     </div>
     <!--    page-size 每页显示条目个数  total 总条目数-->
