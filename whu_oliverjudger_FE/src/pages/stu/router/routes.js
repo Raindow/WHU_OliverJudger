@@ -17,6 +17,8 @@ import Judger from '@/pages/stu/views/Judger'
 import Us from '@/pages/stu/views/Us'
 // eslint-disable-next-line camelcase
 import Problems_Detail from '@/pages/stu/views/Problems_Detail'
+// eslint-disable-next-line camelcase
+import ContestsInformation_Detail from '@/pages/stu/views/ContestsInformation_Detail'
 export default[
   {
     path: '/Home',
@@ -32,11 +34,15 @@ export default[
   },
   {
     path: '/Problems/:id',
-    componenet: Problems_Detail
+    component: Problems_Detail
   },
   {
     path: '/Contests',
     component: Contests
+  },
+  {
+    path: '/Contests/:id',
+    component: ContestsInformation_Detail
   },
   {
     path: '/Courses',
