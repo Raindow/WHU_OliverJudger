@@ -30,17 +30,11 @@ export default {
       required: false,
       type: Boolean,
       default: true
-    }
-  },
-  // mounted () {
-  //   this.init()
-  // }
-  methods: {
-    clickEvent (row) {
-      // 注意这里比较特殊 用 row获取到了行后
-      // 用row.announcement获得对应的名字
-      alert(row.announcement)
-      this.$router.push('/Home/' + row.announcement)
+    },
+    clickEvent: {
+      required: false,
+      type: Function,
+      default: void (0)
     }
   }
 }

@@ -15,6 +15,7 @@
       :table-data="pageData"
       :column-headers="columnHeaders"
       :show-header="false"
+      :click-event="clickEventForContent"
       ></VariableTable>
 <!-- page-size 每页显示条目个数  total 总条目数 -->
     <el-pagination
@@ -26,7 +27,6 @@
       @current-change="handleCurrentChange"
       ></el-pagination>
   </div>
-
 </template>
 
 <script>
@@ -100,6 +100,9 @@ export default {
     },
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage
+    },
+    clickEventForContent (row) {
+      alert(row.announcement)
     }
   }
 }
