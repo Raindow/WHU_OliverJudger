@@ -45,4 +45,7 @@ export default {
 </script>
 
 <style scoped>
+  vue-waterfall-easy{
+    position: fixed;
+  }
 </style>
