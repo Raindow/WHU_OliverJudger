@@ -5,8 +5,12 @@
 </template>
 
 <script>
+import vueWaterfallEasy from 'vue-waterfall-easy'
 export default {
-  name: 'Course'
+  name: 'Course',
+  components: {
+    vueWaterfallEasy
+  }
 }
 </script>
 
