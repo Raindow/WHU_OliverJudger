@@ -12,7 +12,7 @@
       {{ item.navItem }}
     </el-menu-item >
 
-    <el-submenu >
+    <el-submenu index="About">
       <template slot="title"><i class="el-icon-star-on"></i>
         <span>About</span></template>
       <el-menu-item index="/Judger"><i class="el-icon-question"></i><span>About</span></el-menu-item>
