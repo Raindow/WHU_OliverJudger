@@ -19,6 +19,7 @@ import Us from '@/pages/stu/views/Us'
 import Problems_Detail from '@/pages/stu/views/Problems_Detail'
 // eslint-disable-next-line camelcase
 import ContestsInformation_Detail from '@/pages/stu/views/ContestsInformation_Detail'
+import CourseDetail from '@/pages/stu/views/Course_Detail'
 export default[
   {
     path: '/',
@@ -51,6 +52,10 @@ export default[
   {
     path: '/Courses',
     component: Courses
+  },
+  {
+    path: '/Courses/:id',
+    component: CourseDetail
   },
   {
     path: '/Login',
