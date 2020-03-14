@@ -103,6 +103,7 @@ export default {
     },
     clickEventForContent (row) {
       alert(row.announcement)
+      this.$router.push({ path: '/home/' + row.announcement })
     }
   }
 }

@@ -4,32 +4,27 @@
          class="v-waterfall-item"
          v-bind:key=i
          :style="{top:img.top+'px',left:img.left+'px',width:waterfallImgWidth+'px',height:img.height}">
-      <img :src="img.src" alt="">
+      <el-img     style="width: 100px; height: 100px"
+                  :src="img.src"></el-img>
     </div>
   </div>
 </template>
 
 <script>
-// export default {
-//   name: 'Course',
-//   components: {
-//     vueWaterfallEasy
-//   }
-// }
 export default {
-  name: 'v-Course',
+  name: 'Course',
   data () {
     return {
       waterfallList: [],
       imgArr: [
-        require('@/assets/Stu_Default_Picture.jpeg'),
-        require('@/assets/Stu_Default_Picture.jpeg'),
-        require('@/assets/Stu_Default_Picture.jpeg'),
-        require('@/assets/Stu_Default_Picture.jpeg'),
-        require('@/assets/Stu_Default_Picture.jpeg'),
-        require('@/assets/Stu_Default_Picture.jpeg'),
-        require('@/assets/Stu_Default_Picture.jpeg'),
-        require('@/assets/Stu_Default_Picture.jpeg')
+        require('@/assets/test_course.jpg'),
+        require('@/assets/test_course.jpg'),
+        require('@/assets/test_course.jpg'),
+        require('@/assets/test_course.jpg'),
+        require('@/assets/test_course.jpg'),
+        require('@/assets/test_course.jpg'),
+        require('@/assets/test_course.jpg'),
+        require('@/assets/test_course.jpg')
       ],
       waterfallImgWidth: 100,
       waterfallImgCol: 5,

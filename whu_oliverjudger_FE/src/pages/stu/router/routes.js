@@ -21,6 +21,10 @@ import Problems_Detail from '@/pages/stu/views/Problems_Detail'
 import ContestsInformation_Detail from '@/pages/stu/views/ContestsInformation_Detail'
 export default[
   {
+    path: '/',
+    component: Home
+  },
+  {
     path: '/Home',
     component: Home
   },
