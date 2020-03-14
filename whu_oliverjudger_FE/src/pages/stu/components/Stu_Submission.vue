@@ -29,6 +29,7 @@
       layout="prev, pager, next"
       :page-size="pageSize"
       :total="totalTableLength"
+      :current-page.sync="currentPage"
       @current-change="handleCurrentChange"></el-pagination>
   </div>
 </template>

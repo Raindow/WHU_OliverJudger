@@ -24,6 +24,7 @@
       layout="prev, pager, next"
       :page-size="pageSize"
       :total="showTableData.length"
+      :current-page.sync="currentPage"
       @current-change="handleCurrentChange"
       ></el-pagination>
   </div>

@@ -1,12 +1,12 @@
 <template>
-  <div id="Problems">
-    <h1>我是Problems</h1>
-  </div>
+<ProblemPreview></ProblemPreview>
 </template>
 
 <script>
+import ProblemPreview from '../components/ProblemPreview'
 export default {
-  name: 'Problems'
+  name: 'Problems',
+  components: {ProblemPreview}
 }
 </script>
 
