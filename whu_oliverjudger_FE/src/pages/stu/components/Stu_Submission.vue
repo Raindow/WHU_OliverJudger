@@ -8,14 +8,19 @@
                 placeholder="请按照提交信息进行搜索"
                 clearable>
       </el-input>
+      <span class="Stu_SeeYourself">只看自己
+      <el-switch
+        v-model="isSeeYourself">
+      </el-switch>
+      </span>
     </span>
     <div :style="tableHeight">
 
-      <ContestsTable
+      <VariableTable
         :table-data="pageData"
         :column-headers="columnHeaders"
         :show-header="true"
-      ></ContestsTable>
+      ></VariableTable>
     </div>
     <!--    page-size 每页显示条目个数  total 总条目数-->
     <el-pagination
@@ -29,18 +34,19 @@
 </template>
 
 <script>
-import ContestsTable from './ContestsTable'
+import VariableTable from './VariableTable'
 
 export default {
   name: 'Stu_Submission',
   components: {
-    ContestsTable
+    VariableTable
   },
   data () {
     return {
       tableHeight: {
         height: ''
       },
+      isSeeYourself: false,
       totalTableLength: 0, // 获取通告总数目
       pageSize: 7, // page-size 每页显示条目个数
       currentPage: 1,
@@ -67,6 +73,7 @@ export default {
     }
   },
   computed: {
+    // 输入筛选
     showTableData: {
       get () {
         return this.tableData.filter(data => !this.search ||
@@ -80,9 +87,24 @@ export default {
           data.submissionStatus.toLowerCase().includes(this.search.toLowerCase())
         )
       }
+
+    },
+    // 开关筛选
+    switchOnTableData: {
+      get () {
+        return this.tableData.filter(data => data.ID.toLowerCase().includes('aaaaaa')
+        )
+      }
     },
     pageData: function () {
-      return this.showTableData.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
+      console.log(this.isSeeYourself)
+      // return this.showTableData.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
+
+      if (!this.isSeeYourself) {
+        return this.showTableData.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
+      } else {
+        return this.switchOnTableData.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
+      }
     }
   },
   watch: {
@@ -102,6 +124,16 @@ export default {
     },
     setTableContent () {
       this.tableData = [
+        {
+          submissionTime: '2020-2-25 13:37:58',
+          ID: 'aaaaaa',
+          submissionStatus: 'Accepted',
+          problemName: '1',
+          usingTime: '1ms',
+          usingMemory: '2MB',
+          usingLanguage: 'c',
+          author: 'aaa'
+        },
         {
           submissionTime: '2020-2-25 13:37:58',
           ID: '19370be695a7',
@@ -146,6 +178,12 @@ export default {
     float: left;
     font-style: italic;
     font-size: 30px;
+    display: inline-block;
+    margin: 2px;
+  }
+
+  .Stu_SeeYourself {
+    font-size: 15px;
     display: inline-block;
     margin: 2px;
   }

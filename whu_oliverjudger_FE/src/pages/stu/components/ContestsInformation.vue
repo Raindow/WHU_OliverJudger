@@ -11,12 +11,12 @@
     </span>
     <div :style="tableHeight">
 
-      <ContestsTable
+      <VariableTable
         :table-data="pageData"
         :column-headers="columnHeaders"
         :show-header="true"
-        :click-event="clickEvent"
-      ></ContestsTable>
+        :click-event="contestsEvent"
+      ></VariableTable>
     </div>
     <!--    page-size 每页显示条目个数  total 总条目数-->
     <el-pagination
@@ -31,11 +31,11 @@
 </template>
 
 <script>
-import ContestsTable from './ContestsTable'
+import VariableTable from './VariableTable'
 export default {
   name: 'ContestInformation',
   components: {
-    ContestsTable
+    VariableTable
   },
   data () {
     return {
@@ -113,6 +113,10 @@ export default {
     },
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage
+    },
+    contestsEvent (row) {
+      // alert(row.contestName)
+      this.$router.push({ path: '/Contests/' + row.contestName })
     }
   }
 }
