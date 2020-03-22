@@ -29,7 +29,7 @@ export default {
       ],
       MysqlItem: [
         {chapter: '增删改查', link: '/Courses/Mysql/ADUS'},
-        {chapter: '查询子句', link: '/Coueses/Mysql,SubStatement'},
+        {chapter: '查询子句', link: '/Coueses/Mysql/SubStatement'},
         {chapter: '范式', link: '/Course/Mysql/Paradigm'}
       ],
       items: [
