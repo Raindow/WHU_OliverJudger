@@ -1,5 +1,5 @@
 <template>
-  <el-carousel type="card" ref="carousel" height="150px" @click.native="linkto">
+  <el-carousel type="card" ref="carousel" height="150px" @click.native="linkto" autoplay="false">
     <el-carousel-item v-for="item in items" :key="item.chapter">
       <div>
         <h2>
