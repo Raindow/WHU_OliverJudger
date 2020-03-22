@@ -1,5 +1,5 @@
 <template>
-<div class="item" @click="ClickEvent(url)">
+<div class="item" @click="ClickEvent(url,courseEnglish)">
   <el-image
     style="width: 100px; height: 100px"
     :src=imgSrc
@@ -24,12 +24,15 @@ export default {
     },
     imgSrc: {
       required: true
+    },
+    courseEnglish: {
+      required: true
     }
   },
   methods: {
-    ClickEvent: function (url) {
+    ClickEvent: function (url, courseEnglish) {
       alert(url)
-      this.$router.push(url)
+      this.$router.push({path: url, query: {coursename: courseEnglish}})
     }
   }
 }
