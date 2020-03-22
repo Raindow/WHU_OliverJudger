@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import SideBar from '@/pages/stu/components/SideBar'
+import SideBar from '@/pages/stu/components/Student-Center/SideBar'
 export default {
   name: 'Setting',
   components: {

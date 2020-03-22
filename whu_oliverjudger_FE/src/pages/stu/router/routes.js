@@ -1,25 +1,25 @@
-import Home from '../views/Home'
-import Problems from '../views/Problems'
-import Contests from '../views/Contests'
-import Login from '../components/Login'
-import Register from '../components/Register'
+import Home from '../views/Announcements/Home'
+import Problems from '../views/Problems/Problems'
+import Contests from '../views/Contests/Contests'
+import Login from '../components/Register-Login/Login'
+import Register from '../components/Register-Login/Register'
 // eslint-disable-next-line camelcase
-import Stu_home from '@/pages/stu/components/Stu_Home.vue'
+import Stu_home from '@/pages/stu/components/Student-Center/Stu_Home.vue'
 // eslint-disable-next-line camelcase
-import Stu_Submission from '@/pages/stu/components/Stu_Submission'
-import Setting from '@/pages/stu/components/Setting'
-import Account from '@/pages/stu/components/Account'
-import Profile from '@/pages/stu/components/Profile'
-import Courses from '@/pages/stu/views/Course'
+import Stu_Submission from '@/pages/stu/components/Student-Center/Stu_Submission'
+import Setting from '@/pages/stu/components/Student-Center/Setting'
+import Account from '@/pages/stu/components/Student-Center/Account'
+import Profile from '@/pages/stu/components/Student-Center/Profile'
+import Courses from '@/pages/stu/views/Course/Course'
 // eslint-disable-next-line camelcase
-import Announcements_Detail from '@/pages/stu/views/Announcements_Detail'
-import Judger from '@/pages/stu/views/Judger'
-import Us from '@/pages/stu/views/Us'
+import Announcements_Detail from '@/pages/stu/views/Announcements/Announcements_Detail'
+import Judger from '@/pages/stu/views/About/Judger'
+import Us from '@/pages/stu/views/About/Us'
 // eslint-disable-next-line camelcase
-import Problems_Detail from '@/pages/stu/views/Problems_Detail'
+import Problems_Detail from '@/pages/stu/views/Problems/Problems_Detail'
 // eslint-disable-next-line camelcase
-import ContestsInformation_Detail from '@/pages/stu/views/ContestsInformation_Detail'
-import CourseDetail from '@/pages/stu/views/Course_Detail'
+import ContestsInformation_Detail from '@/pages/stu/views/Contests/ContestsInformation_Detail'
+import CourseDetail from '@/pages/stu/views/Course/Course_Detail'
 export default[
   {
     path: '/',

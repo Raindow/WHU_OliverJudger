@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import ContestsInformation from '../components/ContestsInformation'
+import ContestsInformation from '../../components/Contests/ContestsInformation'
 import vueWaterfallEasy from 'vue-waterfall-easy'
 export default {
   name: 'Contests',
