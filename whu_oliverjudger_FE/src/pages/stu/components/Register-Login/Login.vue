@@ -43,6 +43,7 @@ export default {
     },
     // 登录界面登录按钮函数
     login () {
+      console.log(this)
       if (!this.ID) {
         // this.$message.error 常用于主动操作的反馈提示
         this.$message.error('请输入用户名')
@@ -51,25 +52,8 @@ export default {
       if (!this.password) {
         this.$message.error('请输入密码')
       }
-
-      // axios.post('/api/test01/user.php', {
-      //   Name: this.name,
-      //   userPwd: this.password
-      // }).then(response => {
-      //   // 用户名和密码将转为json传到后台接口
-      //   let res = response.data
-      //   // 用res承接返回后台的json文件(像使用数组那样)
-      //   if (res.status == '1') {
-      //     // 显示登录结果
-      //     console.log('登录成功')
-      //     this.errortip = true
-      //     this.errorTip = '登录成功'
-      //   } else {
-      //     console.log('登录失败')
-      //     this.errortip = true
-      //     this.errorTip = '登录失败'
-      //   }
-      // })
+      // eslint-disable-next-line no-undef
+      this.$store.commit('auth_success', '121', this.ID)
     }
   },
   // created () {

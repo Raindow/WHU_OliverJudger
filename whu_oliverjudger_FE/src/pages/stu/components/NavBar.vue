@@ -19,8 +19,8 @@
       <el-menu-item index="/Us"><i class="el-icon-info"></i><span>Us</span></el-menu-item>
     </el-submenu>
     <div class="right_part">
-    <el-button v-show="LogCondition" type="primary" @click="registerVisible = true">注册</el-button>
-    <el-button v-show="LogCondition" type="primary" @click="loginVisible = true">登录</el-button>
+    <el-button v-show="!LogCondition" type="primary" @click="registerVisible = true">注册</el-button>
+    <el-button v-show="!LogCondition" type="primary" @click="loginVisible = true">登录</el-button>
 <!--      用于注册登录的弹窗-->
     <el-dialog title="登录" :visible.sync="loginVisible" :before-close="handleClose">
         <login></login>
@@ -30,14 +30,14 @@
     </el-dialog>
 <!--      用于用户选项的下拉列表-->
     <el-dropdown>
-    <span class="el-dropdown-link" v-if="!LogCondition">
+    <span class="el-dropdown-link" v-if="!isLogin">
       <i class="el-icon-user"></i>Stu_Name<i class="el-icon-arrow-down el-icon--right"></i>
     </span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item @click.native="Stu_Home">Home</el-dropdown-item>
       <el-dropdown-item @click.native="Stu_Submission">Submissions</el-dropdown-item>
       <el-dropdown-item @click.native="Setting">Setting</el-dropdown-item>
-      <el-dropdown-item divided>Log out</el-dropdown-item>
+      <el-dropdown-item @click.native="Loginout">Log out</el-dropdown-item>
     </el-dropdown-menu>
     </el-dropdown>
     </div>
@@ -48,6 +48,7 @@
 <script>
 import Login from '@/pages/stu/components/Register-Login/Login.vue'
 import Register from '@/pages/stu/components/Register-Login/Register.vue'
+// import vuex from 'vuex'
 export default {
   name: 'NavBar',
   methods: {
@@ -64,9 +65,16 @@ export default {
     login () {
       this.$router.push({path: '/Login'})
     },
-    updateCondition () {
-      // 用于更换注册状态
-      this.LogCondition = !this.LogCondition
+    isLogin () {
+      // 是否为登录状态
+      // console.log(this)
+      if (this.$store.state.status === 'success') {
+        console.log('aaa')
+        this.LogCondition = true
+        return true
+      } else {
+        return false
+      }
     },
     Stu_Home () {
       this.$router.push({path: '/Stu_Home'})
@@ -76,6 +84,19 @@ export default {
     },
     Setting () {
       this.$router.push({path: '/Setting/Profile'})
+    },
+    Loginout () {
+      console.log(this.$store.state.status)
+      // if (this.$store.state.status === 'success') {
+      //   console.log('aaa')
+      //   this.LogCondition = true
+      //   return true
+      // } else {
+      //   return false
+      // }
+    },
+    setBarWidth () {
+      this.barWidth = window.innerWidth > 1230 ? 80 + '%' : 100 + '%'
     }
   },
   components: {
