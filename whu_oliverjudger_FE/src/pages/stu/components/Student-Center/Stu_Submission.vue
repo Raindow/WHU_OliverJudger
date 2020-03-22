@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import VariableTable from './VariableTable'
+import VariableTable from '../VariableTable'
 
 export default {
   name: 'Stu_Submission',

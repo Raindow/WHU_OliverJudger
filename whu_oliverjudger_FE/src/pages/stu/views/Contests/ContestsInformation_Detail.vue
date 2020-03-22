@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import VariableTable from '../components/VariableTable'
+import VariableTable from '../../components/VariableTable'
 export default {
   name: 'ContestsInformation_Detail',
   components: {

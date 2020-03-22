@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import CourseItem from '@/pages/stu/components/CourseItem'
+import CourseItem from '@/pages/stu/components/Course/CourseItem'
 export default {
   name: 'Course',
   components: {
