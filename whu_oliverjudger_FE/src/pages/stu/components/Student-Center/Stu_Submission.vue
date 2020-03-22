@@ -98,7 +98,7 @@ export default {
       }
     },
     pageData: function () {
-      console.log(this.isSeeYourself)
+      // console.log(this.isSeeYourself)
       // return this.showTableData.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
 
       if (!this.isSeeYourself) {
