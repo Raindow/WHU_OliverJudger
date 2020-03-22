@@ -128,9 +128,6 @@ export default {
     margin-right: 1%;
   }
   .problemPagination{
-    /*position: absolute;*/
-    /*bottom: 0;*/
     margin: 2% auto;
-    /*width: 100%*/
   }
 </style>
