@@ -3,10 +3,8 @@
 
 // eslint-disable-next-line no-unused-vars
 import axios from 'axios'
-
 import Vue from 'vue'
 import App from './App'
-
 // 引入路由
 import VueRouter from 'vue-router'
 import Routes from './router/routes'
