@@ -5,7 +5,7 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 // 创建VueX对象
-const store = new Vuex({
+export const store = new Vuex.Store({
   state: {
     status: '',
     token: localStorage.getItem('token') || '',
@@ -75,7 +75,4 @@ const store = new Vuex({
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status
   }
-
 })
-
-export default store
