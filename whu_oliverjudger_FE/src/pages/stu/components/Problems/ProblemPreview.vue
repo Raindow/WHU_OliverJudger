@@ -109,7 +109,7 @@ export default {
       this.currentPage = currentPage
     },
     clickEventForContent (row) {
-      alert(row.title)
+      this.$router.push({ path: '/Problems/' + row.title })
     }
   }
 }

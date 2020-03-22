@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-image  :src="require('@/assets/logo.png')" fit="fit" class="barImg"></el-image>
-  <el-menu :default-active="this.$route.path" router mode="horizontal" :style="{float: 'left', width: barWidth, 'min-width': '650px'}">
+  <el-menu :default-active="this.$route.path" router mode="horizontal" class="bar">
 <!--    <el-menu-item>-->
 <!--      <a href="https://www.whu.edu.cn/"><el-image  :src="require('@/assets/logo.png')" fit="fit" style="height: 65px"></el-image></a>-->
 <!--    </el-menu-item>-->
@@ -76,9 +76,6 @@ export default {
     },
     Setting () {
       this.$router.push({path: '/Setting/Profile'})
-    },
-    setBarWidth () {
-      this.barWidth = window.innerWidth > 1230 ? 80 + '%' : 100 + '%'
     }
   },
   components: {
@@ -112,8 +109,7 @@ export default {
       ],
       LogCondition: false, // use this to judge whether it have been login
       registerVisible: false,
-      loginVisible: false,
-      barWidth: '80%'
+      loginVisible: false
     }
   },
   mounted () {
@@ -130,5 +126,17 @@ export default {
   }
   .right_part{
     float:right
+  }
+  .bar{
+    float: left;
+    width: 80%;
+    min-width: 650px
+  }
+  @media screen and (max-width: 1230px) {
+    .bar{
+      float: left;
+      width: 100%;
+      min-width: 650px
+    }
   }
 </style>
