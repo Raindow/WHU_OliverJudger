@@ -22,6 +22,8 @@ import Course_Chapter from '@/pages/stu/components/Course/Course_Chapter'
 // eslint-disable-next-line camelcase
 import ContestsInformation_Detail from '@/pages/stu/views/Contests/ContestsInformation_Detail'
 import CourseDetail from '@/pages/stu/views/Course/Course_Detail'
+// eslint-disable-next-line camelcase
+import Course_Chapter_Item from '@/pages/stu/components/Course/Course_Chapter_Item'
 export default[
   {
     path: '/',
@@ -60,7 +62,11 @@ export default[
     component: CourseDetail,
     children: [{
       path: ':id',
-      component: Course_Chapter
+      component: Course_Chapter,
+      children: [{
+        path: ':id',
+        component: Course_Chapter_Item
+      }]
     }]
 
   },
