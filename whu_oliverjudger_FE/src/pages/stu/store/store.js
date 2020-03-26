@@ -10,8 +10,9 @@ export const store = new Vuex.Store({
     status: '',
     token: localStorage.getItem('token') || '',
     user: {},
-    // use for Course
-    Course: ''
+    // use for Course part
+    Course: '',
+    Chapter: ''
   },
   mutations: {
     auth_request (state) {
@@ -33,7 +34,11 @@ export const store = new Vuex.Store({
     },
     editCourse (state, CourseName) {
       state.Course = CourseName
-      sessionStorage.setItem('CourseName', CourseName) // Set the username in session Storage
+      sessionStorage.setItem('CourseName', CourseName) // Set the CourseName in session Storage
+    },
+    editChapter (state, ChapterName) {
+      state.Chapter = ChapterName
+      sessionStorage.setItem('ChapterName', ChapterName)
     }
   },
   actions: {

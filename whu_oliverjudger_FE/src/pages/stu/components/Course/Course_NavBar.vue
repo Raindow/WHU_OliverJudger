@@ -20,19 +20,19 @@ export default {
       // 定义了data中的 courseEnglishName，由于props无法直接使用，避免麻烦
       courseEnglishName: sessionStorage.getItem('CourseName'),
       Data_StructureItem: [
-        {chapter: '队列&栈', link: '/Courses/Data_Structure/queue-stack'},
-        {chapter: '数组和字符串', link: '/Courses/Data_Structure/array-string'},
-        {chapter: '链表', link: '/Courses/Data_Structure/linked-list'},
-        {chapter: '哈希表', link: '/Courses/Data_Structure/hash-map'},
-        {chapter: '二分查找', link: '/Courses/Data_Structure/binary-search'},
-        {chapter: '二叉树', link: '/Courses/Data_Structure/binary-tree'},
-        {chapter: 'N叉树', link: '/Courses/Data_Structure/n-tree'},
-        {chapter: '前缀树', link: '/Courses/Data_Structure/prefix-tree'}
+        {chapter: '队列&栈', link: '/Courses/Data_Structure/queue-stack', name: 'queue-stack'},
+        {chapter: '数组和字符串', link: '/Courses/Data_Structure/array-string', name: 'array-string'},
+        {chapter: '链表', link: '/Courses/Data_Structure/linked-list', name: 'linked-list'},
+        {chapter: '哈希表', link: '/Courses/Data_Structure/hash-map', name: 'hash-map'},
+        {chapter: '二分查找', link: '/Courses/Data_Structure/binary-search', name: 'binary-search'},
+        {chapter: '二叉树', link: '/Courses/Data_Structure/binary-tree', name: 'binary-tree'},
+        {chapter: 'N叉树', link: '/Courses/Data_Structure/n-tree', name: 'n-tree'},
+        {chapter: '前缀树', link: '/Courses/Data_Structure/prefix-tree', name: 'prefix-tree'}
       ],
       MysqlItem: [
-        {chapter: '增删改查', link: '/Courses/Mysql/ADUS'},
-        {chapter: '查询子句', link: '/Courses/Mysql/SubStatement'},
-        {chapter: '范式', link: '/Courses/Mysql/Paradigm'}
+        {chapter: '增删改查', link: '/Courses/Mysql/adus', name: 'adus'},
+        {chapter: '查询子句', link: '/Courses/Mysql/substatement', name: 'substatement'},
+        {chapter: '范式', link: '/Courses/Mysql/paradigm', name: 'paradigm'}
       ],
       items: [
       ]
@@ -53,6 +53,7 @@ export default {
     // 给每个都弄一个点击事件，如果点击了对应的章节就会跳过去了
     linkto () {
       let activeIndex = this.$refs.carousel.activeIndex
+      this.$store.commit('editChapter', this.items[activeIndex].name)
       this.$router.push(this.items[activeIndex].link)
     }
   }
