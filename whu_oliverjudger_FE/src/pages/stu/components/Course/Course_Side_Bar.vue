@@ -49,6 +49,11 @@ export default {
         {chapter_sub_CN: '双指针技巧', chapter_sub_ENG: 'Array_String_Double-Link'},
         {chapter_sub_CN: '小结', chapter_sub_ENG: 'Array_String_QueueandStack_Summary'}
       ],
+      Test: [
+        {
+          chapter_sub_CN: 'Test', chapter_sub_ENG: 'Test'
+        }
+      ],
       items: []
     }
   },
@@ -60,6 +65,8 @@ export default {
     } else if (this.ChapterName === 'array-string') {
       this.items = []
       this.items = this.Array_StringItems
+    } else {
+      this.items = this.Test
     }
   },
   watch: {
