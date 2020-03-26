@@ -33,7 +33,7 @@
     <span class="el-dropdown-link" v-if="!isLogin">
       <i class="el-icon-user"></i>Stu_Name<i class="el-icon-arrow-down el-icon--right"></i>
     </span>
-    <el-dropdown-menu slot="dropdown">
+    <el-dropdown-menu slot="dropdown" >
       <el-dropdown-item @click.native="Stu_Home">Home</el-dropdown-item>
       <el-dropdown-item @click.native="Stu_Submission">Submissions</el-dropdown-item>
       <el-dropdown-item @click.native="Setting">Setting</el-dropdown-item>

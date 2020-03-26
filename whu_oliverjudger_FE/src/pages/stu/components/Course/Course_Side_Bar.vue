@@ -10,7 +10,7 @@
       text-color="#fff"
       active-text-color="#ffd04b" >
 <!--      左侧选择框-->
-      <el-menu-item v-for="(item,index) in items" v-bind:key="index" :index="index" @click.native="linkto">
+      <el-menu-item v-for="(item,index) in items" v-bind:key="index"  @click.native="linkto">
         <i class="el-icon-menu"></i>
         <span >{{item.chapter_sub_CN}}</span>
       </el-menu-item>

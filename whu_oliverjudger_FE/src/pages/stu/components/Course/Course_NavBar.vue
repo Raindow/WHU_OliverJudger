@@ -15,14 +15,10 @@
 <script>
 export default {
   name: 'Course_NavBar',
-  props: {
-    // 使用 courseName 来接收参数 详情参考Course_Detail
-    courseName: String
-  },
   data: function () {
     return {
       // 定义了data中的 courseEnglishName，由于props无法直接使用，避免麻烦
-      courseEnglishName: this.courseName,
+      courseEnglishName: this.$store.state.Course,
       Data_StructureItem: [
         {chapter: '队列&栈', link: '/Courses/Data_Structure/queue-stack'},
         {chapter: '数组和字符串', link: '/Courses/Data_Structure/array-string'},

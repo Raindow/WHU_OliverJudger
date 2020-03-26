@@ -36,7 +36,8 @@ export default {
   methods: {
     ClickEvent: function (url, courseEnglish) {
       alert(url)
-      this.$router.push({path: url, query: {coursename: courseEnglish}})
+      this.$store.commit('editCourse', courseEnglish)
+      this.$router.push(url)
     }
   }
 }
