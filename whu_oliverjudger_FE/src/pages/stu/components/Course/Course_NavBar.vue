@@ -18,7 +18,7 @@ export default {
   data: function () {
     return {
       // 定义了data中的 courseEnglishName，由于props无法直接使用，避免麻烦
-      courseEnglishName: this.$store.state.Course,
+      courseEnglishName: sessionStorage.getItem('CourseName'),
       Data_StructureItem: [
         {chapter: '队列&栈', link: '/Courses/Data_Structure/queue-stack'},
         {chapter: '数组和字符串', link: '/Courses/Data_Structure/array-string'},

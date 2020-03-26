@@ -33,6 +33,7 @@ export const store = new Vuex.Store({
     },
     editCourse (state, CourseName) {
       state.Course = CourseName
+      sessionStorage.setItem('CourseName', CourseName) // Set the username in session Storage
     }
   },
   actions: {

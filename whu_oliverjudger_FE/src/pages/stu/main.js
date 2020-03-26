@@ -15,9 +15,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import vuex from 'vuex'
 import VueCodeMirror from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
-import VueSessionStorage from 'vue-sessionstorage'
 Vue.use(VueCodeMirror)
-Vue.use(VueSessionStorage)
 // 注意样式文件需要单独引入
 // 调用插件
 Vue.use(ElementUI)
