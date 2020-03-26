@@ -19,8 +19,8 @@
       <el-menu-item index="/Us"><i class="el-icon-info"></i><span>Us</span></el-menu-item>
     </el-submenu>
     <div class="right_part">
-    <el-button v-show="!LogCondition" type="primary" @click="registerVisible = true">注册</el-button>
-    <el-button v-show="!LogCondition" type="primary" @click="loginVisible = true">登录</el-button>
+    <el-button v-show="!  isLogin () " type="primary" @click="registerVisible = true">注册</el-button>
+    <el-button v-show="!  isLogin () " type="primary" @click="loginVisible = true">登录</el-button>
 <!--      用于注册登录的弹窗-->
     <el-dialog title="登录" :visible.sync="loginVisible" :before-close="handleClose">
         <login></login>
@@ -30,7 +30,7 @@
     </el-dialog>
 <!--      用于用户选项的下拉列表-->
     <el-dropdown>
-    <span class="el-dropdown-link" v-show="!isLogin">
+    <span class="el-dropdown-link" v-show="  isLogin () ">
       <i class="el-icon-user"></i>Stu_Name<i class="el-icon-arrow-down el-icon--right"></i>
     </span>
     <el-dropdown-menu slot="dropdown" >
@@ -51,11 +51,34 @@ import Register from '@/pages/stu/components/Register-Login/Register.vue'
 // import vuex from 'vuex'
 export default {
   name: 'NavBar',
+  watch: {
+    LoginCondition: 'isLogin'
+
+  },
   methods: {
     // 弹窗退出函数
-    handleClose () {
-
+    isLogin () {
+      let tem = !!localStorage.getItem('isLogin')
+      console.log('aaa')
+      if (tem === true) {
+        console.log('aaa')
+        this.LoginCondition = true
+        return true
+      } else {
+        this.LoginCondition = false
+        return false
+      }
     },
+    handleClose () {
+      this.registerVisible = false
+      this.loginVisible = false
+      // var tem = localStorage.getItem('isLogin')
+      // console.log(tem)
+      // localStorage.removeItem('isLogin')
+      // tem = localStorage.getItem('isLogin')
+      // console.log(tem)
+    },
+
     // 上方注册按钮函数
     register () {
       this.$router.push({path: '/Register'})
@@ -64,17 +87,18 @@ export default {
     login () {
       this.$router.push({path: '/Login'})
     },
-    isLogin () {
-      // 是否为登录状态
-      // console.log(this)
-      if (this.$store.state.status === 'success') {
-        console.log('aaa')
-        this.LogCondition = true
-        return true
-      } else {
-        return false
-      }
-    },
+    // isLogin () {
+    //   // 是否为登录状态
+    //   var tem = localStorage.getItem('isLogin')
+    //   console.log(tem)
+    //   // if (this.$store.state.status === 'success') {
+    //   //   console.log('aaa')
+    //   //   this.LogCondition = true
+    //   //   return true
+    //   // } else {
+    //   //   return false
+    //   // }
+    // },
     Stu_Home () {
       this.$router.push({path: '/Stu_Home'})
     },
@@ -85,14 +109,11 @@ export default {
       this.$router.push({path: '/Setting/Profile'})
     },
     Loginout () {
-      console.log(this.$store.state.status)
-      // if (this.$store.state.status === 'success') {
-      //   console.log('aaa')
-      //   this.LogCondition = true
-      //   return true
-      // } else {
-      //   return false
-      // }
+      localStorage.removeItem('isLogin')
+      var tem = localStorage.getItem('isLogin')
+      console.log(tem)
+      this.LoginCondition = false
+      location.reload()
     },
     setBarWidth () {
       this.barWidth = window.innerWidth > 1230 ? 80 + '%' : 100 + '%'
@@ -127,7 +148,7 @@ export default {
           navItemIcon: 'el-icon-s-flag'
         }
       ],
-      LogCondition: false, // use this to judge whether it have been login
+      LoginCondition: false, // use this to judge whether it have been login
       registerVisible: false,
       loginVisible: false
     }
