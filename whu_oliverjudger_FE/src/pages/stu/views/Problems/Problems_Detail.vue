@@ -13,10 +13,56 @@
       课程授课。武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测
       评，课程授课</p>
     <span class="example">答案</span>
-    <codemirror
-      :value="code"
-      :options="cmOptions"
-    ></codemirror>
+    <div>
+      <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="在线编辑代码" name="first">
+          <span>language</span>
+          <el-select v-model="codeLang">
+            <el-option
+              v-for="item in codeLangOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+          <span>theme</span>
+          <el-select v-model="theme">
+            <el-option
+              v-for="item in themeOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+          <codemirror
+            ref="coder"
+            :value="code"
+            :options="cmOptions"
+            style="margin-top: 1%"
+          ></codemirror>
+          <el-button style="margin-top: 1%;float: right" @click="codeSubmission">提交</el-button>
+        </el-tab-pane>
+        <el-tab-pane label="文件提交" name="second">
+          <!-- 网址需要修改 -->
+          <el-upload
+            class="upload-demo"
+            style="text-align: center"
+            ref="upload"
+            drag
+            action="https://jsonplaceholder.typicode.com/posts/"
+            multiple
+            :on-preview="handleFilePreview"
+            :on-remove="handleFileRemove"
+            :file-list="fileList"
+            :auto-upload="false">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击选择文件</em></div>
+          </el-upload>
+          <el-button style="margin-top: 1%; float: right" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+        </el-tab-pane>
+      </el-tabs>
+
+    </div>
   </div>
 </template>
 
@@ -39,7 +85,6 @@ import 'codemirror/keymap/emacs.js'
 import 'codemirror/keymap/vim.js'
 // 主题
 import 'codemirror/theme/monokai.css'
-import 'codemirror/theme/ambiance.css'
 // 选择行高亮
 import 'codemirror/addon/selection/active-line'
 // 自动补全
@@ -48,16 +93,17 @@ import 'codemirror/addon/hint/anyword-hint'
 import 'codemirror/addon/hint/show-hint'
 import 'codemirror/addon/hint/show-hint.css'
 // 代码折叠
-import 'codemirror/addon/fold/foldcode.js'
-import 'codemirror/addon/fold/foldgutter.js'
-import 'codemirror/addon/fold/indent-fold.js'
+import 'codemirror/addon/fold/foldcode'
+import 'codemirror/addon/fold/foldgutter'
+import 'codemirror/addon/fold/indent-fold'
 import 'codemirror/addon/fold/brace-fold'
-import 'codemirror/addon/fold/comment-fold.js'
+import 'codemirror/addon/fold/comment-fold'
 import 'codemirror/addon/fold/foldgutter.css'
-// 编辑选项，例如括号自动补全b
+// 编辑选项，例如括号自动补全
 import 'codemirror/addon/edit/closebrackets' // 括号自动补全
 import 'codemirror/addon/edit/matchbrackets' // 光标在括号旁边，就会使匹配的括号突出显示
-import 'codemirror/addon/comment/comment' // 注释和取消注释
+import 'codemirror/addon/comment/comment'// 注释和取消注释
+
 export default {
   name: 'Problems_Detail',
   components: {
@@ -65,25 +111,101 @@ export default {
   },
   data () {
     return {
+      // 标签页 默认页
+      activeName: 'first',
+      // 设置编程语言
+      codeLangOptions: [{
+        value: 'C++',
+        label: 'C++'
+      }, {
+        value: 'Java',
+        label: 'Java'
+      }, {
+        value: 'Python',
+        label: 'Python'
+      }, {
+        value: 'JavaScript',
+        label: 'JavaScript'
+      }],
+      codeLang: 'C++',
+      // 设置主题
+      themeOptions: [{
+        value: 'default',
+        label: 'default'
+      }, {
+        value: 'monokai',
+        label: 'monokai'
+      }],
+      theme: 'default',
+      // 输入的代码
       code: '',
+      // 编辑器设置
       cmOptions: {
         mode: 'text/x-c++src',
-        theme: 'monokai',
-        indentWithTabs: true,
-        smartIndent: true,
-        lineNumbers: true,
+        theme: 'default',
+        indentUnit: 4, // 设置自动缩进为4
+        indentWithTabs: true, // 在缩进时，会将需要把 n*tab宽度个空格替换成n个tab字符
+        smartIndent: true, // 开启自动缩进
+        lineNumbers: true, // 开启代码前行数显示
+        // 下列三个属性用于折叠代码所需要的设置
+        foldGutter: true,
+        gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
         lineWrapping: true,
+        // matchBrackets用于匹配括号，autoCloseBrackets用于自动匹配
         matchBrackets: true,
         autoCloseBrackets: true,
         onKeyEvent: true, // 是否允许拖拽事件和键盘事件
-        styleActiveLine: true,
+        styleActiveLine: true, // 选中行高亮
         cursorHeight: 1, // 光标高度
-        autoRefresh: true,
-        keyMap: 'sublime',
+        autoRefresh: true, // 自动更新
+        keyMap: 'sublime', // 快捷键使用sublime版
+        showCursorWhenSelecting: true,
+        // 额外快捷键
         extraKeys: {
           'Ctrl': 'autocomplete'
         }
+      },
+      // 上传文件列表
+      fileList: []
+    }
+  },
+  watch: {
+    codeLang (val) {
+      switch (val) {
+        case 'C++':
+          this.cmOptions.mode = 'text/x-c++src'
+          break
+        case 'Java':
+          this.cmOptions.mode = 'text/x-java'
+          break
+        case 'Python':
+          this.cmOptions.mode = 'text/python'
+          break
+        case 'JavaScript':
+          this.cmOptions.mode = 'text/javascript'
+          break
       }
+    },
+    theme (val) {
+      this.cmOptions.theme = val
+    }
+  },
+  methods: {
+    handleClick (tab, event) {
+      console.log(tab, event)
+    },
+    // 提交直接编辑的代码需要修改的地方
+    codeSubmission () {
+      console.log(this.$refs.coder.codemirror.getValue())
+    },
+    submitUpload () {
+      this.$refs.upload.submit()
+    },
+    handleFileRemove (file, fileList) {
+      console.log(file, fileList)
+    },
+    handleFilePreview (file) {
+      console.log(file)
     }
   }
 }
