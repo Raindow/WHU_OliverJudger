@@ -9,7 +9,11 @@ export const store = new Vuex.Store({
   state: {
     status: '',
     token: localStorage.getItem('token') || '',
-    user: {}
+    user: {},
+    // use for Course part
+    Course: '',
+    Chapter: '',
+    isLogin: localStorage.getItem('isLogin') || ''
   },
   mutations: {
     auth_request (state) {
@@ -28,31 +32,45 @@ export const store = new Vuex.Store({
     logout (state) {
       state.status = ''
       state.token = ''
+    },
+    editCourse (state, CourseName) {
+      state.Course = CourseName
+      sessionStorage.setItem('CourseName', CourseName) // Set the CourseName in session Storage
+    },
+    editChapter (state, ChapterName) {
+      state.Chapter = ChapterName
+      sessionStorage.setItem('ChapterName', ChapterName)
     }
   },
   actions: {
-    // Login ({commit}, user) {
-    //   return new Promise((resolve, reject) => {
-    //     commit('auth_request')
-    //     // 向后端发送请求，验证用户名密码是否正确，请求成功接收后端返回的token值，利用commit修改store的state属性，并将token存放在localStorage中
-    //     axios.post('login', user)
-    //       .then(resp => {
-    //         const token = resp.data.token
-    //         const user = resp.data.user
-    //         localStorage.setItem('token', token)
-    //         // 每次请求接口时，需要在headers添加对应的Token验证
-    //         axios.defaults.headers.common['Authorization'] = token
-    //         // 更新token
-    //         commit('auth_success', token, user)
-    //         resolve(resp)
-    //       })
-    //       .catch(err => {
-    //         commit('auth_error')
-    //         localStorage.removeItem('token')
-    //         reject(err)
-    //       })
-    //   })
-    // },
+    Login ({commit}, user) {
+      return new Promise((resolve, reject) => {
+        commit('auth_request')
+        let data = {user: user, token: '1234'}
+        localStorage.setItem('token', '1234')
+        localStorage.setItem('isLogin', true)
+        // 更新token
+        commit('auth_success', data)
+
+        // 向后端发送请求，验证用户名密码是否正确，请求成功接收后端返回的token值，利用commit修改store的state属性，并将token存放在localStorage中
+        // axios.post('login', user)
+        //   .then(resp => {
+        //     const token = resp.data.token
+        //     const user = resp.data.user
+        //     localStorage.setItem('token', token)
+        //     // 每次请求接口时，需要在headers添加对应的Token验证
+        //     axios.defaults.headers.common['Authorization'] = token
+        //     // 更新token
+        //     commit('auth_success', token, user)
+        //     resolve(resp)
+        //   })
+        //   .catch(err => {
+        //     commit('auth_error')
+        //     localStorage.removeItem('token')
+        //     reject(err)
+        //   })
+      })
+    },
     LogOut ({ commit, state }) {
       return new Promise((resolve, reject) => {
         axios.get('Logout')

@@ -13,9 +13,13 @@ export default {
   components: {
     Course_NavBar
   },
+  mounted () {
+    console.log()
+  },
   data: function () {
     return {
-      CourseName: this.$route.query.coursename
+      // 接收参数
+      CourseName: this.$store.state.Course
     }
   }
 }

@@ -19,6 +19,7 @@
     "vue": "^2.5.2",
     "vue-codemirror": "^4.0.6",
     "vue-router": "^3.0.1",
+    "vue-sessionstorage": "^1.0.0",
     "vue-waterfall": "^1.0.6",
     "vue-waterfall2": "^1.9.6",
     "vuex": "^3.1.3"

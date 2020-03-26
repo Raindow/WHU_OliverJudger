@@ -15,21 +15,19 @@ import 'element-ui/lib/theme-chalk/index.css'
 import vuex from 'vuex'
 import VueCodeMirror from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
-Vue.use(VueCodeMirror)
 // 注意样式文件需要单独引入
 // 调用插件
+Vue.use(VueCodeMirror)
 Vue.use(ElementUI)
-Vue.config.productionTip = false
 Vue.use(VueRouter)
-
+Vue.use(vuex)
+Vue.config.productionTip = false
 // eslint-disable-next-line no-undef
 const router = new VueRouter({
   routes: Routes,
   // 消除地址栏中的#
   mode: 'history'
 })
-Vue.use(vuex)
-
 // eslint-disable-next-line no-new
 new Vue({
   el: '#app', // 将所有视图放到id值为app的这个dom元素中
