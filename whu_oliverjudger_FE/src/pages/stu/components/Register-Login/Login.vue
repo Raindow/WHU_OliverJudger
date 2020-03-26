@@ -43,7 +43,6 @@ export default {
     },
     // 登录界面登录按钮函数
     login () {
-      console.log(this)
       if (!this.ID) {
         // this.$message.error 常用于主动操作的反馈提示
         this.$message.error('请输入用户名')
@@ -53,7 +52,17 @@ export default {
         this.$message.error('请输入密码')
       }
       // eslint-disable-next-line no-undef
-      this.$store.commit('auth_success', '121', this.ID)
+      let params = {
+        'username': this.ID,
+        'password': this.password
+      }
+      this.$store.dispatch('Login', params)
+        .then(() => {
+          this.$router.push({ path: '/' })
+        })
+        .catch((error) => {
+          console.log(error.response)
+        })
     }
   },
   // created () {
