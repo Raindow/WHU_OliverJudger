@@ -1,5 +1,6 @@
 <template>
   <el-row class="tac">
+<!--      获取当前charpter的名称 $route.params.id 传到Couese_Side_Bar中-->
       <Course_Side_Bar :charpterName=$route.params.id>
       </Course_Side_Bar>
     <el-col :span="16">

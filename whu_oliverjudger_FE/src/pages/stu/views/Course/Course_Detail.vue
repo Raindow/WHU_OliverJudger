@@ -15,6 +15,7 @@ export default {
   },
   data: function () {
     return {
+      // 接收参数
       CourseName: this.$route.query.coursename
     }
   }

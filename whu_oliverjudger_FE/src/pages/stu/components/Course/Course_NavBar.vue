@@ -16,17 +16,22 @@
 export default {
   name: 'Course_NavBar',
   props: {
+    // 使用 courseName 来接收参数 详情参考Course_Detail
     courseName: String
   },
   data: function () {
     return {
+      // 定义了data中的 courseEnglishName，由于props无法直接使用，避免麻烦
       courseEnglishName: this.courseName,
       Data_StructureItem: [
         {chapter: '队列&栈', link: '/Courses/Data_Structure/queue-stack'},
         {chapter: '数组和字符串', link: '/Courses/Data_Structure/array-string'},
         {chapter: '链表', link: '/Courses/Data_Structure/linked-list'},
         {chapter: '哈希表', link: '/Courses/Data_Structure/hash-map'},
-        {chapter: '二分查找', link: '/Courses/Data_Structure/binary-search'}
+        {chapter: '二分查找', link: '/Courses/Data_Structure/binary-search'},
+        {chapter: '二叉树', link: '/Courses/Data_Structure/binary-tree'},
+        {chapter: 'N叉树', link: '/Courses/Data_Structure/n-tree'},
+        {chapter: '前缀树', link: '/Courses/Data_Structure/prefix-tree'}
       ],
       MysqlItem: [
         {chapter: '增删改查', link: '/Courses/Mysql/ADUS'},
@@ -39,6 +44,7 @@ export default {
   },
   mounted: function () {
     // 判断课程总类
+    // 看是什么课程，给items赋值
     if (this.courseEnglishName === 'Data_Structure') {
       this.items = []
       this.items = this.Data_StructureItem
@@ -48,6 +54,7 @@ export default {
     }
   },
   methods: {
+    // 给每个都弄一个点击事件，如果点击了对应的章节就会跳过去了
     linkto () {
       let activeIndex = this.$refs.carousel.activeIndex
       this.$router.push(this.items[activeIndex].link)
