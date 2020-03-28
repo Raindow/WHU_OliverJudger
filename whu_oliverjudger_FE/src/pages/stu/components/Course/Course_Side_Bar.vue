@@ -1,5 +1,5 @@
 <template>
-  <el-col :span="8">
+  <el-col :span="6">
     <h2>{{charpterName}}</h2>
     <el-menu
       default-active="1"
@@ -19,12 +19,8 @@
 </template>
 
 <script>
-import VariableTable from '../VariableTable'
 export default {
   name: 'Course_Side_Bar',
-  components: {
-    VariableTable
-  },
   methods: {
     handleOpen (key, keyPath) {
       console.log(key, keyPath)
