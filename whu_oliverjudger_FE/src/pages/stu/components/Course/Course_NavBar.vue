@@ -1,6 +1,6 @@
 <template>
 <!--  顶端-->
-  <el-carousel type="card" ref="carousel" height="150px" @click.native="linkto" :autoplay="autoSlip">
+  <el-carousel type="card" ref="carousel" height="150px" @click.native="linkto" :autoplay="autoSlip" indicator-position="none">
     <el-carousel-item v-for="item in items" :key="item.chapter">
       <div>
         <h2>
