@@ -10,7 +10,7 @@
       text-color="#fff"
       active-text-color="#ffd04b" >
 <!--      左侧选择框-->
-      <el-menu-item v-for="(item,index) in items" v-bind:key="index"  @click.native="linkto">
+      <el-menu-item v-for="(item,index) in items" v-bind:key="index"  @click.native="linkto(item)">
         <i class="el-icon-menu"></i>
         <span >{{item.chapter_sub_CN}}</span>
       </el-menu-item>
@@ -28,13 +28,14 @@ export default {
     handleClose (key, keyPath) {
       console.log(key, keyPath)
     },
-    linkto () {
-      console.log('hwk')
+    linkto (item) {
+      this.$router.push(this.router_item + '/' + item.chapter_sub_ENG)
     }
   },
   data: function () {
     return {
       ChapterName: '',
+      router_item: '/Courses/' + sessionStorage.getItem('CourseName') + '/' + sessionStorage.getItem('ChapterName'),
       Queue_StackItems: [
         {chapter_sub_CN: '概览', chapter_sub_ENG: 'QueueandStack_Abstract'},
         {chapter_sub_CN: '队列：先入先出的数据结构', chapter_sub_ENG: 'Queue_FIFO'},
@@ -57,6 +58,11 @@ export default {
       items: []
     }
   },
+  // computed: {
+  //   router_item () {
+  //     return this.$store.getters.calculate_chapter_route
+  //   }
+  // },
   beforeMount () {
     this.ChapterName = sessionStorage.getItem('ChapterName')
     if (this.ChapterName === 'queue-stack') {
