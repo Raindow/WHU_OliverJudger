@@ -1,6 +1,6 @@
 <template>
 <!--  顶端-->
-  <el-carousel type="card" ref="carousel" height="150px" @click.native="linkto" :autoplay="false">
+  <el-carousel type="card" ref="carousel" height="150px" @click.native="linkto" :autoplay="autoSlip">
     <el-carousel-item v-for="item in items" :key="item.chapter">
       <div>
         <h2>
@@ -18,6 +18,7 @@ export default {
   data: function () {
     return {
       // 定义了data中的 courseEnglishName，由于props无法直接使用，避免麻烦
+      autoSlip: false,
       courseEnglishName: sessionStorage.getItem('CourseName'),
       Data_StructureItem: [
         {chapter: '队列&栈', link: '/Courses/Data_Structure/queue-stack', name: 'queue-stack'},
