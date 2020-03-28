@@ -5,6 +5,7 @@ import axios from 'axios'
 import Vue from 'vue'
 import App from './App'
 // 引入路由
+// eslint-disable-next-line import/no-duplicates
 import VueRouter from 'vue-router'
 import Routes from './router/routes'
 // eslint-disable-next-line no-unused-vars
@@ -15,6 +16,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import vuex from 'vuex'
 import VueCodeMirror from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
+// eslint-disable-next-line import/no-duplicates
+import Router from 'vue-router'
 // 注意样式文件需要单独引入
 // 调用插件
 Vue.use(VueCodeMirror)
@@ -23,6 +26,11 @@ Vue.use(VueRouter)
 Vue.use(vuex)
 Vue.config.productionTip = false
 // eslint-disable-next-line no-undef
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch(err => err)
+}
 const router = new VueRouter({
   routes: Routes,
   // 消除地址栏中的#
