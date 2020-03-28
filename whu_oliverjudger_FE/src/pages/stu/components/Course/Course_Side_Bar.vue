@@ -1,5 +1,5 @@
 <template>
-  <el-col :span="6">
+  <el-col :span="20">
     <h2>{{charpterName}}</h2>
     <el-menu
       default-active="1"
@@ -15,7 +15,7 @@
         <span >{{item.chapter_sub_CN}}</span>
       </el-menu-item>
     </el-menu>
-  </el-col>
+  </el-col >
 </template>
 
 <script>
