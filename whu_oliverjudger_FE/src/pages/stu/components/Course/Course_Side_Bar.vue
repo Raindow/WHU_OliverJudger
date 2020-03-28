@@ -19,8 +19,12 @@
 </template>
 
 <script>
+import VariableTable from '../VariableTable'
 export default {
   name: 'Course_Side_Bar',
+  components: {
+    VariableTable
+  },
   methods: {
     handleOpen (key, keyPath) {
       console.log(key, keyPath)
