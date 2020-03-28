@@ -58,11 +58,6 @@ export default {
       items: []
     }
   },
-  // computed: {
-  //   router_item () {
-  //     return this.$store.getters.calculate_chapter_route
-  //   }
-  // },
   beforeMount () {
     this.ChapterName = sessionStorage.getItem('ChapterName')
     if (this.ChapterName === 'queue-stack') {
