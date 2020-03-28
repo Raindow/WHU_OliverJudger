@@ -1,4 +1,3 @@
-```
 # Whu_OliverJudger_FE
 
 > A Vue.js project
@@ -52,5 +51,5 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 6. 个人空间（hwk）
 7. 登录注册（szk）
 8. 登录状态（szk）
-```
+
 
