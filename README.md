@@ -52,7 +52,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 7. 登录注册（szk）
 8. 登录状态（szk）
 
-## 项目成员：
+## 项目团队：
 - 指导老师：何承达 
 - 成员：石泽昆、陈添、黄文柯
 
