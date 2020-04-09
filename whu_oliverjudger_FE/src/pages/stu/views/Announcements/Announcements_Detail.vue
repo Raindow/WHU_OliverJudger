@@ -1,6 +1,6 @@
 <template>
   <div class="Announcements_detail">
-    <div class="titleStyle" v-html=" getDetail ($route.params.id)"></div>
+    <div class="titleStyle" >{{$route.params.id}}</div>
 
     <div class="detailContentStyle" v-html=" getDetail (detailContent)"></div>
 
@@ -14,27 +14,30 @@ export default {
   data () {
     return {
       title: '',
-      detailContent: '',
-      tableData: [] // 存储通告数据
+      detailContent: ''
     }
   },
-  mounted () {
+  created () {
     this.init()
   },
   methods: {
     init () {
-      this.title = '武汉大学在线测评系统'
-      this.detailContent = '本项目是由何承达老师指导，具体成员为石泽昆，陈添，黄文柯。\n\n' +
-        '所有参加的学生都要求是武大的学生，希望你们使用愉快！”\n' +
-        '\n'
-      this.tableData = [
-        {
-          startAt: '2020-2-25 13:37:58',
-          endAt: '2020-2-25 13:37:58',
-          contestType: 'Accepted',
-          rule: '1',
-          creator: 'aaa'
-        }]
+      let xmlhttp = new XMLHttpRequest()
+      xmlhttp.open('POST', 'http://127.0.0.1:3000/announcement')
+      xmlhttp.setRequestHeader('content-type', 'application.json')
+      let data = {title: this.$route.params.id}
+      xmlhttp.onreadystatechange = function (res) {
+        // eslint-disable-next-line no-undef
+        if (xmlhttp.readyState === 4) {
+          if (xmlhttp.status === 200) {
+            const {Title, Content} = JSON.parse(xmlhttp.response)[0]
+            console.log('Title', Title)
+            console.log('Content', Content)
+            this.detailContent = Content
+          }
+        }
+      }
+      xmlhttp.send(JSON.stringify(data))
     },
     getDetail (data) {
       return data.replace(/\n/g, '<br/>')
