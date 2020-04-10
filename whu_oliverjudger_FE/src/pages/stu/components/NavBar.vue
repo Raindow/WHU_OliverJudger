@@ -111,9 +111,12 @@ export default {
     },
     Loginout () {
       localStorage.removeItem('isLogin')
+      localStorage.removeItem('userID')
       var tem = localStorage.getItem('isLogin')
       console.log(tem)
       this.LoginCondition = false
+      // this.$router.replace('/Home')
+      this.$router.push('/' + '/Home')
       location.reload()
     },
     setBarWidth () {
