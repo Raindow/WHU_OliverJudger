@@ -1,10 +1,11 @@
-const db = require('config/db.js')
+const db = require('config/db')
 let show = () => {
     return new  Promise((resolve, reject) => {
-        db.query('SELECT * from Announcement', (err, rows) => {
+        db.query('select * from Announcement', (err, rows) => {
             if(err) {
                 reject(err);
             }
+            console.log(rows)
             resolve(rows);
         })
     })
