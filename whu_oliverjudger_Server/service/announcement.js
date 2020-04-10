@@ -1,26 +1,27 @@
-const db = require('config/db')
+const db = require('../config/db')
 let show = () => {
-    return new  Promise((resolve, reject) => {
-        db.query('select * from Announcement', (err, rows) => {
-            if(err) {
-                reject(err);
-            }
-            console.log(rows)
-            resolve(rows);
-        })
+  return new Promise((resolve, reject) => {
+    console.log('show in');
+    db.query('select * from announcement', (err, rows) => {
+      if(err) {
+        reject(err);
+      }
+      resolve(rows);
     })
-}//显示全部 （select*）
+  })
+};
 
-let select = (attributename, attribute) => {
-    return new Promise((resolve, reject) => {
-        db.query(`select * from Announcement where ${attributename} = '${attribute}'`, (err, rows) => {
-            if(err) {
-                reject(err);
-            }
-            resolve(rows);
-        })
+let showAttr = (attr) => {
+  return new Promise((resolve, reject) => {
+    console.log('show Attr in');
+    db.query(`select ${attr} from announcement`, (err, rows) => {
+      if(err) {
+        reject(err);
+      }
+      resolve(rows);
     })
-}//查询一行（传参)
+  })
+}
 
-exports.show = show
-exports.select = select
+exports.show = show;
+exports.showAttr = showAttr;
