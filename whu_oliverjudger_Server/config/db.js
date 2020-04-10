@@ -2,7 +2,7 @@ var mysql = require("mysql")
 var pool = mysql.createPool({
     host:"localhost",
     user:"root",
-    password:"kewilliam91",
+    password:"szk19990322",
     database:"WHU_Oliver_Judger"
 })//数据库连接配置
 

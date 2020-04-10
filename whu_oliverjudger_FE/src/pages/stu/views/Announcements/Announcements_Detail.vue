@@ -1,8 +1,8 @@
 <template>
   <div class="Announcements_detail">
-    <div class="titleStyle" >{{$route.params.id}}</div>
+    <div class="titleStyle" v-html="title"></div>
 
-    <div class="detailContentStyle" v-html=" getDetail (detailContent)"></div>
+    <div class="detailContentStyle" v-html="detailContent"></div>
 
   </div>
 
@@ -21,26 +21,27 @@ export default {
     this.init()
   },
   methods: {
+    getDetail (data) {
+      return data.replace(/\n/g, '<br/>')
+    },
     init () {
+      let that = this
       let xmlhttp = new XMLHttpRequest()
       xmlhttp.open('POST', 'http://127.0.0.1:3000/announcement')
       xmlhttp.setRequestHeader('content-type', 'application.json')
       let data = {title: this.$route.params.id}
       xmlhttp.onreadystatechange = function (res) {
         // eslint-disable-next-line no-undef
+        console.log(xmlhttp.status)
         if (xmlhttp.readyState === 4) {
           if (xmlhttp.status === 200) {
-            const {Title, Content} = JSON.parse(xmlhttp.response)[0]
-            console.log('Title', Title)
-            console.log('Content', Content)
-            this.detailContent = Content
+            let {Title, Content} = JSON.parse(xmlhttp.response)[0]
+            that.detailContent = that.getDetail(Content)
+            that.title = that.getDetail(Title)
           }
         }
       }
       xmlhttp.send(JSON.stringify(data))
-    },
-    getDetail (data) {
-      return data.replace(/\n/g, '<br/>')
     }
   }
 }
