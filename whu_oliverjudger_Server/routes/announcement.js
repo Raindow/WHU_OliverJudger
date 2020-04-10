@@ -29,14 +29,5 @@ router.post('/', function(req, res, next) {
 });
 
 connection.end()
-// router.get('/', async (req, res, next) => {
-//     try {
-//         let result = await require('service/announcement.js').show();
-//         console.log('result')
-//         res.send(result);
-//     } catch (e) {
-//         res.send(e);
-//     }
-// })
 
 module.exports = router;
