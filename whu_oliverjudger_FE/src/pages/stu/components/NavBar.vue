@@ -56,7 +56,7 @@ export default {
 
   },
   methods: {
-    // 弹窗退出函数
+
     isLogin () {
       let tem = !!localStorage.getItem('isLogin')
       console.log('aaa')
@@ -69,6 +69,7 @@ export default {
         return false
       }
     },
+    // 弹窗退出函数
     handleClose () {
       this.registerVisible = false
       this.loginVisible = false
@@ -110,9 +111,12 @@ export default {
     },
     Loginout () {
       localStorage.removeItem('isLogin')
+      localStorage.removeItem('userID')
       var tem = localStorage.getItem('isLogin')
       console.log(tem)
       this.LoginCondition = false
+      // this.$router.replace('/Home')
+      this.$router.push('/' + '/Home')
       location.reload()
     },
     setBarWidth () {

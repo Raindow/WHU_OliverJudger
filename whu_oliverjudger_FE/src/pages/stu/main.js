@@ -44,3 +44,19 @@ new Vue({
   router: router,
   store: store
 })
+router.beforeEach((to, from, next) => {
+  // store的getters中定义获取用户信息的函数 getUser
+  // userId为空说明用户未登录
+  let tem = !!localStorage.getItem('isLogin')
+  if (tem !== true) {
+    // 跳转到登录页
+    if (to.path === '/Setting/Profile' || to.path === '/Setting/Account' || to.path === '/Stu_Submission' || to.path === '/Stu_Home') {
+      alert('请先登录')
+      next('/Home')
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})

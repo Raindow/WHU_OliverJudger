@@ -63,6 +63,7 @@ export default {
         .catch((error) => {
           console.log(error.response)
         })
+      location.reload()
     }
   },
   // created () {
