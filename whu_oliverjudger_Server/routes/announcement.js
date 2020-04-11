@@ -7,7 +7,7 @@ router.get('/show', async (req, res, next) => {
     console.log('show');
     try {
         let result = await announcement.show();
-        res.send(result);
+        res.json(result);
     } catch (e) {
         res.send(e);
     }
