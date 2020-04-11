@@ -43,7 +43,7 @@ export default {
       // }
       // // JSON.stringify() 方法用于将 JavaScript 值转换为 JSON 字符串
       // xmlhttp.send(JSON.stringify(data))
-      this.$axios.get('http://127.0.0.1:3000/announcement/showDetail', { // 还可以直接把参数拼接在url后边
+      this.$axios.get('/announcement/showDetail', { // 还可以直接把参数拼接在url后边
         params: {
           title: this.$route.params.id
         }

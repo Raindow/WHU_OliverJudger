@@ -20,6 +20,8 @@ import 'codemirror/lib/codemirror.css'
 import Router from 'vue-router'
 // 注意样式文件需要单独引入
 // 调用插件
+axios.defaults.baseURL = 'http://127.0.0.1:3000'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 Vue.prototype.$axios = axios
 Vue.use(VueCodeMirror)
 Vue.use(ElementUI)

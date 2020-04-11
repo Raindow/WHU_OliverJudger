@@ -61,8 +61,8 @@ export default {
     // 计算需要显示的的条目总量
       get () {
         return this.tableData.filter(data => !this.search ||
-                                     data.announcement.toLowerCase().includes(this.search.toLowerCase()) ||
-                                     data.date.includes(this.search))
+                                     data.Title.toLowerCase().includes(this.search.toLowerCase()) ||
+                                     data.Time.includes(this.search))
       }
     },
     // 设置当前页的显示
@@ -87,7 +87,7 @@ export default {
     },
     setTableContent () {
       let that = this
-      this.$axios.get('http://127.0.0.1:3000/announcement/showList'
+      this.$axios.get('/announcement/showList'
       ).then(function (res) {
         console.log(res.data)
         that.tableData = res.data
