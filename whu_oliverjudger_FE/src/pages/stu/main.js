@@ -20,6 +20,7 @@ import 'codemirror/lib/codemirror.css'
 import Router from 'vue-router'
 // 注意样式文件需要单独引入
 // 调用插件
+Vue.prototype.$axios = axios
 Vue.use(VueCodeMirror)
 Vue.use(ElementUI)
 Vue.use(VueRouter)
