@@ -45,8 +45,8 @@ export default {
       currentPage: 1,
       search: '',
       columnHeaders: [ // 列表的头标签
-        {prop: 'announcement', label: '公告'},
-        {prop: 'date', label: '日期'}
+        {prop: 'Title', label: '公告'},
+        {prop: 'Time', label: '日期'}
       ],
       tableData: [] // 存储通告数据
     }
@@ -86,25 +86,33 @@ export default {
       this.announcementsHeight.height = (0.65 * window.innerHeight) + 'px'
     },
     setTableContent () {
-      this.tableData = [{announcement: '武汉大学Oline Judger', date: '2020-3-8'}, {announcement: '武汉大学计算机学院', date: '1010-10-10'},
-        {announcement: '武汉大学国软', date: '2020-5-20'}, {announcement: '珞珈山', date: '1010-10-10'},
-        {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-        {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-        {announcement: 'OliverJudger', date: '3020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-        {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-        {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-        {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-        {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-        {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-        {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'}
-      ]
+      let that = this
+      this.$axios.get('http://127.0.0.1:3000/announcement/showList'
+      ).then(function (res) {
+        console.log(res.data)
+        that.tableData = res.data
+      }).catch(function (error) {
+        console.log(error)
+      })
+      // this.tableData = [{announcement: '开发人员', date: '2020-3-8'}, {announcement: '武汉大学计算机学院', date: '1010-10-10'},
+      //   {announcement: '武汉大学国软', date: '2020-5-20'}, {announcement: '珞珈山', date: '1010-10-10'},
+      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
+      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
+      //   {announcement: 'OliverJudger', date: '3020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
+      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
+      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
+      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
+      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
+      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
+      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'}
+      // ]
     },
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage
     },
     clickEventForContent (row) {
       // alert(row.announcement)
-      this.$router.push({ path: '/home/' + row.announcement })
+      this.$router.push({ path: '/home/' + row.Title })
     }
   }
 }

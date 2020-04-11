@@ -26,22 +26,34 @@ export default {
     },
     init () {
       let that = this
-      let xmlhttp = new XMLHttpRequest()
-      xmlhttp.open('POST', 'http://127.0.0.1:3000/announcement')
-      xmlhttp.setRequestHeader('content-type', 'application.json')
-      let data = {title: this.$route.params.id}
-      xmlhttp.onreadystatechange = function (res) {
-        // eslint-disable-next-line no-undef
-        console.log(xmlhttp.status)
-        if (xmlhttp.readyState === 4) {
-          if (xmlhttp.status === 200) {
-            let {Title, Content} = JSON.parse(xmlhttp.response)[0]
-            that.detailContent = that.getDetail(Content)
-            that.title = that.getDetail(Title)
-          }
+      // let xmlhttp = new XMLHttpRequest()
+      // xmlhttp.open('GET', 'http://127.0.0.1:3000/announcement/show')
+      // xmlhttp.setRequestHeader('content-type', 'application.json')
+      // let data = {title: this.$route.params.id}
+      // xmlhttp.onreadystatechange = function (res) {
+      //   // eslint-disable-next-line no-undef
+      //   console.log(xmlhttp.status)
+      //   if (xmlhttp.readyState === 4) {
+      //     if (xmlhttp.status === 200) {
+      //       let {Title, Content} = JSON.parse(xmlhttp.response)[0]
+      //       that.detailContent = that.getDetail(Content)
+      //       that.title = that.getDetail(Title)
+      //     }
+      //   }
+      // }
+      // // JSON.stringify() 方法用于将 JavaScript 值转换为 JSON 字符串
+      // xmlhttp.send(JSON.stringify(data))
+      this.$axios.get('http://127.0.0.1:3000/announcement/showDetail', { // 还可以直接把参数拼接在url后边
+        params: {
+          title: this.$route.params.id
         }
-      }
-      xmlhttp.send(JSON.stringify(data))
+      }).then(function (res) {
+        console.log(res.data[0])
+        that.detailContent = (res.data[0]).Content
+        that.title = that.$route.params.id
+      }).catch(function (error) {
+        console.log(error)
+      })
     }
   }
 }

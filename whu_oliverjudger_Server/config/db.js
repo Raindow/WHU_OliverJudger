@@ -6,7 +6,7 @@ let pool = mysql.createPool({
   host: "localhost",
   port     : 3306,
   user: "root", // 数据库用户名
-  password: "hezijishuohua8", // 数据库密码
+  password: "kewilliam91", // 数据库密码
   database: "whu_oliverjudger"  // 数据库名称
 });
 
