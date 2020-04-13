@@ -52,8 +52,8 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 7. 登录注册（szk）
 8. 登录状态（szk）
 ### 2020.4～220.5
-4.1~4.7 学习后端开发框架Express
-4.8~4.15 前后端开始交互
+- From: 4.1 To: 4.7 学习后端开发框架Express
+- From: 4.8 To: 4.15 后端搭建（接口和数据库），公告界面交互完成
 
 ## 项目团队：
 - 指导老师：何承达 
