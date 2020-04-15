@@ -31,7 +31,7 @@ router.post('/showAttr', async (req, res, next) => {
     console.log('showAttr');
     try {
         let result = await announcement.showAttr(req.body.attr);
-        res.send(result);
+        res.json(result);
     } catch (e) {
         res.send(e);
     }
