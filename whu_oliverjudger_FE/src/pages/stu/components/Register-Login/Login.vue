@@ -27,6 +27,7 @@ Vue.prototype.$axios = axios;
 </template>
 
 <script>
+import Vue from 'vue'
 export default {
   name: 'Login',
   methods: {
@@ -51,19 +52,26 @@ export default {
       if (!this.password) {
         this.$message.error('请输入密码')
       }
-      // eslint-disable-next-line no-undef
-      let params = {
-        'username': this.ID,
+      let data = {
+        'ID': this.ID,
         'password': this.password
       }
-      this.$store.dispatch('Login', params)
-        .then(() => {
-          this.$router.push({ path: '/' })
-        })
-        .catch((error) => {
-          console.log(error.response)
-        })
-      location.reload()
+      let that = this
+      this.$axios.post('http://127.0.0.1:3000/users/login', data
+      ).then(function (res) {
+        console.log(res.data)
+        if (res.data === '验证成功') {
+          Vue.prototype.$userID = that.ID
+          localStorage.setItem('isLogin', true)
+          location.reload()
+        } else {
+          alert(res.data)
+          console.log(res.data)
+          location.reload()
+        }
+      }).catch(function (error) {
+        console.log(error)
+      })
     }
   },
   // created () {

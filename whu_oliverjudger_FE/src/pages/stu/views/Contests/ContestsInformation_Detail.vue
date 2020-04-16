@@ -8,6 +8,7 @@
       :table-data="tableData"
       :column-headers="columnHeaders"
       :show-header="true"
+      :click-event="clickEvent"
     ></VariableTable>
     </span>
   </div>
@@ -57,6 +58,9 @@ export default {
     },
     getDetail (data) {
       return data.replace(/\n/g, '<br/>')
+    },
+    clickEvent () {
+
     }
   }
 }

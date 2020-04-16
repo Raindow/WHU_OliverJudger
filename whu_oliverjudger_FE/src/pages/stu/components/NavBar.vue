@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-image  :src="require('@/assets/logo.png')" fit="fit" class="barImg"></el-image>
+    <el-image  :src="require('@/assets/logo.png')" fit="fit" class="barImg" @click="linkto('Home')"></el-image>
   <el-menu :default-active="this.$route.path" router mode="horizontal" class="bar">
 <!--    <el-menu-item>-->
 <!--      <a href="https://www.whu.edu.cn/"><el-image  :src="require('@/assets/logo.png')" fit="fit" style="height: 65px"></el-image></a>-->
@@ -56,7 +56,9 @@ export default {
 
   },
   methods: {
-
+    linkto (url) {
+      this.$router.push('/' + url)
+    },
     isLogin () {
       let tem = !!localStorage.getItem('isLogin')
       if (tem === true) {
@@ -114,7 +116,7 @@ export default {
       console.log(tem)
       this.LoginCondition = false
       // this.$router.replace('/Home')
-      this.$router.push('/' + '/Home')
+      this.$router.push('/' + 'Home')
       location.reload()
     },
     setBarWidth () {

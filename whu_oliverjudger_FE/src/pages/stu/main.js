@@ -53,7 +53,8 @@ router.beforeEach((to, from, next) => {
   let tem = !!localStorage.getItem('isLogin')
   if (tem !== true) {
     // 跳转到登录页
-    if (to.path === '/Setting/Profile' || to.path === '/Setting/Account' || to.path === '/Stu_Submission' || to.path === '/Stu_Home') {
+    // if (to.path === '/home/(.*?)') {
+    if (to.path !== '/Home' && to.path !== '/Judger' && to.path !== '/Us') {
       alert('请先登录')
       next('/Home')
     } else {
