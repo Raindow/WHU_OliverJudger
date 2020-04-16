@@ -57,6 +57,7 @@ export default {
         this.studentLogin()
       }
     },
+    // 学生登录
     studentLogin () {
       let data = {
         'ID': this.ID,

@@ -67,6 +67,7 @@ export default {
         this.studentRegister()
       }
     },
+    // 学生注册
     studentRegister () {
       let data = {
         'ID': this.ID,
