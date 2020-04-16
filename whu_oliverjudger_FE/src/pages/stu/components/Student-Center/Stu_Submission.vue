@@ -20,6 +20,7 @@
         :table-data="pageData"
         :column-headers="columnHeaders"
         :show-header="true"
+        :click-event="clickEvent"
       ></VariableTable>
     </div>
     <!--    page-size 每页显示条目个数  total 总条目数-->
@@ -115,6 +116,8 @@ export default {
   },
 
   methods: {
+    clickEvent () {
+    },
     init () {
       this.setTableContent()
       this.calculateTableHeight()
