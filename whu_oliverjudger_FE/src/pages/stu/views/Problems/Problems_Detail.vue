@@ -3,15 +3,9 @@
     <span class="title">{{$route.params.id}}</span>
     <el-divider></el-divider>
     <span class="describe">问题阐述</span>
-    <p>武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测评，课程
-      授课。武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测评，
-      课程授课。武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测
-      评，课程授课</p>
+    <p v-html="problem"></p>
     <span class="example">示例</span>
-    <p>武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测评，课程
-      授课。武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测评，
-      课程授课。武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测评，课程授课。武汉大学计算机学院在线代码测
-      评，课程授课</p>
+    <p v-html="example"></p>
     <span class="example">答案</span>
     <div>
       <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -111,6 +105,10 @@ export default {
   },
   data () {
     return {
+      // 问题描述
+      problem: '',
+      // 示例
+      example: '',
       // 标签页 默认页
       activeName: 'first',
       // 设置编程语言
@@ -169,6 +167,9 @@ export default {
       fileList: []
     }
   },
+  mounted () {
+    window.addEventListener('load', this.getContent, false)
+  },
   watch: {
     codeLang (val) {
       switch (val) {
@@ -206,6 +207,25 @@ export default {
     },
     handleFilePreview (file) {
       console.log(file)
+    },
+    getContent () {
+      console.log('getContent')
+      console.log(this.$route.params.id)
+      this.$axios.get('http://127.0.0.1:3000/problems/detail', {
+        params: {
+          title: this.$route.params.id
+        }
+      }).then((res) => {
+        console.log(res.data)
+        this.problem = this.getDetail((res.data[0]).content)
+        this.example = this.getDetail((res.data[0]).exampleInandOut)
+      }).catch((err) => {
+        console.log(err)
+      })
+    },
+    getDetail (data) {
+      console.log('getDetail')
+      return data.replace(/\\n/g, '<br/>')
     }
   }
 }

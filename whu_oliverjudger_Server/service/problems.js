@@ -11,11 +11,14 @@ let preview = () => {
 }
 
 let detail = (title) => {
+  console.log(title)
   return new Promise((resolve, reject) => {
     db.query(`select * from problems where title = '${title}'`, (err, rows) => {
       if(err){
+        console.log('detail false')
         reject(err);
       }
+      console.log('detail success')
       resolve(rows);
     })
   })

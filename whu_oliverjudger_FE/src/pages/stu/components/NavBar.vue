@@ -53,7 +53,6 @@ export default {
   name: 'NavBar',
   watch: {
     LoginCondition: 'isLogin'
-
   },
   methods: {
     linkto (url) {
@@ -118,9 +117,6 @@ export default {
       // this.$router.replace('/Home')
       this.$router.push('/' + 'Home')
       location.reload()
-    },
-    setBarWidth () {
-      this.barWidth = window.innerWidth > 1230 ? 80 + '%' : 100 + '%'
     }
   },
   components: {
@@ -156,10 +152,10 @@ export default {
       registerVisible: false,
       loginVisible: false
     }
-  },
-  mounted () {
-    window.addEventListener('resize', this.setBarWidth, false)
   }
+  // mounted () {
+  //   window.addEventListener('resize', this.setBarWidth, false)
+  // }
 }
 </script>
 
