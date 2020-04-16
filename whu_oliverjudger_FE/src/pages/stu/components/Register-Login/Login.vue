@@ -14,9 +14,9 @@ Vue.prototype.$axios = axios;
         <el-input type="password" v-model.trim="password" placeholder=" 请输入密码"></el-input>
       </div>
       <div class="item">
-        <el-radio-group v-model="radio">
-        <el-radio v-model="radio" label="stu">学生</el-radio>
-        <el-radio v-model="radio" label="tea">老师</el-radio>
+        <el-radio-group v-model="loginType">
+        <el-radio v-model="loginType" label="stu">学生</el-radio>
+        <el-radio v-model="loginType" label="tea">老师</el-radio>
         </el-radio-group>
       </div>
       <el-button class="login_bt" type="primary" @click="login" round :loading="isBtnLoading">登录</el-button>

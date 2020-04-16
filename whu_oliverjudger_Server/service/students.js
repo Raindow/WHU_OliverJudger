@@ -3,7 +3,7 @@ const db = require('../config/db')
 // 登录验证函数
 let verifyLogin = (ID,password) => {
     return new Promise((resolve, reject) => {
-        db.query(`select * from users where StudentID = ${ID}`, (err, user) => {
+        db.query(`select * from students where StudentID = ${ID}`, (err, user) => {
             if(err) {
                 resolve(err)
             }
@@ -28,7 +28,7 @@ let verifyLogin = (ID,password) => {
 
 let verifyRgister = (ID,password, email) => {
     return new Promise((resolve, reject) => {
-        db.query(`select * from users where StudentID = ${ID}`, (err, user) => {
+        db.query(`select * from students where StudentID = ${ID}`, (err, user) => {
             if(err) {
                 resolve(err)
             }
