@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80015
 File Encoding         : 65001
 
-Date: 2020-04-16 17:30:24
+Date: 2020-04-16 17:51:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -107,11 +107,11 @@ CREATE TABLE `problems` (
 INSERT INTO `problems` VALUES ('1', '武汉大学', '简单', '武汉大学（Wuhan University），简称“武大”，是中华人民共和国教育部直属的综合性全国重点大学，国家首批“世界一流大学建设高校A类”、”985工程“和”211工程“重点建设高校；入选国家”珠峰计划“、”2011计划“、”111计划“、卓越医生教育培养计划、卓越法律人才教育培养计划、卓越工程师教育培养计划、国家大学生创新性实验计划、国家级大学生创新创业训练计划、国家建设高水平大学公派研究生项目、新工科研究与实践项目，是全国首批深化创新创业教育改革示范高校、中国政府奖学金来华留学生接收院校、医学“双一流”建设联盟成员、首批学位授权自主审核单位、“强基计划”试点高校。', '给定\\nnums = [2, 7, 11, 15], target = 9\\n因为nums[0] + nums[1] = 2 + 7 = 9\\n所以返回 [0, 1]\n');
 
 -- ----------------------------
--- Table structure for users
+-- Table structure for students
 -- ----------------------------
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `ID` varchar(255) DEFAULT NULL,
+DROP TABLE IF EXISTS `students`;
+CREATE TABLE `students` (
+  `StudentID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `Password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `Name` varchar(255) DEFAULT NULL,
   `Major` varchar(255) DEFAULT NULL,
@@ -122,6 +122,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
--- Records of users
+-- Records of students
 -- ----------------------------
-INSERT INTO `users` VALUES (null, null, null, null, null, null, null, null);
+INSERT INTO `students` VALUES ('1', '1', null, null, null, null, null, null);
