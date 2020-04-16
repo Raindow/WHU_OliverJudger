@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 
 export default {
   name: 'Register',
@@ -69,19 +68,11 @@ export default {
         'password': this.password,
         'email': this.email
       }
-      let that = this
       this.$axios.post('http://127.0.0.1:3000/users/register', data
       ).then(function (res) {
         console.log(res.data)
-        if (res.data === '验证成功') {
-          Vue.prototype.$userID = that.ID
-          localStorage.setItem('isLogin', true)
-          location.reload()
-        } else {
-          alert(res.data)
-          console.log(res.data)
-          location.reload()
-        }
+        alert(res.data)
+        location.reload()
       }).catch(function (error) {
         console.log(error)
       })

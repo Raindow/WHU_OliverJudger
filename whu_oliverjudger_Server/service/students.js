@@ -24,9 +24,10 @@ let verifyLogin = (ID,password) => {
         })
     })
 }
+exports.verifyLogin = verifyLogin;
 
-
-let verifyRgister = (ID,password, email) => {
+// 判断账户是否存在
+let isStudentExist = (ID) => {
     return new Promise((resolve, reject) => {
         db.query(`select * from students where StudentID = ${ID}`, (err, user) => {
             if(err) {
@@ -34,21 +35,32 @@ let verifyRgister = (ID,password, email) => {
             }
             else{
                 if (user.length===0){
-                    resolve('此用户不存在')
+                    console.log('此用户不存在')
+                    resolve(false)
                 }
                 else {
-                    console.log('allusers',user[0])
-                    if (user[0].Password === password){
-                        resolve('验证成功')
-                    }else {
-                        resolve('密码错误');
-                    }
+                    console.log('此用户已存在')
+                    resolve(true)
                 }
 
             }
         })
     })
 }
+exports.isStudentExist = isStudentExist;
 
+// 添加账户
+let add = (ID,password,email) => {
+    return new Promise((resolve, reject) => {
+        db.query(`INSERT INTO students (StudentID, Password, Email)VALUES( ${ID},  ${password},  ${email})`, (err, user) => {
+            if(err) {
+                resolve(err)
+            }
+            else{
+                resolve('注册成功')
 
-exports.verifyLogin = verifyLogin;
+            }
+        })
+    })
+}
+exports.add = add;

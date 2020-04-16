@@ -8,8 +8,6 @@ router.get('/', function(req, res, next) {
 
 // 处理登录请求
 router.post('/login', async (req, res, next) => {
-  console.log(req.body.ID)
-  console.log(req.body.password)
   try {
     let result = await students.verifyLogin(req.body.ID,req.body.password);
     res.send(result)
@@ -19,11 +17,15 @@ router.post('/login', async (req, res, next) => {
 })
 
 router.post('/register', async (req, res, next) => {
-  console.log(req.body.ID)
-  console.log(req.body.password)
   try {
-    let result = await students.verifyLogin(req.body.ID,req.body.password);
-    res.send(result)
+    let isExist = await students.isStudentExist(req.body.ID)
+    if (!isExist){
+      let result = await students.add(req.body.ID,req.body.password, req.body.email);
+      res.send(result)
+    }else {
+      res.send('此用户已存在')
+    }
+
   } catch (e) {
     res.send(e);
   }
