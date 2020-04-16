@@ -6,13 +6,13 @@
       <input v-model.trim="ID" placeholder=" 请输入账号 ">
     </div>
     <div class="item">
-      <input type="password" v-model.trim="inputContent" placeholder=" 请输入密码">
+      <input type="password" v-model.trim="password" placeholder=" 请输入密码">
     </div>
     <div class="item">
-      <input type="password" v-model.trim="inputContent" placeholder=" 请再次输入密码">
+      <input type="password" v-model.trim="passwordConfirm" placeholder=" 请再次输入密码">
     </div>
     <div class="item">
-      <input v-model.trim="inputContent" placeholder=" 请输入邮箱">
+      <input v-model.trim="email" placeholder=" 请输入邮箱">
     </div>
     <div class="item">
       <el-radio-group v-model="radio">
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   name: 'Register',
   methods: {
@@ -45,13 +47,54 @@ export default {
     },
     // 注册界面登录按钮函数
     register () {
+      if (!this.ID) {
+        // this.$message.error 常用于主动操作的反馈提示
+        this.$message.error('请输入用户名')
+        return
+      }
+      if (!this.password) {
+        this.$message.error('请输入密码')
+        return
+      }
+      if (this.password !== this.passwordConfirm) {
+        this.$message.error('请保证两次密码相同')
+        return
+      }
+      if (!this.email) {
+        this.$message.error('请输入邮箱')
+        return
+      }
+      let data = {
+        'ID': this.ID,
+        'password': this.password,
+        'email': this.email
+      }
+      let that = this
+      this.$axios.post('http://127.0.0.1:3000/users/register', data
+      ).then(function (res) {
+        console.log(res.data)
+        if (res.data === '验证成功') {
+          Vue.prototype.$userID = that.ID
+          localStorage.setItem('isLogin', true)
+          location.reload()
+        } else {
+          alert(res.data)
+          console.log(res.data)
+          location.reload()
+        }
+      }).catch(function (error) {
+        console.log(error)
+      })
     }
   },
   data () {
     return {
       // 新建了名为radio的数据模型，通过v-model把两个单选按钮都绑定radio
-      radio: 'stu'
-
+      loginType: 'stu',
+      ID: '',
+      password: '',
+      passwordConfirm: '',
+      email: ''
     }
   }
 }

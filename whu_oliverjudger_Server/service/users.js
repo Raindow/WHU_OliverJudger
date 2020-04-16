@@ -3,7 +3,7 @@ const db = require('../config/db')
 // 登录验证函数
 let verifyLogin = (ID,password) => {
     return new Promise((resolve, reject) => {
-        db.query(`select * from users where ID = ${ID}`, (err, user) => {
+        db.query(`select * from users where StudentID = ${ID}`, (err, user) => {
             if(err) {
                 resolve(err)
             }
@@ -12,8 +12,8 @@ let verifyLogin = (ID,password) => {
                     resolve('此用户不存在')
                 }
                 else {
-                    console.log('allusers',user[0].password)
-                    if (user[0].password === password){
+                    console.log('allusers',user[0])
+                    if (user[0].Password === password){
                         resolve('验证成功')
                     }else {
                         resolve('密码错误');

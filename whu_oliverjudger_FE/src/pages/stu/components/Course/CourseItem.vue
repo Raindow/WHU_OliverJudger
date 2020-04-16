@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     ClickEvent: function (url, courseEnglish) {
-      alert(url)
+      // alert(url)
       this.$store.commit('editCourse', courseEnglish)
       this.$router.push(url)
     }

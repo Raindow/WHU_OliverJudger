@@ -51,6 +51,7 @@ export default {
       }
       if (!this.password) {
         this.$message.error('请输入密码')
+        return
       }
       let data = {
         'ID': this.ID,
@@ -87,8 +88,7 @@ export default {
       ID: '',
       password: '',
       isBtnLoading: false,
-      radio: 'stu'
-
+      loginType: 'stu'
     }
   }
 }

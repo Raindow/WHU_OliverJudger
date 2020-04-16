@@ -8,7 +8,6 @@ router.get('/showDetail', async (req, res, next) => {
     console.log('showDetail');
     try {
         let result = await announcement.showDeail(req.query.title);
-        console.log(result)
         res.json(result);
     } catch (e) {
         res.send(e);
@@ -20,7 +19,6 @@ router.get('/showList', async (req, res, next) => {
     console.log('showList');
     try {
         let result = await announcement.showList();
-        console.log(result)
         res.json(result);
     } catch (e) {
         res.send(e);

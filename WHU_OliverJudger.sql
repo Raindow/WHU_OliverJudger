@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : myRoot
-Source Server Version : 80013
+Source Server         : szkqwer
+Source Server Version : 80015
 Source Host           : localhost:3306
 Source Database       : whu_oliverjudger
 
 Target Server Type    : MYSQL
-Target Server Version : 80013
+Target Server Version : 80015
 File Encoding         : 65001
 
-Date: 2020-04-16 16:44:45
+Date: 2020-04-16 17:30:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -112,10 +112,16 @@ INSERT INTO `problems` VALUES ('1', '武汉大学', '简单', '武汉大学（Wu
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `ID` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL
+  `Password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Major` varchar(255) DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `Solved` varchar(255) DEFAULT NULL,
+  `Submission` varchar(255) DEFAULT NULL,
+  `Score` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', '1');
+INSERT INTO `users` VALUES (null, null, null, null, null, null, null, null);
