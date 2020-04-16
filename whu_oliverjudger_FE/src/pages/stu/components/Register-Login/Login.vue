@@ -53,6 +53,11 @@ export default {
         this.$message.error('请输入密码')
         return
       }
+      if (this.loginType === 'stu') {
+        this.studentLogin()
+      }
+    },
+    studentLogin () {
       let data = {
         'ID': this.ID,
         'password': this.password
