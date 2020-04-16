@@ -27,14 +27,6 @@ router.get('/showList', async (req, res, next) => {
     }
 });
 
-router.post('/showAttr', async (req, res, next) => {
-    console.log('showAttr');
-    try {
-        let result = await announcement.showAttr(req.body.attr);
-        res.json(result);
-    } catch (e) {
-        res.send(e);
-    }
-})
+
 
 module.exports = router;

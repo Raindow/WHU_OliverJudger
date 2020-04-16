@@ -8,7 +8,8 @@ let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
 let announcementRouter = require('./routes/announcement');
 let problemsRouter = require('./routes/problems');
-
+let courseRouter = require('./routes/course');
+let chapterRouter = require('./routes/chapter')
 const app = express();
 
 // 解决跨域
@@ -37,6 +38,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/announcement',announcementRouter);
 app.use('/problems', problemsRouter);
+app.use('/course',courseRouter);
+app.use('/chapter',chapterRouter)
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

@@ -1,10 +1,10 @@
 <template>
 <!--  顶端-->
   <el-carousel type="card" ref="carousel" height="150px" @click.native="linkto" :autoplay="autoSlip" indicator-position="none">
-    <el-carousel-item v-for="item in items" :key="item.chapter">
+    <el-carousel-item v-for="item in items" :key="item.Chapter">
       <div>
         <h2>
-          {{ item.chapter }}
+          {{ item.Chapter }}
         </h2>
         {{courseEnglishName}}
       </div>
@@ -42,13 +42,25 @@ export default {
   mounted: function () {
     // 判断课程总类
     // 看是什么课程，给items赋值
-    if (this.courseEnglishName === 'Data_Structure') {
-      this.items = []
-      this.items = this.Data_StructureItem
-    } else if (this.courseEnglishName === 'Mysql') {
-      this.items = []
-      this.items = this.MysqlItem
-    }
+    // if (this.courseEnglishName === 'Data_Structure') {
+    //   this.items = []
+    //   this.items = this.Data_StructureItem
+    // } else if (this.courseEnglishName === 'Mysql') {
+    //   this.items = []
+    //   this.items = this.MysqlItem
+    // }
+    this.items = []
+    let that = this
+    this.$axios.get('/course/showCourseList', { // 还可以直接把参数拼接在url后边
+      params: {
+        course: this.courseEnglishName
+      }
+    }).then(function (res) {
+      console.log(res.data)
+      that.items = res.data
+    }).catch(function (error) {
+      console.log(error)
+    })
   },
   methods: {
     // 给每个都弄一个点击事件，如果点击了对应的章节就会跳过去了
