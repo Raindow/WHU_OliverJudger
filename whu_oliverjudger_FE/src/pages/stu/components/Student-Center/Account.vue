@@ -3,12 +3,12 @@
     <el-container>
       <el-header>账号设置</el-header>
       <el-main>
-        <el-row gutter="24">
+        <el-row gutter=24>
           <el-col :span="12" >更改密码</el-col>
           <el-col :span="12" >更改邮箱
           </el-col>
         </el-row>
-        <el-row gutter="24">
+        <el-row gutter=24>
           <el-col :span="12" >Old Password<el-input
             placeholder="请输入Old_Password"
             v-model="input_Old_Password"
@@ -20,7 +20,7 @@
             clearable>
           </el-input></el-col>
         </el-row>
-        <el-row gutter="24">
+        <el-row gutter=24>
           <el-col :span="12" >New Password<el-input
             placeholder="请输入New Password"
             v-model="input_New_Password"
@@ -32,7 +32,7 @@
             :disabled="true">
           </el-input></el-col>
         </el-row>
-        <el-row gutter="24">
+        <el-row gutter=24>
           <el-col :span="12" >Confirm New Password<el-input
             placeholder="确认 New Password"
             v-model="confirm_New_Password"
@@ -44,7 +44,7 @@
             clearable>
           </el-input></el-col>
         </el-row>
-        <el-row gutter="24">
+        <el-row gutter=24>
           <el-col :span="12" >        <el-button type="primary" plain>Update Password</el-button>
           </el-col>
           <el-col :span="12" >        <el-button type="primary" plain>Update Email</el-button>

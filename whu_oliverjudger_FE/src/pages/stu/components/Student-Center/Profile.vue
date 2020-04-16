@@ -3,7 +3,7 @@
     <el-container>
     <el-header>个人信息</el-header>
     <el-main>
-      <el-row gutter="24">
+      <el-row gutter=24>
         <el-col :span="12" >Name<el-input
           placeholder="请输入Name"
           v-model="input_name"
@@ -16,7 +16,7 @@
         </el-input></el-col>
       </el-row>
 
-      <el-row gutter="24">
+      <el-row gutter=24>
 
         <el-col :span="12" >Major<el-input
           placeholder="请输入Major"
