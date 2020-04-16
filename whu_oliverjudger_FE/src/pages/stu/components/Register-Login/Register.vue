@@ -63,6 +63,11 @@ export default {
         this.$message.error('请输入邮箱')
         return
       }
+      if (this.loginType === 'stu') {
+        this.studentRegister()
+      }
+    },
+    studentRegister () {
       let data = {
         'ID': this.ID,
         'password': this.password,
