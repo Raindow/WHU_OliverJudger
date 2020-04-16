@@ -168,7 +168,7 @@ export default {
     }
   },
   mounted () {
-    window.addEventListener('load', this.getContent, false)
+    this.getContent()
   },
   watch: {
     codeLang (val) {
