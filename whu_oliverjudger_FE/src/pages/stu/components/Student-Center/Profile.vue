@@ -4,18 +4,18 @@
     <el-header>个人信息</el-header>
     <el-main>
       <el-row >
-        <el-col :span=11>Name：{{now_name}}<el-input
-          placeholder="请输入Name"
+        <el-col :span=11>姓名：{{now_name}}<el-input
+          placeholder="更新姓名"
           v-model="input_name"
           clearable>
         </el-input></el-col>
-        <el-col :span=11 >Major：{{now_major}}<el-input
-          placeholder="请输入Major"
+        <el-col :span=11 >专业：{{now_major}}<el-input
+          placeholder="更新专业"
           v-model="input_major"
           clearable>
         </el-input></el-col>
        </el-row>
-      <el-button type="primary" plain v-on:click="test">Update</el-button>
+      <el-button type="primary" plain v-on:click="update">Update</el-button>
     </el-main>
   </el-container>
   </div>
@@ -47,12 +47,32 @@ export default {
     })
   },
   methods: {
-    test: function () {
-      // alert('tt' + localStorage.getItem('userID'))
+    update: function () {
+      let data = {
+        'ID': localStorage.getItem('userID'),
+        'Name': this.input_name === '' ? this.now_name : this.input_name,
+        'Major': this.input_major === '' ? this.now_major : this.input_major
+      }
+      let that = this
+      this.$axios.post('/users/updateprofile', data
+      ).then(function (res) {
+        console.log(res.data)
+        if (res.data === '验证成功') {
+          that.now_name = that.input_name
+          that.now_major = that.input_major
+          alert('更新完成')
+          // location.reload()
+        } else {
+          alert(res.data)
+          console.log(res.data)
+          location.reload()
+        }
+      }).catch(function (error) {
+        console.log(error)
+      })
     }
   },
   created () {
-    // this.test()
   }
 }
 </script>

@@ -76,5 +76,20 @@ let showProfile = (attr) => {
         })
     })
 };
-
 exports.showProfile = showProfile;
+
+
+// 添加账户
+let updateProfile = (ID,Name,Major) => {
+    return new Promise((resolve, reject) => {
+        db.query(`Update  students SET Name = ${Name},Major=${Major} WHERE StudentID = ${ID}`, (err, user) => {
+            if(err) {
+                resolve(err)
+            }
+            else{
+                resolve('Profile更新成功')
+            }
+        })
+    })
+}
+exports.updateProfile = updateProfile;
