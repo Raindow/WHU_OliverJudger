@@ -25,5 +25,16 @@ router.get('/showAllList', async (req, res, next) => {
     }
 });
 
+router.get('/showCourseAllList', async (req, res, next) => {
+    console.log('showAllList');
+    try {
+        let result = await course.showAllCourseBase();
+        console.log(result)
+        res.json(result);
+    } catch (e) {
+        res.send(e);
+    }
+});
+
 
 module.exports = router;

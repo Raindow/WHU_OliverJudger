@@ -1,7 +1,7 @@
 <template>
   <div class="Course">
 <!--这个页面是拿来做Course的主界面，课程的每个item使用的是Course_Item-->
-    <div v-for="(item,i) in courseList" :key="i" :index="item.name">
+    <div v-for="(item,i) in items" :key="i" :index="item.name">
       <CourseItem v-bind:title="item.navItem" :imgSrc="item.imgSrc" :url="item.name" :course-english="item.navIndex">
       </CourseItem>
     </div >
@@ -17,6 +17,7 @@ export default {
   },
   data () {
     return {
+      items: [],
       courseList: [
         {
           name: '/Courses/Data_Structure',
@@ -51,6 +52,17 @@ export default {
         }
       ]
     }
+  },
+  mounted: function () {
+    this.items = []
+    let that = this
+    this.$axios.get('/course/showCourseAllList'
+    ).then(function (res) {
+      console.log(res.data)
+      that.items = res.data
+    }).catch(function (error) {
+      console.log(error)
+    })
   },
   methods: {
   }
