@@ -47,6 +47,7 @@ new Vue({
   router: router,
   store: store
 })
+// Vue.prototype.$userID = '123'
 router.beforeEach((to, from, next) => {
   // store的getters中定义获取用户信息的函数 getUser
   // userId为空说明用户未登录

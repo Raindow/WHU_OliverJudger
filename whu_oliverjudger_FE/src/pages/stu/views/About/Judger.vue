@@ -37,7 +37,8 @@
 export default {
   name: 'Judger',
   created () {
-    console.log(this.$userID)
+    // console.log(this.$userID)
+    // console.log(this.$userID)
   },
   data () {
     return {

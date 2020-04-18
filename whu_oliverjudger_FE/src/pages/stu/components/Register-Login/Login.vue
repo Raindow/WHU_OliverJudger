@@ -27,8 +27,17 @@ Vue.prototype.$axios = axios;
 </template>
 
 <script>
+// import Vue from 'vue'
 export default {
   name: 'Login',
+  data () {
+    return {
+      ID: '',
+      password: '',
+      isBtnLoading: false,
+      loginType: 'stu'
+    }
+  },
   methods: {
     // 登录界面取消按钮函数
     cancel () {
@@ -67,12 +76,11 @@ export default {
       ).then(function (res) {
         console.log(res.data)
         if (res.data === '验证成功') {
-          that.$store.commit('saveId', that.ID)
-          alert(that.$store.state.studentID)
-          alert(that.ID)
-          console.log(that.ID)
-          // Vue.prototype.$userID = that.ID
+          // that.$store.commit('saveId', that.ID)
+          // that.$userID = that.ID
+          // alert(that.$userID)
           localStorage.setItem('isLogin', true)
+          localStorage.setItem('userID', that.ID)
           location.reload()
         } else {
           alert(res.data)
@@ -91,15 +99,8 @@ export default {
   //   }
   // },
   computed: {
-  },
-  data () {
-    return {
-      ID: '',
-      password: '',
-      isBtnLoading: false,
-      loginType: 'stu'
-    }
   }
+
 }
 </script>
 
