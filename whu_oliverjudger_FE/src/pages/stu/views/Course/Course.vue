@@ -22,32 +22,32 @@ export default {
           name: '/Courses/Data_Structure',
           navItem: '数据结构',
           navIndex: 'Data_Structure',
-          imgSrc: require('@/assets/Course_cover/Data_Structure.jpg')
+          imgSrc: 'https://pic.downk.cc/item/5e9a5fc7c2a9a83be55bc51a.jpg'
         },
         {
           name: '/Courses/Java',
           navItem: '面向对象程序设计Java',
           navIndex: 'Java',
-          imgSrc: require('@/assets/Course_cover/Java.jpeg')
+          imgSrc: 'https://pic.downk.cc/item/5e9a601fc2a9a83be55c0cb4.jpg'
 
         },
         {
           name: '/Courses/Cplusplus',
           navItem: 'C++程序设计',
           navIndex: 'Cplusplus',
-          imgSrc: require('@/assets/Course_cover/CPlusPlus.jpg')
+          imgSrc: 'https://pic.downk.cc/item/5e9a6032c2a9a83be55c1cf8.jpg'
         },
         {
           name: '/Courses/Objective-C',
           navItem: 'Objective-C',
           navIndex: 'Objective-C',
-          imgSrc: require('@/assets/Course_cover/C#.jpg')
+          imgSrc: 'https://pic.downk.cc/item/5e9a606ec2a9a83be55c4b4d.jpg'
         },
         {
           name: '/Courses/Mysql',
           navItem: '数据库系统',
           navIndex: 'Mysql',
-          imgSrc: require('@/assets/Course_cover/Mysql.jpg')
+          imgSrc: 'https://pic.downk.cc/item/5e9a60a6c2a9a83be55c7362.jpg'
         }
       ]
     }
