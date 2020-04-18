@@ -27,7 +27,6 @@ Vue.prototype.$axios = axios;
 </template>
 
 <script>
-import Vue from 'vue'
 export default {
   name: 'Login',
   methods: {
@@ -68,7 +67,11 @@ export default {
       ).then(function (res) {
         console.log(res.data)
         if (res.data === '验证成功') {
-          Vue.prototype.$userID = that.ID
+          that.$store.commit('saveId', that.ID)
+          alert(that.$store.state.studentID)
+          alert(that.ID)
+          console.log(that.ID)
+          // Vue.prototype.$userID = that.ID
           localStorage.setItem('isLogin', true)
           location.reload()
         } else {

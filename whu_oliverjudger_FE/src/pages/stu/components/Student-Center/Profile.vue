@@ -4,18 +4,18 @@
     <el-header>个人信息</el-header>
     <el-main>
       <el-row gutter=24>
-        <el-col :span="12" >Name<el-input
+        <el-col :span=12>Name<el-input
           placeholder="请输入Name"
           v-model="input_name"
           clearable>
         </el-input></el-col>
-        <el-col :span="12" >Major<el-input
+        <el-col :span=12 >Major<el-input
           placeholder="请输入Major"
           v-model="input_major"
           clearable>
         </el-input></el-col>
        </el-row>
-      <el-button type="primary" plain>Update</el-button>
+      <el-button type="primary" plain v-on:click="test">Update</el-button>
     </el-main>
   </el-container>
   </div>
@@ -28,6 +28,11 @@ export default {
     return {
       input_name: '',
       input_major: ''
+    }
+  },
+  methods: {
+    test: function () {
+      alert('tt' + this.$store.state.studentID)
     }
   }
 }

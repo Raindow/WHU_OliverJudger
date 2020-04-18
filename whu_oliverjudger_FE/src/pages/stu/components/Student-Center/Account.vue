@@ -48,7 +48,6 @@
           <el-col :span="12" >        <el-button type="primary" plain>Update Password</el-button>
           </el-col>
           <el-col :span="12" >        <el-button type="primary" plain>Update Email</el-button>
-
           </el-col>
         </el-row>
       </el-main>
