@@ -64,3 +64,17 @@ let add = (ID,password,email) => {
     })
 }
 exports.add = add;
+
+let showProfile = (attr) => {
+    return new Promise((resolve, reject) => {
+        console.log('showChapterList');
+        db.query(`select Name,Major from students where StudentID = '${attr}'`, (err, rows) => {
+            if(err) {
+                reject(err);
+            }
+            resolve(rows);
+        })
+    })
+};
+
+exports.showProfile = showProfile;

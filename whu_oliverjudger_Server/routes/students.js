@@ -31,7 +31,17 @@ router.post('/register', async (req, res, next) => {
   }
 })
 
-
+router.get('/profile', async (req, res, next) => {
+  console.log(req.query.chapter)
+  console.log('studentprofile');
+  try {
+    let result = await students.showProfile(req.query.ID);
+    console.log(result)
+    res.json(result);
+  } catch (e) {
+    res.send(e);
+  }
+});
 
 
 module.exports = router;

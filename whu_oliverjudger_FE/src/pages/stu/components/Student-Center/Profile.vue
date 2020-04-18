@@ -29,18 +29,19 @@ export default {
       input_name: '',
       now_name: 'default',
       input_major: '',
-      now_major: ''
+      now_major: 'default'
     }
   },
   mounted: function () {
     let that = this
-    this.$axios.get('/course/showCourseList', { // 还可以直接把参数拼接在url后边
+    this.$axios.get('/users/profile', { // 还可以直接把参数拼接在url后边
       params: {
         ID: localStorage.getItem('userID')
       }
     }).then(function (res) {
-      console.log(res.data)
-      that.items = res.data
+      console.log(res.data[0])
+      that.now_name = res.data[0].Name
+      that.now_major = res.data[0].Major
     }).catch(function (error) {
       console.log(error)
     })
