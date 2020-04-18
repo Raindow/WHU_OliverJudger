@@ -32,8 +32,11 @@ export default {
   },
   methods: {
     test: function () {
-      alert('tt' + this.$store.state.studentID)
+      alert('tt' + localStorage.getItem('userID'))
     }
+  },
+  created () {
+    this.test()
   }
 }
 </script>
