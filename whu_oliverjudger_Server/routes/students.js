@@ -45,7 +45,6 @@ router.get('/profile', async (req, res, next) => {
 
 router.post('/updateprofile', async (req, res, next) => {
   try {
-    console.log(req.body.ID)
     let result = await students.updateProfile(req.body.ID,req.body.Name,req.body.Major);
       res.send(result)
   } catch (e) {

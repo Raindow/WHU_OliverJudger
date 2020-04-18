@@ -82,12 +82,14 @@ exports.showProfile = showProfile;
 // 添加账户
 let updateProfile = (ID,Name,Major) => {
     return new Promise((resolve, reject) => {
-        db.query(`Update  students SET Name = ${Name},Major=${Major} WHERE StudentID = ${ID}`, (err, user) => {
+        db.query(`UPDATE students SET  Name='${Name}'  , Major='${Major}' WHERE StudentID = ${ID}`, (err, user) => {
             if(err) {
+                console.log(err)
                 resolve(err)
             }
             else{
                 resolve('Profile更新成功')
+                console.log('Profile更新成功')
             }
         })
     })
