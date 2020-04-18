@@ -3,7 +3,7 @@
   <el-image
     style="width: 100px; height: 100px"
     :src="require('@/assets/Stu_Default_Picture.jpeg')"
-    fit="fit"></el-image>
+    fit="fit" ></el-image>
   <el-row>
     <el-col :span="24"><div class="grid-content bg-purple-dark">
       {{stu_name}}

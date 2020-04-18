@@ -3,13 +3,13 @@
     <el-container>
     <el-header>个人信息</el-header>
     <el-main>
-      <el-row gutter=24>
-        <el-col :span=12>Name<el-input
+      <el-row >
+        <el-col :span=11>Name：{{now_name}}<el-input
           placeholder="请输入Name"
           v-model="input_name"
           clearable>
         </el-input></el-col>
-        <el-col :span=12 >Major<el-input
+        <el-col :span=11 >Major：{{now_major}}<el-input
           placeholder="请输入Major"
           v-model="input_major"
           clearable>
@@ -27,12 +27,27 @@ export default {
   data () {
     return {
       input_name: '',
-      input_major: ''
+      now_name: 'default',
+      input_major: '',
+      now_major: ''
     }
+  },
+  mounted: function () {
+    let that = this
+    this.$axios.get('/course/showCourseList', { // 还可以直接把参数拼接在url后边
+      params: {
+        ID: localStorage.getItem('userID')
+      }
+    }).then(function (res) {
+      console.log(res.data)
+      that.items = res.data
+    }).catch(function (error) {
+      console.log(error)
+    })
   },
   methods: {
     test: function () {
-      alert('tt' + localStorage.getItem('userID'))
+      // alert('tt' + localStorage.getItem('userID'))
     }
   },
   created () {
@@ -49,6 +64,7 @@ export default {
     }
   }
   .el-col {
+    margin: 10px;
     border-radius: 4px;
   }
 </style>

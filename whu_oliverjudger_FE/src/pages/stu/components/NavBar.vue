@@ -114,7 +114,6 @@ export default {
       var tem = localStorage.getItem('isLogin')
       console.log(tem)
       this.LoginCondition = false
-      // this.$router.replace('/Home')
       this.$router.push('/' + 'Home')
       location.reload()
     }
@@ -148,6 +147,7 @@ export default {
           navItemIcon: 'el-icon-s-flag'
         }
       ],
+      Stu_Name: '',
       LoginCondition: false, // use this to judge whether it have been login
       registerVisible: false,
       loginVisible: false
