@@ -109,6 +109,7 @@ export default {
     padding-top: 10%;
     padding-left: 10%;
     padding-right: 10%;
+    /*width: 60%;*/
   }
   .item {
     margin:10px 5px 15px 20px;

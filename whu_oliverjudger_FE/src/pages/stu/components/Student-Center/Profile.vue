@@ -52,7 +52,7 @@ export default {
     }
   },
   created () {
-    this.test()
+    // this.test()
   }
 }
 </script>

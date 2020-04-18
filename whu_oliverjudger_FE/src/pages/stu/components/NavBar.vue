@@ -31,7 +31,7 @@
 <!--      用于用户选项的下拉列表-->
     <el-dropdown>
     <span class="el-dropdown-link" v-show="  isLogin () ">
-      <i class="el-icon-user"></i>Stu_Name<i class="el-icon-arrow-down el-icon--right"></i>
+      <i class="el-icon-user"></i>{{ID}}<i class="el-icon-arrow-down el-icon--right"></i>
     </span>
     <el-dropdown-menu slot="dropdown" >
       <el-dropdown-item @click.native="Stu_Home">Home</el-dropdown-item>
@@ -124,6 +124,7 @@ export default {
   },
   data () {
     return {
+      ID: localStorage.getItem('userID'),
       navList: [
         {
           name: '/Home',

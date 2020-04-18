@@ -12,6 +12,12 @@
       <input type="password" v-model.trim="passwordConfirm" placeholder=" 请再次输入密码">
     </div>
     <div class="item">
+      <input v-model.trim="stuName" placeholder=" 请输入名字">
+    </div>
+    <div class="item">
+      <input v-model.trim="major" placeholder=" 请输入专业">
+    </div>
+    <div class="item">
       <input v-model.trim="email" placeholder=" 请输入邮箱">
     </div>
     <div class="item">
@@ -59,6 +65,14 @@ export default {
         this.$message.error('请保证两次密码相同')
         return
       }
+      if (!this.stuName) {
+        this.$message.error('请输入姓名')
+        return
+      }
+      if (!this.major) {
+        this.$message.error('请输入专业')
+        return
+      }
       if (!this.email) {
         this.$message.error('请输入邮箱')
         return
@@ -72,6 +86,8 @@ export default {
       let data = {
         'ID': this.ID,
         'password': this.password,
+        'stuName': this.stuName,
+        'major': this.major,
         'email': this.email
       }
       this.$axios.post('http://127.0.0.1:3000/users/register', data
@@ -89,6 +105,8 @@ export default {
       // 新建了名为radio的数据模型，通过v-model把两个单选按钮都绑定radio
       loginType: 'stu',
       ID: '',
+      stuName: '',
+      major: '',
       password: '',
       passwordConfirm: '',
       email: ''
@@ -99,9 +117,9 @@ export default {
 
 <style scoped>
   .register_form {
-    padding-top: 10%;
-    padding-left: 10%;
-    padding-right: 10%;
+    /*padding-top: 10%;*/
+    padding-left: 5%;
+    padding-right: 5%;
   }
 .item {
   margin:10px 5px 15px 20px;

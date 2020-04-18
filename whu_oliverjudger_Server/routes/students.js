@@ -20,7 +20,7 @@ router.post('/register', async (req, res, next) => {
   try {
     let isExist = await students.isStudentExist(req.body.ID)
     if (!isExist){
-      let result = await students.add(req.body.ID,req.body.password, req.body.email);
+      let result = await students.add(req.body.ID,req.body.password,req.body.stuName,req.body.major, req.body.email);
       res.send(result)
     }else {
       res.send('此用户已存在')

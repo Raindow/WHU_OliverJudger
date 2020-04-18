@@ -50,9 +50,9 @@ let isStudentExist = (ID) => {
 exports.isStudentExist = isStudentExist;
 
 // 添加账户
-let add = (ID,password,email) => {
+let add = (ID,password,stuName,major,email) => {
     return new Promise((resolve, reject) => {
-        db.query(`INSERT INTO students (StudentID, Password, Email)VALUES( ${ID},  ${password},  ${email})`, (err, user) => {
+        db.query(`INSERT INTO students (StudentID, Password,Name,Major,Email)VALUES( ${ID},  ${password},${stuName},${major},  ${email})`, (err, user) => {
             if(err) {
                 resolve(err)
             }
