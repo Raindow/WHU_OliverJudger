@@ -110,20 +110,38 @@ let getAccount = (attr) => {
 };
 exports.getAccount = getAccount;
 
-// 更新账户
+// 更新账户密码
 let updateAccountPassword = (ID,Password) => {
     return new Promise((resolve, reject) => {
         db.query(`UPDATE students SET  Password='${Password}' WHERE StudentID = '${ID}'`, (err, user) => {
             if(err) {
                 console.log(err)
-                console.log('updateAccountPassword')
+                console.log('updateAccountPasswordFail')
                 resolve(err)
             }
             else{
-                resolve('Profile更新成功')
-                console.log('updateAccountPassword')
+                resolve('Password更新成功')
+                console.log('updateAccountPasswordSuccess')
             }
         })
     })
 }
 exports.updateAccountPassword = updateAccountPassword;
+
+// 更新账户密码
+let updateAccountEmail = (ID,Email) => {
+    return new Promise((resolve, reject) => {
+        db.query(`UPDATE students SET  Email='${Email}' WHERE StudentID = '${ID}'`, (err, user) => {
+            if(err) {
+                console.log(err)
+                console.log('updateAccountEmailFail')
+                resolve(err)
+            }
+            else{
+                resolve('Email更新成功')
+                console.log('updateAccountEmailSuccess')
+            }
+        })
+    })
+}
+exports.updateAccountEmail = updateAccountEmail;

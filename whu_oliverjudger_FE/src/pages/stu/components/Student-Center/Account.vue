@@ -47,7 +47,7 @@
         <el-row >
           <el-col :span="11" >        <el-button type="primary" plain v-on:click="UpdatePassword">Update Password</el-button>
           </el-col>
-          <el-col :span="11" >        <el-button type="primary" plain>Update Email</el-button>
+          <el-col :span="11" >        <el-button type="primary" plain v-on:click="UpdateEmail">Update Email</el-button>
           </el-col>
         </el-row>
       </el-main>
@@ -69,6 +69,16 @@ export default {
     }
   },
   created: function () {
+    let that = this
+    this.$axios.get('/users/getAccount', { // 还可以直接把参数拼接在url后边
+      params: {
+        ID: localStorage.getItem('userID')
+      }
+    }).then(function (res) {
+      that.input_Current_Email = res.data[0].Email
+    }).catch(function (error) {
+      console.log(error)
+    })
   },
   methods: {
     UpdatePassword: function () {
@@ -78,8 +88,6 @@ export default {
           ID: localStorage.getItem('userID')
         }
       }).then(function (res) {
-        console.log(res.data[0])
-        console.log(res.data[0].Password)
         if (that.input_Old_Password === res.data[0].Password) {
           if (that.input_New_Password === that.confirm_New_Password) {
             if (that.input_New_Password === '' || that.confirm_New_Password === '') {
@@ -92,7 +100,7 @@ export default {
               that.$axios.post('/users/updateAccountPassword', data
               ).then(function (res) {
                 console.log(res.data)
-                if (res.data === 'Profile更新成功') {
+                if (res.data === 'Password更新成功') {
                   alert('密码更新成功')
                   location.reload()
                 } else {
@@ -108,6 +116,38 @@ export default {
           }
         } else {
           alert('密码错误，无法更新密码')
+        }
+      }).catch(function (error) {
+        console.log(error)
+      })
+    },
+    UpdateEmail: function () {
+      let that = this
+      this.$axios.get('/users/getAccount', { // 还可以直接把参数拼接在url后边
+        params: {
+          ID: localStorage.getItem('userID')
+        }
+      }).then(function (res) {
+        if (that.input_Current_Password === res.data[0].Password) {
+          let data = {
+            'ID': localStorage.getItem('userID'),
+            'Email': that.input_New_Email
+          }
+          that.$axios.post('/users/updateAccountEmail', data
+          ).then(function (res) {
+            console.log(res.data)
+            if (res.data === 'Email更新成功') {
+              alert('Email更新成功')
+              location.reload()
+            } else {
+              alert('Email更新失败')
+              location.reload()
+            }
+          }).catch(function (error) {
+            console.log(error)
+          })
+        } else {
+          alert('密码错误，无法更改邮箱')
         }
       }).catch(function (error) {
         console.log(error)

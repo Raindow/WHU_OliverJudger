@@ -75,4 +75,13 @@ router.post('/updateAccountPassword', async (req, res, next) => {
   }
 })
 
+router.post('/updateAccountEmail', async (req, res, next) => {
+  try {
+    let result = await students.updateAccountEmail(req.body.ID,req.body.Email);
+    res.send(result)
+    console.log(result)
+  } catch (e) {
+    res.send(e);
+  }
+})
 module.exports = router;
