@@ -1,17 +1,21 @@
-var express = require('express');
-var router = express.Router();
-let submission = require('../service/submission')
-
+const express = require('express');
+const router = express.Router();
+let submission = require('../service/submission');
+const multer = require('multer');
+const upload = multer({dest: 'uploads/'});
 
 // 处理添加记录请求
-router.post('/submission', async (req, res, next) => {
+router.post('/submit', upload.single('file'), async (req, res, next) => {
     try {
+        console.log(req.body)
+        console.log(req.file)
         // req.body.文件
         // 文件键入判题器，返回结果记录在judge
         // 添加到数据库
-        let isAdd = await submission.addSubmission(req.body)
+        //let isAdd = await submission.addSubmission(req.body)
         // res返回相关信息，包括 是否接受，内存信息，运行时间，错误原因
-        res.send(isAdd)
+        //res.send(isAdd)
+        res.send('a')
     } catch (e) {
         res.send(e);
     }

@@ -43,10 +43,12 @@
             style="text-align: center"
             ref="upload"
             drag
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action="http://127.0.0.1:3000/submission/submit"
             multiple
             :on-preview="handleFilePreview"
             :on-remove="handleFileRemove"
+            :on-success="handleFileSuccess"
+            :on-error="handleFileErr"
             :file-list="fileList"
             :auto-upload="false">
             <i class="el-icon-upload"></i>
@@ -197,7 +199,12 @@ export default {
     },
     // 提交直接编辑的代码需要修改的地方
     codeSubmission () {
-      console.log(this.$refs.coder.codemirror.getValue())
+      this.$axios.post('http://127.0.0.1:3000/submission/submit', {
+        language: this.codeLang,
+        content: this.$refs.coder.codemirror.getValue()
+      }).then((res) => {
+        console.log(res.data)
+      })
     },
     submitUpload () {
       this.$refs.upload.submit()
@@ -206,6 +213,16 @@ export default {
       console.log(file, fileList)
     },
     handleFilePreview (file) {
+      console.log(file)
+    },
+    handleFileSuccess (response, file, fileList) {
+      console.log('success')
+      console.log(response)
+      console.log(file)
+    },
+    handleFileErr (err, file, fileList) {
+      console.log('err')
+      console.log(err)
       console.log(file)
     },
     getContent () {
