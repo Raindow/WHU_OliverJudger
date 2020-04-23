@@ -8,11 +8,11 @@
                 placeholder="请按照提交信息进行搜索"
                 clearable>
       </el-input>
-      <span class="Stu_SeeYourself">只看自己
-      <el-switch
-        v-model="isSeeYourself">
-      </el-switch>
-      </span>
+<!--      <span class="Stu_SeeYourself">只看自己-->
+<!--      <el-switch-->
+<!--        v-model="isSeeYourself">-->
+<!--      </el-switch>-->
+<!--      </span>-->
     </span>
     <div :style="tableHeight">
 
@@ -48,6 +48,7 @@ export default {
       tableHeight: {
         height: ''
       },
+      ID: localStorage.getItem('userID'),
       isSeeYourself: false,
       totalTableLength: 0, // 获取通告总数目
       pageSize: 7, // page-size 每页显示条目个数
@@ -55,14 +56,13 @@ export default {
       search: '',
       searchChanged: false,
       columnHeaders: [ // 列表的头标签
-        {prop: 'submissionTime', label: '提交时间'},
         {prop: 'ID', label: '用户ID'},
+        {prop: 'submissionTime', label: '提交时间'},
         {prop: 'submissionStatus', label: '提交状态'},
         {prop: 'problemName', label: '问题名'},
         {prop: 'usingTime', label: '使用时间'},
         {prop: 'usingMemory', label: '使用内存'},
-        {prop: 'usingLanguage', label: '使用语言'},
-        {prop: 'author', label: '作者'}
+        {prop: 'usingLanguage', label: '使用语言'}
       ],
       tableData: [] // 存储通告数据
     }
@@ -92,12 +92,12 @@ export default {
 
     },
     // 开关筛选
-    switchOnTableData: {
-      get () {
-        return this.tableData.filter(data => data.ID.toLowerCase().includes('aaaaaa')
-        )
-      }
-    },
+    // switchOnTableData: {
+    //   get () {
+    //     return this.tableData.filter(data => data.ID.toLowerCase().includes('aaaaaa')
+    //     )
+    //   }
+    // },
     pageData: function () {
       // console.log(this.isSeeYourself)
       // return this.showTableData.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
@@ -119,8 +119,29 @@ export default {
     clickEvent () {
     },
     init () {
-      this.setTableContent()
+      this.getSubmission()
       this.calculateTableHeight()
+    },
+    // 获取提交记录
+    getSubmission () {
+      let data = {
+        'ID': this.ID
+      }
+      let that = this
+      this.$axios.post('/submission/searchSubmission', data
+      ).then(function (res) {
+        console.log(res.data)
+        that.dealRes(res.data)
+      }).catch(function (error) {
+        console.log(error)
+      })
+    },
+    dealRes (data) {
+      console.log(data[0])
+      for (var i = 0; i < data.length; i++) {
+        let tem = {'ID': data[i].studentID, 'submissionTime': data[i].submissionTime, 'submissionStatus': data[i].submissionStatus, 'problemName': data[i].problemName, 'usingTime': data[i].usingTime, 'usingMemory': data[i].usingMemory, 'usingLanguage': data[i].usingLanguage}
+        this.tableData.push(tem)
+      }
     },
     calculateTableHeight () {
       // innerheight 返回窗口的文档显示区的高度。
