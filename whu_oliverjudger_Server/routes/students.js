@@ -52,4 +52,27 @@ router.post('/updateprofile', async (req, res, next) => {
   }
 })
 
+
+router.get('/getAccount', async (req, res, next) => {
+  console.log(req.query.ID)
+  console.log('getAccount');
+  try {
+    let result = await students.getAccount(req.query.ID);
+    console.log(result)
+    res.json(result);
+  } catch (e) {
+    res.send(e);
+  }
+});
+
+router.post('/updateAccountPassword', async (req, res, next) => {
+  try {
+    let result = await students.updateAccountPassword(req.body.ID,req.body.Password);
+    res.send(result)
+    console.log(result)
+  } catch (e) {
+    res.send(e);
+  }
+})
+
 module.exports = router;

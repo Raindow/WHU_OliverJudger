@@ -79,7 +79,7 @@ let showProfile = (attr) => {
 exports.showProfile = showProfile;
 
 
-// 添加账户
+// 更新账户
 let updateProfile = (ID,Name,Major) => {
     return new Promise((resolve, reject) => {
         db.query(`UPDATE students SET  Name='${Name}'  , Major='${Major}' WHERE StudentID = ${ID}`, (err, user) => {
@@ -95,3 +95,35 @@ let updateProfile = (ID,Name,Major) => {
     })
 }
 exports.updateProfile = updateProfile;
+
+// 获取用户的密码和邮箱
+let getAccount = (attr) => {
+    return new Promise((resolve, reject) => {
+        console.log('getAccount');
+        db.query(`select Password,Email from students where StudentID = ${attr}`, (err, rows) => {
+            if(err) {
+                reject(err);
+            }
+            resolve(rows);
+        })
+    })
+};
+exports.getAccount = getAccount;
+
+// 更新账户
+let updateAccountPassword = (ID,Password) => {
+    return new Promise((resolve, reject) => {
+        db.query(`UPDATE students SET  Password='${Password}' WHERE StudentID = '${ID}'`, (err, user) => {
+            if(err) {
+                console.log(err)
+                console.log('updateAccountPassword')
+                resolve(err)
+            }
+            else{
+                resolve('Profile更新成功')
+                console.log('updateAccountPassword')
+            }
+        })
+    })
+}
+exports.updateAccountPassword = updateAccountPassword;

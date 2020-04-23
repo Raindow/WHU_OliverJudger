@@ -57,7 +57,7 @@ export default {
       this.$axios.post('/users/updateProfile', data
       ).then(function (res) {
         console.log(res.data)
-        if (res.data === '验证成功') {
+        if (res.data === 'Profile更新成功') {
           that.now_name = that.input_name
           that.now_major = that.input_major
           alert('更新完成')
