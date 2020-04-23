@@ -2,11 +2,6 @@
   <div>
     <el-image  :src="require('@/assets/logo.png')" fit="fit" class="barImg" @click="linkto('Home')"></el-image>
   <el-menu :default-active="this.$route.path" router mode="horizontal" class="bar">
-<!--    <el-menu-item>-->
-<!--      <a href="https://www.whu.edu.cn/"><el-image  :src="require('@/assets/logo.png')" fit="fit" style="height: 65px"></el-image></a>-->
-<!--    </el-menu-item>-->
-<!--    el-menu-item的index设为要跳转的路由（并且点击菜单项，会直接push到点击的页面)。-->
-<!--    注意：一定要设置el-submenu的index属性（1，2，3…）。不然会出bug-->
     <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name" >
       <i :class="item.navItemIcon"></i>
       {{ item.navItem }}
@@ -72,11 +67,6 @@ export default {
     handleClose () {
       this.registerVisible = false
       this.loginVisible = false
-      // var tem = localStorage.getItem('isLogin')
-      // console.log(tem)
-      // localStorage.removeItem('isLogin')
-      // tem = localStorage.getItem('isLogin')
-      // console.log(tem)
     },
 
     // 上方注册按钮函数
@@ -87,18 +77,7 @@ export default {
     login () {
       this.$router.push({path: '/Login'})
     },
-    // isLogin () {
-    //   // 是否为登录状态
-    //   var tem = localStorage.getItem('isLogin')
-    //   console.log(tem)
-    //   // if (this.$store.state.status === 'success') {
-    //   //   console.log('aaa')
-    //   //   this.LogCondition = true
-    //   //   return true
-    //   // } else {
-    //   //   return false
-    //   // }
-    // },
+
     Stu_Home () {
       this.$router.push({path: '/Stu_Home'})
     },
