@@ -10,7 +10,6 @@ let addSubmission = (data) => {
             }
             else{
                 resolve('添加成功')
-
             }
         })
     })
