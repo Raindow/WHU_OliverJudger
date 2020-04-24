@@ -87,24 +87,11 @@ export default {
       this.problemPreviewHeight.height = (0.65 * window.innerHeight) + 'px'
     },
     setTableContent () {
-      this.$axios.get('http://127.0.0.1:3000/problems/').then((res) => {
+      this.$axios.get('/problems/').then((res) => {
         this.tableData = res.data
       }).catch((err) => {
         console.log(err)
       })
-      // this.tableData = [{index: '1', title: 'OliverJurdge', level: '困难'},
-      //   {index: '2', title: '武汉大学', level: '简单'}, {index: '13', title: '软件学院', level: '简单'},
-      //   {index: '3', title: 'OliverJurdge', level: '中等'}, {index: '14', title: 'OliverJurdge', level: '中等'},
-      //   {index: '4', title: 'OliverJurdge', level: '困难'}, {index: '15', title: '软件学院', level: '简单'},
-      //   {index: '5', title: 'OliverJurdge', level: '简单'}, {index: '16', title: 'OliverJurdge', level: '中等'},
-      //   {index: '6', title: '软件学院', level: '困难'}, {index: '17', title: 'OliverJurdge', level: '困难'},
-      //   {index: '7', title: 'OliverJurdge', level: '中等'}, {index: '18', title: '武汉大学', level: '简单'},
-      //   {index: '8', title: '武汉大学', level: '中等'}, {index: '19', title: 'OliverJurdge', level: '简单'},
-      //   {index: '9', title: 'OliverJurdge', level: '简单'}, {index: '20', title: 'OliverJurdge', level: '中等'},
-      //   {index: '10', title: '软件学院', level: '困难'}, {index: '21', title: '武汉大学', level: '困难'},
-      //   {index: '11', title: 'OliverJurdge', level: '简单'}, {index: '22', title: 'OliverJurdge', level: '中等'},
-      //   {index: '12', title: 'OliverJurdge', level: '困难'}, {index: '23', title: '软件学院', level: '困难'}
-      // ]
     },
     handleSizeChange (val) {
       this.currentPage = 1

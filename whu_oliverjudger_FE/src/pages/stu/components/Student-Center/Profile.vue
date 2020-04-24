@@ -34,7 +34,7 @@ export default {
   },
   mounted: function () {
     let that = this
-    this.$axios.get('/users/profile', { // 还可以直接把参数拼接在url后边
+    this.$axios.get('/students/profile', { // 还可以直接把参数拼接在url后边
       params: {
         ID: localStorage.getItem('userID')
       }
@@ -54,7 +54,7 @@ export default {
         'Major': this.input_major === '' ? this.now_major : this.input_major
       }
       let that = this
-      this.$axios.post('/users/updateProfile', data
+      this.$axios.post('/students/updateProfile', data
       ).then(function (res) {
         console.log(res.data)
         if (res.data === 'Profile更新成功') {

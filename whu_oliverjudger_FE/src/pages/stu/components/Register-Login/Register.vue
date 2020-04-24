@@ -90,7 +90,7 @@ export default {
         'major': this.major,
         'email': this.email
       }
-      this.$axios.post('http://127.0.0.1:3000/users/register', data
+      this.$axios.post('/students/register', data
       ).then(function (res) {
         console.log(res.data)
         alert(res.data)

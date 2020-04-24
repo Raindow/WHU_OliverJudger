@@ -12,11 +12,13 @@
           <el-col :span="11" >Old Password<el-input
             placeholder="请输入Old_Password"
             v-model="input_Old_Password"
+            type="password"
             clearable>
           </el-input></el-col>
           <el-col :span="11" >Current Password<el-input
             placeholder="请输入Current Password"
             v-model="input_Current_Password"
+            type="password"
             clearable>
           </el-input></el-col>
         </el-row>
@@ -24,6 +26,7 @@
           <el-col :span="11" >New Password<el-input
             placeholder="请输入New Password"
             v-model="input_New_Password"
+            type="password"
             clearable>
           </el-input></el-col>
           <el-col :span="11" >Current Email<el-input
@@ -36,6 +39,7 @@
           <el-col :span="11" >Confirm New Password<el-input
             placeholder="确认 New Password"
             v-model="confirm_New_Password"
+            type="password"
             clearable>
           </el-input></el-col>
           <el-col :span="11" >Input New Email<el-input
@@ -68,9 +72,10 @@ export default {
       input_New_Email: ''
     }
   },
+  // 初始化当前邮箱
   created: function () {
     let that = this
-    this.$axios.get('/users/getAccount', { // 还可以直接把参数拼接在url后边
+    this.$axios.get('/students/getAccount', { // 还可以直接把参数拼接在url后边
       params: {
         ID: localStorage.getItem('userID')
       }
@@ -81,9 +86,10 @@ export default {
     })
   },
   methods: {
+    // 更新密码
     UpdatePassword: function () {
       let that = this
-      this.$axios.get('/users/getAccount', { // 还可以直接把参数拼接在url后边
+      this.$axios.get('/students/getAccount', { // 还可以直接把参数拼接在url后边
         params: {
           ID: localStorage.getItem('userID')
         }
@@ -97,9 +103,8 @@ export default {
                 'ID': localStorage.getItem('userID'),
                 'Password': that.input_New_Password
               }
-              that.$axios.post('/users/updateAccountPassword', data
+              that.$axios.post('/students/updateAccountPassword', data
               ).then(function (res) {
-                console.log(res.data)
                 if (res.data === 'Password更新成功') {
                   alert('密码更新成功')
                   location.reload()
@@ -121,9 +126,11 @@ export default {
         console.log(error)
       })
     },
+
+    // 更新邮箱
     UpdateEmail: function () {
       let that = this
-      this.$axios.get('/users/getAccount', { // 还可以直接把参数拼接在url后边
+      this.$axios.get('/students/getAccount', { // 还可以直接把参数拼接在url后边
         params: {
           ID: localStorage.getItem('userID')
         }
@@ -133,9 +140,8 @@ export default {
             'ID': localStorage.getItem('userID'),
             'Email': that.input_New_Email
           }
-          that.$axios.post('/users/updateAccountEmail', data
+          that.$axios.post('/students/updateAccountEmail', data
           ).then(function (res) {
-            console.log(res.data)
             if (res.data === 'Email更新成功') {
               alert('Email更新成功')
               location.reload()

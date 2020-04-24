@@ -90,13 +90,7 @@ export default {
       }
 
     },
-    // 开关筛选
-    // switchOnTableData: {
-    //   get () {
-    //     return this.tableData.filter(data => data.ID.toLowerCase().includes('aaaaaa')
-    //     )
-    //   }
-    // },
+
     pageData: function () {
       // console.log(this.isSeeYourself)
       // return this.showTableData.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
@@ -145,41 +139,6 @@ export default {
     calculateTableHeight () {
       // innerheight 返回窗口的文档显示区的高度。
       this.tableHeight.height = (0.6 * (window.innerHeight)) + 'px'
-    },
-    setTableContent () {
-      this.tableData = [
-        {
-          submissionTime: '2020-2-25 13:37:58',
-          ID: 'aaaaaa',
-          submissionStatus: 'Accepted',
-          problemName: '1',
-          usingTime: '1ms',
-          usingMemory: '2MB',
-          usingLanguage: 'c',
-          author: 'aaa'
-        },
-        {
-          submissionTime: '2020-2-25 13:37:58',
-          ID: '19370be695a7',
-          submissionStatus: 'Accepted',
-          problemName: '1',
-          usingTime: '1ms',
-          usingMemory: '2MB',
-          usingLanguage: 'c',
-          author: 'aaa'
-        },
-        {
-          submissionTime: '2020-2-27 13:37:58',
-          ID: '19370be695a7',
-          submissionStatus: 'Accepted',
-          problemName: '2',
-          usingTime: '1ms',
-          usingMemory: '2MB',
-          usingLanguage: 'java',
-          author: 'bbb'
-        }
-      ]
-      this.totalTableLength = this.tableData.length // 设置总通告数目
     },
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage

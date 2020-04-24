@@ -72,7 +72,7 @@ export default {
         'password': this.password
       }
       let that = this
-      this.$axios.post('http://127.0.0.1:3000/users/login', data
+      this.$axios.post('/students/login', data
       ).then(function (res) {
         console.log(res.data)
         if (res.data === '验证成功') {

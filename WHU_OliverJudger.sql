@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80015
 File Encoding         : 65001
 
-Date: 2020-04-23 15:33:38
+Date: 2020-04-23 16:23:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -167,3 +167,5 @@ CREATE TABLE `submission` (
 -- ----------------------------
 -- Records of submission
 -- ----------------------------
+INSERT INTO `submission` VALUES ('1', '2', '3', '8', '4', '5', '6', '7', '9');
+INSERT INTO `submission` VALUES ('1', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i');
