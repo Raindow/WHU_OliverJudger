@@ -1,6 +1,6 @@
 <template>
   <el-col :span="20">
-    <h2>{{charpterName}}</h2>
+    <h2>{{ChapterName}}</h2>
     <el-menu
       default-active="1"
       class="el-menu-vertical-demo"
@@ -53,8 +53,6 @@ export default {
         chapter: that.ChapterName
       }
     }).then(function (res) {
-      console.log(sessionStorage.getItem('ChapterName'))
-      console.log(res.data)
       that.items = res.data
     }).catch(function (error) {
       console.log(error)
@@ -70,8 +68,6 @@ export default {
           chapter: that.ChapterName
         }
       }).then(function (res) {
-        console.log(sessionStorage.getItem('ChapterName'))
-        console.log(res.data)
         that.items = res.data
       }).catch(function (error) {
         console.log(error)

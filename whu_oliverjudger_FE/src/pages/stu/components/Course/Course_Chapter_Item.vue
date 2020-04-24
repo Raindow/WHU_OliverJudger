@@ -119,9 +119,6 @@ export default {
     width: 60%;
     margin: 3% auto;
   }
-  .title{
-    /*float: right;*/
-  }
   .tableStyle{
     width: 20%;
   }

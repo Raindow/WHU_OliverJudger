@@ -1,6 +1,6 @@
 <template>
   <div class="Course_Detail">
-    <Course_NavBar :courseName="CourseName"></Course_NavBar>
+    <Course_NavBar ></Course_NavBar>
     <router-view>
     </router-view>
   </div>
@@ -14,12 +14,9 @@ export default {
     Course_NavBar
   },
   mounted () {
-    console.log()
   },
   data: function () {
     return {
-      // 接收参数
-      CourseName: this.$store.state.Course
     }
   }
 }

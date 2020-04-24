@@ -2,8 +2,8 @@ let express = require('express');
 let router = express.Router();
 let course = require('../service/course')
 
+// 某一课程的所有chapter
 router.get('/showCourseList', async (req, res, next) => {
-    console.log(req.query.course)
     console.log('showCourseList');
     try {
         let result = await course.showCourseChapterList(req.query.course);
@@ -25,10 +25,12 @@ router.get('/showAllList', async (req, res, next) => {
     }
 });
 
+// /showCourseAllList 用来课程首页课程的对外展示
 router.get('/showCourseAllList', async (req, res, next) => {
     console.log('showAllList');
     try {
         let result = await course.showAllCourseBase();
+        console.log('课程首页数据展示完成')
         console.log(result)
         res.json(result);
     } catch (e) {

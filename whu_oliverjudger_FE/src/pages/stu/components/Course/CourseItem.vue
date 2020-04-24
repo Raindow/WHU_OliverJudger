@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     ClickEvent: function (url, courseEnglish) {
-      // alert(url)
+      // 当点击对应的课程后会存储课程English并且推到对应的URL
       this.$store.commit('editCourse', courseEnglish)
       this.$router.push(url)
     }
