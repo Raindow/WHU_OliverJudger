@@ -3,8 +3,7 @@ let router = express.Router();
 let course = require('../service/chapter')
 
 router.get('/showChapterList', async (req, res, next) => {
-    console.log(req.query.chapter)
-    console.log('showCourseList');
+    console.log('showChapterList');
     try {
         let result = await course.showChapterList(req.query.chapter);
         console.log(result)
@@ -18,7 +17,6 @@ router.get('/showAllList', async (req, res, next) => {
     console.log('showAllList');
     try {
         let result = await course.showChapterAllList();
-        console.log(result)
         res.json(result);
     } catch (e) {
         res.send(e);
