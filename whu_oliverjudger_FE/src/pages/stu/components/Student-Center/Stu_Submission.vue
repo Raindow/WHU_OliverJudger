@@ -85,7 +85,6 @@ export default {
             data.usingTime.toLowerCase().includes(this.search.toLowerCase()) ||
             data.usingLanguage.toLowerCase().includes(this.search.toLowerCase()) ||
           data.usingMemory.toLowerCase().includes(this.search.toLowerCase()) ||
-          data.author.toLowerCase().includes(this.search.toLowerCase()) ||
           data.submissionStatus.toLowerCase().includes(this.search.toLowerCase())
         )
       }
