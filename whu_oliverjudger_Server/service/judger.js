@@ -11,4 +11,5 @@ function execute(cmd){
     });
 
 }
-execute('python3 ../EPIJudge-master/epi_judge_python_solutions/a_b_sqrt2.py');
+execute('python ../EPIJudge-master/epi_judge_python_solutions/a_b_sqrt2.py');
+execute('python py_test.py 2');
