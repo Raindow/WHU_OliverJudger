@@ -15,6 +15,7 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
         //let isAdd = await submission.addSubmission(req.body)
         // res返回相关信息，包括 是否接受，内存信息，运行时间，错误原因
         //res.send(isAdd)
+
         res.send('a')
     } catch (e) {
         res.send(e);
@@ -23,6 +24,14 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
 
 // 处理查询记录请求
 router.post('/searchSubmission', async (req, res, next) => {
+    // 异步调用py
+    const exec = require('child_process').exec;
+    exec('python ./epi_judge_python_solutions/a_b_sqrt2.py',function(error,stdout,stderr){
+        if(error) {
+            console.info('stderr : '+stderr);
+        }
+        console.log('exec: ' + stdout);
+    })
     try {
         let result = await submission.searchSubmission(req.body.ID);
         res.send(result)
