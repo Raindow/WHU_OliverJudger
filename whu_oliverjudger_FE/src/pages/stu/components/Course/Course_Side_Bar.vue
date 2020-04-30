@@ -30,6 +30,7 @@ export default {
     },
     linkto (item) {
       this.$router.push(this.router_item + '/' + item.Chapter_Sub_ENG)
+      location.reload()
     }
   },
   data: function () {

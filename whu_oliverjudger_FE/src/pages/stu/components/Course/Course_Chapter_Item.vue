@@ -2,13 +2,6 @@
   <div>
    <span class="title"> {{$route.params.id}}</span>
     <span>
-      <!--      clearable是否可清空-->
-      <el-input
-        class="problemSearch"
-        v-model="search"
-        placeholder="搜索题目 名称、内容 或 编号"
-        clearable
-      ></el-input>
     </span>
     <span class="tableStyle">
     <VariableTable
@@ -45,9 +38,9 @@ export default {
       pageSize: 5,
       search: '',
       columnHeaders: [ // 列表的头标签
-        {prop: 'index', label: '序号'},
+        {prop: 'proIndex', label: '序号'},
         {prop: 'title', label: '题名'},
-        {prop: 'level', label: '难度'}
+        {prop: 'proLevel', label: '难度'}
       ],
       tableData: [] // 存储通告数据
     }
@@ -80,20 +73,23 @@ export default {
   methods: {
     init () {
       this.setTableContent()
-      // this.calculateProblemPreviewHeight()
     },
     calculateProblemPreviewHeight () {
       // innerHeight 返回窗口的文档显示区的高度。
       this.problemPreviewHeight.height = (0.65 * window.innerHeight) + 'px'
     },
     setTableContent () {
-      this.tableData = [{index: '1', title: 'OliverJurdge', level: '困难'},
-        {index: '2', title: '武汉大学', level: '简单'}, {index: '13', title: '软件学院', level: '简单'},
-        {index: '3', title: 'OliverJurdge', level: '中等'}, {index: '14', title: 'OliverJurdge', level: '中等'},
-        {index: '4', title: 'OliverJurdge', level: '困难'}, {index: '15', title: '软件学院', level: '简单'},
-        {index: '5', title: 'OliverJurdge', level: '简单'}, {index: '16', title: 'OliverJurdge', level: '中等'},
-        {index: '6', title: '软件学院', level: '困难'}, {index: '17', title: 'OliverJurdge', level: '困难'}
-      ]
+      let that = this
+      this.$axios.get('/chapter/chapterProblem', { // 还可以直接把参数拼接在url后边
+        params: {
+          chapter: this.$route.params.id
+        }
+      }).then(function (res) {
+        console.log(res.data)
+        that.tableData = res.data
+      }).catch(function (error) {
+        console.log(error)
+      })
     },
     handleSizeChange (val) {
       this.currentPage = 1
@@ -110,11 +106,9 @@ export default {
 </script>
 
 <style scoped>
-  .problemSearch{
-    float: right;
-    width: 30%;
-    margin-top: 2%;
-  }
+div{
+  margin:20px;
+}
   .problemPagination{
     width: 60%;
     margin: 3% auto;
