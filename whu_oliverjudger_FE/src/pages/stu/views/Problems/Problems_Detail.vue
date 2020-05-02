@@ -11,7 +11,7 @@
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="在线编辑代码" name="first">
           <span>language</span>
-          <el-select v-model="codeLang.label">
+          <el-select v-model="codeLang">
             <el-option
               v-for="item in codeLangOptions"
               :key="item.value"
@@ -116,19 +116,16 @@ export default {
       activeName: 'first',
       // 设置编程语言
       codeLangOptions: [{
-        value: 'cpp',
+        value: 'C++',
         label: 'C++'
       }, {
-        value: 'java',
+        value: 'Java',
         label: 'Java'
       }, {
-        value: 'py',
+        value: 'Python',
         label: 'Python'
       }],
-      codeLang: {
-        value: 'cpp',
-        label: 'C++'
-      },
+      codeLang: 'C++',
       // 设置主题
       themeOptions: [{
         value: 'default',
@@ -176,7 +173,7 @@ export default {
   },
   watch: {
     codeLang (val) {
-      switch (val.label) {
+      switch (val) {
         case 'C++':
           this.cmOptions.mode = 'text/x-c++src'
           break
@@ -197,24 +194,34 @@ export default {
   },
   methods: {
     handleClick (tab, event) {
-      console.log(tab, event)
+      // console.log(tab, event)
     },
     // 提交直接编辑的代码需要修改的地方
     codeSubmission () {
-      this.$axios.post('http://127.0.0.1:3000/submission/submit', {
-        ID: localStorage.getItem('id'),
-        language: this.codeLang.value,
+      let data = {
+        ID: localStorage.getItem('userID'),
+        language: (() => {
+          switch (this.codeLang) {
+            case 'C++':
+              return 'cpp'
+            case 'Java':
+              return 'java'
+            case 'Python':
+              return 'py'
+          }
+        })(),
         title: this.$route.params.id,
         content: this.$refs.coder.codemirror.getValue()
-      }).then((res) => {
-        console.log(res.data)
+      }
+      this.$axios.post('/submission/submit', data).then((res) => {
+        console.log('abcdefg', res.data)
       })
     },
     beforeUpload (file, fileList) {
-      console.log('beforeUpload' + 'aaaaa')
-      console.log(fileList)
-      console.log(this.fileList)
-      this.fileUploadData.ID = localStorage.getItem('id')
+      // console.log('beforeUpload' + 'aaaaa')
+      // console.log(fileList)
+      // console.log(this.fileList)
+      this.fileUploadData.ID = localStorage.getItem('userID')
       this.fileUploadData.language = (file.name.split('.')).pop()
       this.fileUploadData.title = this.$route.params.id
     },
@@ -222,33 +229,35 @@ export default {
       this.$refs.upload.submit()
     },
     handleFileRemove (file, fileList) {
-      console.log(file, fileList)
+      // console.log(file, fileList)
     },
     handleFilePreview (file) {
-      console.log(file)
+      // console.log(file)
     },
     handleFileSuccess (response, file, fileList) {
-      console.log('success')
-      console.log(response)
-      console.log(file)
-      console.log(fileList)
-      console.log(this)
-      console.log(this.fileUploadData)
+      // console.log('success')
+      // console.log(response)
+      // console.log(file)
+      // console.log(fileList)
+      // console.log(this)
+      // console.log(this.fileUploadData)
+      console.log('abcdefg', response)
     },
+    // eslint-disable-next-line handle-callback-err
     handleFileErr (err, file, fileList) {
-      console.log('err')
-      console.log(err)
-      console.log(file)
+      // console.log('err')
+      // console.log(err)
+      // console.log(file)
     },
     getContent () {
-      console.log('getContent')
-      console.log(this.$route.params.id)
+      // console.log('getContent')
+      // console.log(this.$route.params.id)
       this.$axios.get('http://127.0.0.1:3000/problems/detail', {
         params: {
           title: this.$route.params.id
         }
       }).then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         this.problem = this.getDetail((res.data[0]).content)
         this.example = this.getDetail((res.data[0]).exampleInandOut)
       }).catch((err) => {
@@ -256,7 +265,7 @@ export default {
       })
     },
     getDetail (data) {
-      console.log('getDetail')
+      // console.log('getDetail')
       return data.replace(/\\n/g, '<br/>')
     }
   }

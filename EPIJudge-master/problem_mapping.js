@@ -1888,7 +1888,7 @@ problem_mapping = {
                 "total": 13
             },
             "Python: a_b_sqrt2.py": {
-                "passed": 13,
+                "passed": 0,
                 "total": 13
             }
         },
