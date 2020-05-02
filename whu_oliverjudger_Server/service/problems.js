@@ -1,7 +1,7 @@
 const db = require('../config/db')
 let preview = () => {
   return new Promise((resolve, reject) => {
-    db.query('select proIndex, title, proLevel from problems', (err, rows) => {
+    db.query('select proIndex, title, proLevel from problems where status=0', (err, rows) => {
       if(err){
         reject(err);
       }
