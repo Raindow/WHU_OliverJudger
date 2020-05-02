@@ -1,10 +1,10 @@
+/*
+* student.js
+* 用于处理学生的登录注册和个人信息的数据交互
+* */
 var express = require('express');
 var router = express.Router();
 let students = require('../service/students')
-/* GET students listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
 
 // 处理登录请求
 router.post('/login', async (req, res, next) => {
@@ -16,6 +16,7 @@ router.post('/login', async (req, res, next) => {
   }
 })
 
+// 处理注册请求
 router.post('/register', async (req, res, next) => {
   try {
     let isExist = await students.isStudentExist(req.body.ID)
@@ -31,9 +32,8 @@ router.post('/register', async (req, res, next) => {
   }
 })
 
+// 处理porfile界面的显示
 router.get('/profile', async (req, res, next) => {
-  console.log(req.query.chapter)
-  console.log('studentprofile');
   try {
     let result = await students.showProfile(req.query.ID);
     console.log(result)

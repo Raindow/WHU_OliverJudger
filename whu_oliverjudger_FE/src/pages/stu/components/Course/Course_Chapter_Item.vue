@@ -85,7 +85,6 @@ export default {
           chapter: this.$route.params.id
         }
       }).then(function (res) {
-        console.log(res.data)
         that.tableData = res.data
       }).catch(function (error) {
         console.log(error)

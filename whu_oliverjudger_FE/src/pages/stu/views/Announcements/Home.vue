@@ -1,3 +1,6 @@
+<!--
+用于首页信息公告的view
+-->
 <template>
 <Announcements></Announcements>
 </template>

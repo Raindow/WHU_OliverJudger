@@ -1,3 +1,8 @@
+<!--
+NavBar.vue
+用于显示处理导航栏的信息
+同时import的Login和Register用于处理登录注册请求
+-->
 <template>
   <div>
     <el-image  :src="require('@/assets/logo.png')" fit="fit" class="barImg" @click="linkto('Home')"></el-image>
@@ -43,7 +48,6 @@
 <script>
 import Login from '@/pages/stu/components/Register-Login/Login.vue'
 import Register from '@/pages/stu/components/Register-Login/Register.vue'
-// import vuex from 'vuex'
 export default {
   name: 'NavBar',
   watch: {
@@ -133,9 +137,6 @@ export default {
       loginVisible: false
     }
   }
-  // mounted () {
-  //   window.addEventListener('resize', this.setBarWidth, false)
-  // }
 }
 </script>
 

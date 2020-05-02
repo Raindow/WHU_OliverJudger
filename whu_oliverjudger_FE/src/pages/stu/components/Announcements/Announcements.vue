@@ -1,9 +1,12 @@
+<!--
+Announcements.vue
+用来展示公告列表的信息的页面组件，调用了VariableTable.vue来实现组件化，降低耦合程度
+-->
 <template>
   <div class="announcement"
   :style="announcementsHeight">
     <span>
       <span class="announcementHeader">Announcement</span>
-<!--      clearable是否可清空-->
       <el-input
         class="announcementSearch"
         v-model="search"
@@ -17,7 +20,6 @@
       :show-header="false"
       :click-event="clickEventForContent"
       ></VariableTable>
-<!-- page-size 每页显示条目个数  total 总条目数 -->
     <el-pagination
       class="announcementPagination"
       background
@@ -98,7 +100,6 @@ export default {
       this.currentPage = currentPage
     },
     clickEventForContent (row) {
-      // alert(row.announcement)
       this.$router.push({ path: '/home/' + row.Title })
     }
   }

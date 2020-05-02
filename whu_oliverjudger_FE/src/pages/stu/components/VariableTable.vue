@@ -1,5 +1,8 @@
+<!--
+VariableTable.vue
+用于处理定义列表的信息
+-->
 <template>
-<!--  show-heade 是否显示表头-->
   <el-table
     :show-header="showHeader"
     :data="tableData"

@@ -1,11 +1,11 @@
+/*
+announcement.js 处理公告的信息
+*/
 let express = require('express');
 let router = express.Router();
 let announcement = require('../service/announcement')
-
-/* GET users listing. */
+/* /showDetail 为某一个具体的公告返回对应的信息*/
 router.get('/showDetail', async (req, res, next) => {
-    console.log(req.query.title)
-    console.log('showDetail');
     try {
         let result = await announcement.showDeail(req.query.title);
         res.json(result);
@@ -13,10 +13,8 @@ router.get('/showDetail', async (req, res, next) => {
         res.send(e);
     }
 });
-
+/* /showList 中为公告首页的信息列表服务*/
 router.get('/showList', async (req, res, next) => {
-    console.log(req.query.title)
-    console.log('showList');
     try {
         let result = await announcement.showList();
         res.json(result);

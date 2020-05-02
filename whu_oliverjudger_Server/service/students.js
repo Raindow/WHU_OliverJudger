@@ -1,5 +1,4 @@
 const db = require('../config/db')
-
 // 登录验证函数
 let verifyLogin = (ID,password) => {
     return new Promise((resolve, reject) => {
@@ -35,14 +34,11 @@ let isStudentExist = (ID) => {
             }
             else{
                 if (user.length===0){
-                    console.log('此用户不存在')
                     resolve(false)
                 }
                 else {
-                    console.log('此用户已存在')
                     resolve(true)
                 }
-
             }
         })
     })
@@ -84,12 +80,10 @@ let updateProfile = (ID,Name,Major) => {
     return new Promise((resolve, reject) => {
         db.query(`UPDATE students SET  Name='${Name}'  , Major='${Major}' WHERE StudentID = ${ID}`, (err, user) => {
             if(err) {
-                console.log(err)
                 resolve(err)
             }
             else{
                 resolve('Profile更新成功')
-                console.log('Profile更新成功')
             }
         })
     })
@@ -99,7 +93,6 @@ exports.updateProfile = updateProfile;
 // 获取用户的密码和邮箱
 let getAccount = (attr) => {
     return new Promise((resolve, reject) => {
-        console.log('getAccount');
         db.query(`select Password,Email from students where StudentID = ${attr}`, (err, rows) => {
             if(err) {
                 reject(err);
@@ -115,31 +108,25 @@ let updateAccountPassword = (ID,Password) => {
     return new Promise((resolve, reject) => {
         db.query(`UPDATE students SET  Password='${Password}' WHERE StudentID = '${ID}'`, (err, user) => {
             if(err) {
-                console.log(err)
-                console.log('updateAccountPasswordFail')
                 resolve(err)
             }
             else{
                 resolve('Password更新成功')
-                console.log('updateAccountPasswordSuccess')
             }
         })
     })
 }
 exports.updateAccountPassword = updateAccountPassword;
 
-// 更新账户密码
+// 更新账户邮箱
 let updateAccountEmail = (ID,Email) => {
     return new Promise((resolve, reject) => {
         db.query(`UPDATE students SET  Email='${Email}' WHERE StudentID = '${ID}'`, (err, user) => {
             if(err) {
-                console.log(err)
-                console.log('updateAccountEmailFail')
                 resolve(err)
             }
             else{
                 resolve('Email更新成功')
-                console.log('updateAccountEmailSuccess')
             }
         })
     })

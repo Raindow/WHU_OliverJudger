@@ -25,7 +25,6 @@ let showCourseChapterAllList =()=>{
 
 let showAllCourseBase =()=>{
     return new Promise((resolve,reject)=>{
-        console.log('showAllCourseBase');
         db.query(`select name,navItem,navIndex,imgSrc from Class`, (err, rows) => {
             if(err) {
                 reject(err);

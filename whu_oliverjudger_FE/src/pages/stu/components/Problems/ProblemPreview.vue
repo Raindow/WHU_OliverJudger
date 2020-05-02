@@ -1,8 +1,10 @@
+<!--
+ProblemPreview.vue
+用于处理题目列表哦页面的显示
+-->
 <template>
   <div class="problemPreview">
-<!--       :style="problemPreviewHeight">-->
     <span>
-      <!--      clearable是否可清空-->
       <el-input
         class="problemSearch"
         v-model="search"
@@ -16,7 +18,6 @@
       :show-header="true"
       :click-event="clickEventForContent"
     ></VariableTable>
-    <!-- page-size 每页显示条目个数  total 总条目数 -->
     <el-pagination
       class="problemPagination"
       background

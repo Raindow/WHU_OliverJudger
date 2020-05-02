@@ -11,18 +11,8 @@ let showChapterList = (attr) => {
     })
 };
 
-let showChapterAllList =()=>{
-    return new Promise((resolve,reject)=>{
-        console.log('showChapterAllList');
-        db.query(`select Chapter,Chapter_Sub_CN,Chapter_Sub_ENG from Chapter`, (err, rows) => {
-            if(err) {
-                reject(err);
-            }
-            resolve(rows);
-        })
-    })
-};
 
+// 用于获取对应某个小节的所有题目
 let preview = (chapter) => {
     return new Promise((resolve, reject) => {
         db.query(`select proIndex, title, proLevel from chapterproblems where class = '${chapter}'`, (err, rows) => {
@@ -37,5 +27,4 @@ let preview = (chapter) => {
 }
 
 exports.showChapterList = showChapterList;
-exports.showChapterAllList = showChapterAllList;
 exports.preview = preview;

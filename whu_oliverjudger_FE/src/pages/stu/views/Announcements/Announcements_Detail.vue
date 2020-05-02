@@ -1,11 +1,12 @@
+<!--
+Announcements_Detail.vue
+用于显示公告的具体页面
+-->
 <template>
   <div class="Announcements_detail">
     <div class="titleStyle" v-html="title"></div>
-
     <div class="detailContentStyle" v-html="detailContent"></div>
-
   </div>
-
 </template>
 
 <script>
@@ -26,12 +27,11 @@ export default {
     },
     init () {
       let that = this
-      this.$axios.get('/announcement/showDetail', { // 还可以直接把参数拼接在url后边
+      this.$axios.get('/announcement/showDetail', {
         params: {
           title: this.$route.params.id
         }
       }).then(function (res) {
-        console.log(res.data[0])
         that.detailContent = (res.data[0]).Content
         that.title = that.$route.params.id
       }).catch(function (error) {

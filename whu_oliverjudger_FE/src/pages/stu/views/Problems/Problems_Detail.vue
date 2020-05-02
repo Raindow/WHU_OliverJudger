@@ -38,7 +38,6 @@
           <el-button style="margin-top: 1%;float: right" @click="codeSubmission">提交</el-button>
         </el-tab-pane>
         <el-tab-pane label="文件提交" name="second">
-          <!-- 网址需要修改 -->
           <el-upload
             class="upload-demo"
             style="text-align: center"

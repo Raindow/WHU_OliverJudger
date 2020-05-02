@@ -4,7 +4,6 @@ Vue.prototype.$axios = axios;
 <template>
   <div class="login">
     <div class="outer_label">
-<!--      <img class="inner_label login_logo" src="src/assets/logo.png">-->
     </div>
     <div class="login_form">
       <div id="ID" class="item">
@@ -20,7 +19,6 @@ Vue.prototype.$axios = axios;
         </el-radio-group>
       </div>
       <el-button class="login_bt" type="primary" @click="login" round :loading="isBtnLoading">登录</el-button>
-<!--      <el-button class="login_bt" type="primary" @click="cancel" round>取消</el-button>-->
     </div>
   </div>
 
@@ -53,7 +51,6 @@ export default {
     // 登录界面登录按钮函数
     login () {
       if (!this.ID) {
-        // this.$message.error 常用于主动操作的反馈提示
         this.$message.error('请输入用户名')
         return
       }
@@ -76,15 +73,11 @@ export default {
       ).then(function (res) {
         console.log(res.data)
         if (res.data === '验证成功') {
-          // that.$store.commit('saveId', that.ID)
-          // that.$userID = that.ID
-          // alert(that.$userID)
           localStorage.setItem('isLogin', true)
           localStorage.setItem('userID', that.ID)
           location.reload()
         } else {
           alert(res.data)
-          console.log(res.data)
           location.reload()
         }
       }).catch(function (error) {
@@ -92,12 +85,6 @@ export default {
       })
     }
   },
-  // created () {
-  //   if (JSON.parse(localStorage.getItem('user')) && JSON.parse(localStorage.getItem('user')).userName) {
-  //     this.userName = JSON.parse(localStorage.getItem('user')).userName
-  //     this.password = JSON.parse(localStorage.getItem('user')).password
-  //   }
-  // },
   computed: {
   }
 
@@ -109,11 +96,8 @@ export default {
     padding-top: 10%;
     padding-left: 10%;
     padding-right: 10%;
-    /*width: 60%;*/
   }
   .item {
     margin:10px 5px 15px 20px;
-
   }
-
 </style>

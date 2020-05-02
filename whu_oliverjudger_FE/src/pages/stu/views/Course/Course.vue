@@ -1,6 +1,9 @@
+<!--
+Course.vue
+这个页面是拿来做Course的主界面，课程的每个item使用的是Course_Item
+-->
 <template>
   <div class="Course">
-<!--这个页面是拿来做Course的主界面，课程的每个item使用的是Course_Item-->
     <div v-for="(item,i) in items" :key="i" :index="item.name">
       <CourseItem v-bind:title="item.navItem" :imgSrc="item.imgSrc" :url="item.name" :course-english="item.navIndex">
       </CourseItem>
