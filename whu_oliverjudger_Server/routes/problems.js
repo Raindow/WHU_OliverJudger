@@ -14,8 +14,6 @@ router.get('/', async (req, res, next) => {
 router.get('/detail', async (req, res, next) => {
   try {
     let param = req.query;
-    console.log(param);
-    console.log(param.key);
     let result = await problems.detail(param.title);
     res.json(result);
   } catch (e) {

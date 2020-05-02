@@ -40,7 +40,6 @@ export default {
   data () {
     return {
       announcementsHeight: {height: ''},
-      // totalTableLength: 0, // 获取通告总数目
       pageSize: 8, // page-size 每页显示条目个数
       currentPage: 1,
       search: '',
@@ -94,18 +93,6 @@ export default {
       }).catch(function (error) {
         console.log(error)
       })
-      // this.tableData = [{announcement: '开发人员', date: '2020-3-8'}, {announcement: '武汉大学计算机学院', date: '1010-10-10'},
-      //   {announcement: '武汉大学国软', date: '2020-5-20'}, {announcement: '珞珈山', date: '1010-10-10'},
-      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-      //   {announcement: 'OliverJudger', date: '3020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'},
-      //   {announcement: 'OliverJudger', date: '2020-20-20'}, {announcement: 'OliverJudger', date: '1010-10-10'}
-      // ]
     },
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage

@@ -11,12 +11,13 @@
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="在线编辑代码" name="first">
           <span>language</span>
-          <el-select v-model="codeLang">
+          <el-select v-model="codeLang.label">
             <el-option
               v-for="item in codeLangOptions"
               :key="item.value"
               :label="item.label"
-              :value="item.value">
+              :value="item.value"
+              aria-selected="true">
             </el-option>
           </el-select>
           <span>theme</span>
@@ -44,7 +45,8 @@
             ref="upload"
             drag
             action="http://127.0.0.1:3000/submission/submit"
-            multiple
+            :before-upload="beforeUpload"
+            :data="fileUploadData"
             :on-preview="handleFilePreview"
             :on-remove="handleFileRemove"
             :on-success="handleFileSuccess"
@@ -115,19 +117,19 @@ export default {
       activeName: 'first',
       // 设置编程语言
       codeLangOptions: [{
-        value: 'C++',
+        value: 'cpp',
         label: 'C++'
       }, {
-        value: 'Java',
+        value: 'java',
         label: 'Java'
       }, {
-        value: 'Python',
+        value: 'py',
         label: 'Python'
-      }, {
-        value: 'JavaScript',
-        label: 'JavaScript'
       }],
-      codeLang: 'C++',
+      codeLang: {
+        value: 'cpp',
+        label: 'C++'
+      },
       // 设置主题
       themeOptions: [{
         value: 'default',
@@ -166,7 +168,8 @@ export default {
         }
       },
       // 上传文件列表
-      fileList: []
+      fileList: [],
+      fileUploadData: {ID: null, language: '', title: ''}
     }
   },
   mounted () {
@@ -174,7 +177,7 @@ export default {
   },
   watch: {
     codeLang (val) {
-      switch (val) {
+      switch (val.label) {
         case 'C++':
           this.cmOptions.mode = 'text/x-c++src'
           break
@@ -200,11 +203,21 @@ export default {
     // 提交直接编辑的代码需要修改的地方
     codeSubmission () {
       this.$axios.post('http://127.0.0.1:3000/submission/submit', {
-        language: this.codeLang,
+        ID: localStorage.getItem('id'),
+        language: this.codeLang.value,
+        title: this.$route.params.id,
         content: this.$refs.coder.codemirror.getValue()
       }).then((res) => {
         console.log(res.data)
       })
+    },
+    beforeUpload (file, fileList) {
+      console.log('beforeUpload' + 'aaaaa')
+      console.log(fileList)
+      console.log(this.fileList)
+      this.fileUploadData.ID = localStorage.getItem('id')
+      this.fileUploadData.language = (file.name.split('.')).pop()
+      this.fileUploadData.title = this.$route.params.id
     },
     submitUpload () {
       this.$refs.upload.submit()
@@ -219,6 +232,9 @@ export default {
       console.log('success')
       console.log(response)
       console.log(file)
+      console.log(fileList)
+      console.log(this)
+      console.log(this.fileUploadData)
     },
     handleFileErr (err, file, fileList) {
       console.log('err')

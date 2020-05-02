@@ -1,12 +1,31 @@
 const express = require('express');
 const router = express.Router();
 let submission = require('../service/submission');
+const fs = require('fs');
 const multer = require('multer');
-const upload = multer({dest: 'uploads/'});
+const storage = multer.diskStorage({
+    destination: './uploads',
+    filename: function(req, file, callback) {
+        console.log(req.body.a)
+        callback(null, req.ID + '_' + new Date().toLocaleDateString() + '_' + req.body.title + '.' + req.body.language);
+    }
+})
+const upload = multer({storage: storage});
 
 // 处理添加记录请求
 router.post('/submit', upload.single('file'), async (req, res, next) => {
     try {
+        if(req.body.content){
+            let filePath = './uploads/' + req.body.ID + '_' + new Date().toLocaleDateString() + '_' + req.body.title + '.' + req.body.language;
+            console.log(filePath)
+            fs.writeFile(filePath, req.body.content, (err) =>{
+                if(err) {
+                    console.log(err);
+                }else {
+                    console.log('success');
+                }
+            })
+        }
         console.log(req.body)
         console.log(req.file)
         // req.body.文件
