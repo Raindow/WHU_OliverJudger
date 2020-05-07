@@ -85,7 +85,7 @@ import 'codemirror/keymap/vim.js'
 import 'codemirror/theme/monokai.css'
 // 选择行高亮
 import 'codemirror/addon/selection/active-line'
-// 自动补全
+// 自动补全,代码提示
 import 'codemirror/addon/hint/javascript-hint'
 import 'codemirror/addon/hint/anyword-hint'
 import 'codemirror/addon/hint/show-hint'
@@ -140,7 +140,7 @@ export default {
       code: '',
       // 编辑器设置
       cmOptions: {
-        mode: 'text/x-c++src',
+        mode: 'text/x-python',
         theme: 'default',
         indentUnit: 4, // 设置自动缩进为4
         indentWithTabs: true, // 在缩进时，会将需要把 n*tab宽度个空格替换成n个tab字符
@@ -162,29 +162,39 @@ export default {
         // 额外快捷键
         extraKeys: {
           'Ctrl': 'autocomplete'
+        },
+        hintOptions: { // 自定义提示选项
+          completeSingle: false,
+          alignWithWord: false
         }
       },
       // 上传文件列表
-      fileList: [],
-      fileUploadData: {ID: null, language: '', title: ''}
+      fileList: []
     }
   },
   mounted () {
     this.getContent()
+    this.$refs.coder.codemirror.on('inputRead', () => {
+    // ,
+    //   hintOptions: {
+    //     completeSingle: false
+    //   }
+      this.$refs.coder.codemirror.showHint({
+        completeSingle: false
+      })
+    })
   },
   watch: {
     codeLang (val) {
-      console.log(val)
-      console.log(this.cmdOptions.mode)
       switch (val) {
         case 'C++':
-          this.cmOptions.mode = 'text/x-c++src'
+          this.$refs.coder.codemirror.setOption('mode', 'text/x-c++src')
           break
         case 'Java':
-          this.cmOptions.mode = 'text/x-java'
+          this.$refs.coder.codemirror.setOption('mode', 'text/x-java')
           break
         case 'Python':
-          this.cmOptions.mode = 'text/python'
+          this.$refs.coder.codemirror.setOption('mode', 'text/x-python')
           break
       }
     },
