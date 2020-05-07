@@ -176,13 +176,7 @@ export default {
     this.getContent()
     this.initProblem()
     this.$refs.coder.codemirror.on('inputRead', () => {
-    // ,
-    //   hintOptions: {
-    //     completeSingle: false
-    //   }
-      this.$refs.coder.codemirror.showHint({
-        completeSingle: false
-      })
+      this.$refs.coder.codemirror.showHint()
     })
   },
   watch: {
