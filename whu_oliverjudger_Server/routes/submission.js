@@ -38,7 +38,7 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
         let oldPath=''
         let languageType=''
         if (filePath===''){
-            console.log(req.file)
+            // console.log(req.file)
             const path = require('path');
             let extname = path.extname(req.file.filename);
             oldPath=req.file.path
@@ -54,7 +54,7 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
             }
 
         } else {
-            console.log('bbb',req.body.language)
+            // console.log('bbb',req.body.language)
             oldPath=filePath
             if (req.body.language==='py'){
                 newPath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' + '.' + req.body.language
@@ -68,7 +68,7 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
             }
 
         }
-        console.log('qq',newPath)
+        // console.log('qq',newPath)
         fs.copyFile(oldPath, newPath, (err) =>{
             if(err) {
                 console.log(err);
@@ -80,13 +80,34 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
         // 异步调用py
         if (languageType==='python'){
             const exec = require('child_process').exec;
-            exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py',function(error,stdout,stderr){
+            exec('python ../EPIJudge-master/aaa.py',function(error,stdout,stderr){
+            // exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py',function(error,stdout,stderr){
+                let result=''
                 if(error) {
-                    console.info('stderr : '+stderr);
+                    // console.info('stderr : '+stderr);
+                    result=stderr
                 }
-                // console.log('exec: ' + stdout);
-                result=stdout
+                else {
+                    result=stdout
+                }
+                result=result.replace(new RegExp('\'','g'), '"')
+
+                let isPassed = result.includes('You\"ve passed ALL tests');
+
                 console.log('result',result)
+                let data={
+                    studentID: req.body.ID ,
+                    submissionTime:Date.now(),
+                    submissionStatus:isPassed?1:0,
+                    problemName:req.body.title,
+                    usingTime:isPassed?result.match(/Median running time(.*?)us/g)[0].split(':')[1]:0,
+                    usingLanguage:req.body.language,
+                    failReason:isPassed?0:result
+                    // failReason:isPassed?0:result.replace('\'', '"')
+                }
+
+                let a = submission.addSubmission(data)
+                console.log(a)
                 res.send(result);
 
             })
@@ -153,20 +174,25 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
 
 // 给前端显示预留
 router.post('/reserve', async (req, res, next) => {
-    language=req.body.language //选用语言
-    title=req.body.title //题目名
+    let language=req.body.language //选用语言
+    console.log(language)
+    let title=req.body.title //题目名
+    let result = await submission.showTitle(language,title);
+    console.log(result)
     let filePath=''
-    if (req.body.language==='py'){
-        filePath='../EPIJudge-master/epi_judge_python'+'/'+title + '.' + req.body.language
+    if (req.body.language==='Python'){
+        filePath='../EPIJudge-master/epi_judge_python'+'/'+result[0].python + '.py'
 
-    }else if(req.body.language==='java'){
-        filePath='../EPIJudge-master/epi_judge_java'+'/epi/'+title + '.' + req.body.language
+    }else if(req.body.language==='Java'){
+        filePath='../EPIJudge-master/epi_judge_java'+'/epi/'+result[0].java + '.java'
 
-    }else if(req.body.language==='cpp'){
-        filePath='../EPIJudge-master/epi_judge_cpp'+'/'+title + '.' + req.body.language
+    }else if(req.body.language==='C++'){
+        filePath='../EPIJudge-master/epi_judge_cpp'+'/'+result[0].cpp + '.cc'
+        console.log(filePath)
     }
     try {
         var data = fs.readFileSync(filePath);
+        console.log(data)
         res.send(data)
     } catch (e) {
         res.send(e);

@@ -140,7 +140,7 @@ export default {
       code: '',
       // 编辑器设置
       cmOptions: {
-        mode: 'text/x-python',
+        mode: 'text/x-c++src',
         theme: 'default',
         indentUnit: 4, // 设置自动缩进为4
         indentWithTabs: true, // 在缩进时，会将需要把 n*tab宽度个空格替换成n个tab字符
@@ -174,6 +174,7 @@ export default {
   },
   mounted () {
     this.getContent()
+    this.initProblem()
     this.$refs.coder.codemirror.on('inputRead', () => {
     // ,
     //   hintOptions: {
@@ -197,6 +198,7 @@ export default {
           this.$refs.coder.codemirror.setOption('mode', 'text/x-python')
           break
       }
+      this.initProblem()
     },
     theme (val) {
       this.cmOptions.theme = val
@@ -262,7 +264,7 @@ export default {
     getContent () {
       // console.log('getContent')
       // console.log(this.$route.params.id)
-      this.$axios.get('http://127.0.0.1:3000/problems/detail', {
+      this.$axios.get('/problems/detail', {
         params: {
           title: this.$route.params.id
         }
@@ -272,6 +274,20 @@ export default {
         this.example = this.getDetail((res.data[0]).exampleInandOut)
       }).catch((err) => {
         console.log(err)
+      })
+    },
+    initProblem () {
+      let data = {
+        'language': this.codeLang,
+        'title': 'a_b_sqrt2'
+      }
+      let that = this
+      this.$axios.post('/submission/reserve', data
+      ).then(function (res) {
+        console.log(res.data)
+        that.code = res.data
+      }).catch(function (error) {
+        console.log(error)
       })
     },
     getDetail (data) {

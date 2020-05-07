@@ -30,10 +30,26 @@ export default {
     return {
       stu_picture_src: '@/assets/logo.png',
       stu_name: 'admin',
-      stu_solved: 2,
-      stu_submission: 4,
-      stu_score: 95.6
+      stu_solved: '2',
+      stu_submission: '4',
+      stu_score: '95.6'
     }
+  },
+  mounted () {
+    let data = {
+      'ID': '1'
+    }
+    let that = this
+    this.$axios.post('/students/show', data
+    ).then(function (res) {
+      console.log(res.data)
+      that.stu_name = res.data[0].Name
+      that.stu_solved = res.data[0].Solved
+      that.stu_submission = res.data[0].Submission
+      that.stu_score = res.data[0].Score
+    }).catch(function (error) {
+      console.log(error)
+    })
   }
 }
 </script>
