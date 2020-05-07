@@ -148,6 +148,30 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
     }
 })
 
+
+
+// 给前端显示预留
+router.post('/searchSubmission', async (req, res, next) => {
+    language=req.body.language//选用
+    title=req.body.title //题目名
+    let filePath=''
+    if (req.body.language==='py'){
+        filePath='../EPIJudge-master/epi_judge_python'+'/'+title + '.' + req.body.language
+
+    }else if(req.body.language==='java'){
+        filePath='../EPIJudge-master/epi_judge_java'+'/epi/'+title + '.' + req.body.language
+
+    }else if(req.body.language==='cpp'){
+        filePath='../EPIJudge-master/epi_judge_cpp'+'/'+title + '.' + req.body.language
+    }
+    try {
+        var data = fs.readFileSync(filePath);
+        res.send(data)
+    } catch (e) {
+        res.send(e);
+    }
+})
+
 // 处理查询记录请求
 router.post('/searchSubmission', async (req, res, next) => {
     // 异步调用py
