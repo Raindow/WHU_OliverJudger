@@ -48,7 +48,7 @@ exports.isStudentExist = isStudentExist;
 // 添加账户
 let add = (ID,password,stuName,major,email) => {
     return new Promise((resolve, reject) => {
-        db.query(`INSERT INTO students (StudentID, Password,Name,Major,Email)VALUES( ${ID},  ${password},${stuName},${major},  ${email})`, (err, user) => {
+        db.query(`INSERT INTO students (StudentID, Password,Name,Major,Email)VALUES( '${ID}',  '${password}','${stuName}','${major}',  '${email}')`, (err, user) => {
             if(err) {
                 resolve(err)
             }
@@ -78,7 +78,7 @@ exports.showProfile = showProfile;
 // 更新账户
 let updateProfile = (ID,Name,Major) => {
     return new Promise((resolve, reject) => {
-        db.query(`UPDATE students SET  Name='${Name}'  , Major='${Major}' WHERE StudentID = ${ID}`, (err, user) => {
+        db.query(`UPDATE students SET  Name='${Name}'  , Major='${Major}' WHERE StudentID = '${ID}'`, (err, user) => {
             if(err) {
                 resolve(err)
             }
@@ -93,7 +93,7 @@ exports.updateProfile = updateProfile;
 // 获取用户的密码和邮箱
 let getAccount = (attr) => {
     return new Promise((resolve, reject) => {
-        db.query(`select Password,Email from students where StudentID = ${attr}`, (err, rows) => {
+        db.query(`select Password,Email from students where StudentID = '${attr}'`, (err, rows) => {
             if(err) {
                 reject(err);
             }

@@ -38,7 +38,7 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
         let oldPath=''
         let languageType=''
         if (filePath===''){
-            console.log(req.file)
+            // console.log(req.file)
             const path = require('path');
             let extname = path.extname(req.file.filename);
             oldPath=req.file.path
@@ -54,7 +54,7 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
             }
 
         } else {
-            console.log('bbb',req.body.language)
+            // console.log('bbb',req.body.language)
             oldPath=filePath
             if (req.body.language==='py'){
                 newPath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' + '.' + req.body.language
@@ -68,7 +68,7 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
             }
 
         }
-        console.log('qq',newPath)
+        // console.log('qq',newPath)
         fs.copyFile(oldPath, newPath, (err) =>{
             if(err) {
                 console.log(err);
