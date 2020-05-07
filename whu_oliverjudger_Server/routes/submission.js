@@ -153,20 +153,25 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
 
 // 给前端显示预留
 router.post('/reserve', async (req, res, next) => {
-    language=req.body.language //选用语言
-    title=req.body.title //题目名
+    let language=req.body.language //选用语言
+    console.log(language)
+    let title=req.body.title //题目名
+    let result = await submission.showTitle(language,title);
+    console.log(result)
     let filePath=''
-    if (req.body.language==='py'){
-        filePath='../EPIJudge-master/epi_judge_python'+'/'+title + '.' + req.body.language
+    if (req.body.language==='Python'){
+        filePath='../EPIJudge-master/epi_judge_python'+'/'+result[0].python + '.py'
 
-    }else if(req.body.language==='java'){
-        filePath='../EPIJudge-master/epi_judge_java'+'/epi/'+title + '.' + req.body.language
+    }else if(req.body.language==='Java'){
+        filePath='../EPIJudge-master/epi_judge_java'+'/epi/'+result[0].java + '.java'
 
-    }else if(req.body.language==='cpp'){
-        filePath='../EPIJudge-master/epi_judge_cpp'+'/'+title + '.' + req.body.language
+    }else if(req.body.language==='C++'){
+        filePath='../EPIJudge-master/epi_judge_cpp'+'/'+result[0].cpp + '.cc'
+        console.log(filePath)
     }
     try {
         var data = fs.readFileSync(filePath);
+        console.log(data)
         res.send(data)
     } catch (e) {
         res.send(e);

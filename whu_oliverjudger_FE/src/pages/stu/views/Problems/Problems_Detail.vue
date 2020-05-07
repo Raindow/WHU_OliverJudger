@@ -171,6 +171,7 @@ export default {
   },
   mounted () {
     this.getContent()
+    this.initProblem()
   },
   watch: {
     codeLang (val) {
@@ -187,6 +188,7 @@ export default {
           this.cmOptions.mode = 'text/python'
           break
       }
+      this.initProblem()
     },
     theme (val) {
       this.cmOptions.theme = val
@@ -252,7 +254,7 @@ export default {
     getContent () {
       // console.log('getContent')
       // console.log(this.$route.params.id)
-      this.$axios.get('http://127.0.0.1:3000/problems/detail', {
+      this.$axios.get('/problems/detail', {
         params: {
           title: this.$route.params.id
         }
@@ -262,6 +264,20 @@ export default {
         this.example = this.getDetail((res.data[0]).exampleInandOut)
       }).catch((err) => {
         console.log(err)
+      })
+    },
+    initProblem () {
+      let data = {
+        'language': this.codeLang,
+        'title': 'a_b_sqrt2'
+      }
+      let that = this
+      this.$axios.post('/submission/reserve', data
+      ).then(function (res) {
+        console.log(res.data)
+        that.code = res.data
+      }).catch(function (error) {
+        console.log(error)
       })
     },
     getDetail (data) {
