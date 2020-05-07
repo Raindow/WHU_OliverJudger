@@ -80,13 +80,22 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
         // 异步调用py
         if (languageType==='python'){
             const exec = require('child_process').exec;
-            exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py',function(error,stdout,stderr){
+            exec('python ../EPIJudge-master/aaa.py',function(error,stdout,stderr){
+            // exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py',function(error,stdout,stderr){
+
                 if(error) {
-                    console.info('stderr : '+stderr);
+                    // console.info('stderr : '+stderr);
+                    result=stderr
+                }
+                else {
+                    result=stdout
                 }
                 // console.log('exec: ' + stdout);
-                result=stdout
+
                 console.log('result',result)
+
+
+
                 res.send(result);
 
             })
