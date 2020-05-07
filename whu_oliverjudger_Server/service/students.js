@@ -132,3 +132,18 @@ let updateAccountEmail = (ID,Email) => {
     })
 }
 exports.updateAccountEmail = updateAccountEmail;
+
+
+let show = (ID) => {
+    return new Promise((resolve, reject) => {
+        db.query(`select Name,Solved, Submission, Score  from students WHERE StudentID = '${ID}'`, (err, rows) => {
+            if(err) {
+                resolve(err)
+            }
+            else{
+                resolve(rows)
+            }
+        })
+    })
+}
+exports.show = show;
