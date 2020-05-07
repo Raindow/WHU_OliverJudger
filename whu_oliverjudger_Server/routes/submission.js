@@ -53,8 +53,6 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
                 languageType='cpp'
             }
 
-
-
         } else {
             console.log('bbb',req.body.language)
             oldPath=filePath
@@ -92,7 +90,9 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
                 res.send(result);
 
             })
-        }else if(languageType==='java'){
+
+        }// 异步调用java
+        else if(languageType==='java'){
             // const exec = require('child_process').exec;
             // exec('javac ../EPIJudge-master/epi_judge_java_solutions/epi/AbsentValueArray.java',function(error,stdout,stderr){
             //     if(error) {
@@ -104,7 +104,8 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
             //     // res.send(result);
 
             // })
-        }else if(languageType==='cpp'){
+        }// 异步调用cpp
+        else if(languageType==='cpp'){
             const exec = require('child_process').exec;
             exec('javac ../EPIJudge-master/epi_judge_java_solutions/epi/AbsentValueArray.java',function(error,stdout,stderr){
                 if(error) {
@@ -151,8 +152,8 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
 
 
 // 给前端显示预留
-router.post('/searchSubmission', async (req, res, next) => {
-    language=req.body.language//选用
+router.post('/reserve', async (req, res, next) => {
+    language=req.body.language //选用语言
     title=req.body.title //题目名
     let filePath=''
     if (req.body.language==='py'){
