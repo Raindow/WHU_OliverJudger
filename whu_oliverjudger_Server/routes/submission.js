@@ -82,7 +82,7 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
             const exec = require('child_process').exec;
             exec('python ../EPIJudge-master/aaa.py',function(error,stdout,stderr){
             // exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py',function(error,stdout,stderr){
-
+                let result=''
                 if(error) {
                     // console.info('stderr : '+stderr);
                     result=stderr
@@ -90,12 +90,24 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
                 else {
                     result=stdout
                 }
-                // console.log('exec: ' + stdout);
+                result=result.replace(new RegExp('\'','g'), '"')
+
+                let isPassed = result.includes('You\"ve passed ALL tests');
 
                 console.log('result',result)
+                let data={
+                    studentID: req.body.ID ,
+                    submissionTime:Date.now(),
+                    submissionStatus:isPassed?1:0,
+                    problemName:req.body.title,
+                    usingTime:isPassed?result.match(/Median running time(.*?)us/g)[0].split(':')[1]:0,
+                    usingLanguage:req.body.language,
+                    failReason:isPassed?0:result
+                    // failReason:isPassed?0:result.replace('\'', '"')
+                }
 
-
-
+                let a = submission.addSubmission(data)
+                console.log(a)
                 res.send(result);
 
             })

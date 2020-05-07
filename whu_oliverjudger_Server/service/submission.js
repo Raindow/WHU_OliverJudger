@@ -3,10 +3,11 @@ const db = require('../config/db')
 // 添加记录函数
 let addSubmission = (data) => {
     return new Promise((resolve, reject) => {
-        db.query(`INSERT INTO submission (studentID, submissionTime,submissionStatus,problemIndex,problemName,usingTime,usingLanguage,failReason)VALUES
-        ( '${data.studentID}', '${data.submissionTime}','${data.submissionStatus}','${data.problemIndex}','${data.problemName}','${data.usingTime}','${data.usingLanguage}','${data.failReason}')`, (err, result) => {
+        db.query(`INSERT INTO submission (studentID, submissionTime,submissionStatus,problemName,usingTime,usingLanguage,failReason)VALUES
+        ( '${data.studentID}', '${data.submissionTime}','${data.submissionStatus}','${data.problemName}','${data.usingTime}','${data.usingLanguage}','${data.failReason}')`, (err, result) => {
             if(err) {
                 resolve(err)
+                console.log(err)
             }
             else{
                 resolve('添加成功')
