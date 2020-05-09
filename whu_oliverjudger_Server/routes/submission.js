@@ -77,43 +77,62 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
 
             }
         })
-        // 异步调用py
+        // 异步调用pyconst
+        exec = require('child_process').exec;
         if (languageType==='python'){
-            const exec = require('child_process').exec;
+
             // exec('python ../EPIJudge-master/aaa.py',function(error,stdout,stderr){
             exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py',function(error,stdout,stderr){
-                let result=''
+
                 if(error) {
                     // console.info('stderr : '+stderr);
-                    result=stderr
+
+                    console.log('stderr',error)
+                    let data={
+                        studentID: req.body.ID ,
+                        submissionTime:Date.now(),
+                        submissionStatus:0,
+                        problemName:req.body.title,
+                        usingTime:0,
+                        usingLanguage:req.body.language,
+                        failReason:stderr
+                        // failReason:isPassed?0:result.replace('\'', '"')
+                    }
+
+                    let a = submission.addSubmission(data)
+                    console.log(a)
+
+
+                    res.send(stderr);
+
                 }
                 else {
-                    result=stdout
-                }
-                result=result.replace(new RegExp('\'','g'), '"')
 
-                let isPassed = result.includes('You\"ve passed ALL tests');
+                    console.log('stdout',stdout)
+                    stdout=stdout.replace(new RegExp('\'','g'), '"')
 
-                console.log('result',result)
-                let data={
-                    studentID: req.body.ID ,
-                    submissionTime:Date.now(),
-                    submissionStatus:isPassed?1:0,
-                    problemName:req.body.title,
-                    usingTime:isPassed?result.match(/Median running time(.*?)us/g)[0].split(':')[1]:0,
-                    usingLanguage:req.body.language,
-                    failReason:isPassed?0:result
-                    // failReason:isPassed?0:result.replace('\'', '"')
+                    let isPassed = stdout.includes('You\"ve passed ALL tests');
+
+                    // console.log('result',result)
+                    let data={
+                        studentID: req.body.ID ,
+                        submissionTime:Date.now(),
+                        submissionStatus:isPassed?1:0,
+                        problemName:req.body.title,
+                        usingTime:isPassed?stdout.match(/Median running time(.*?)us/g)[0].split(':')[1]:0,
+                        usingLanguage:req.body.language,
+                        failReason:isPassed?0:stdout
+                        // failReason:isPassed?0:result.replace('\'', '"')
+                    }
+                    let a = submission.addSubmission(data)
+                    console.log(a)
+                    if (isPassed){
+                        res.send('You have passed ALL tests');
+                    }else {
+                        res.send(stdout);
+                    }
                 }
 
-                let a = submission.addSubmission(data)
-                console.log(a)
-                if (isPassed){
-                    res.send('You have passed ALL tests');
-                }
-                else{
-                    res.send(result);
-                }
 
 
             })
@@ -181,10 +200,10 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
 // 给前端显示预留
 router.post('/reserve', async (req, res, next) => {
     let language=req.body.language //选用语言
-    console.log(language)
+    // console.log(language)
     let title=req.body.title //题目名
     let result = await submission.showTitle(language,title);
-    console.log(result)
+    // console.log(result)
     let filePath=''
     if (req.body.language==='Python'){
         filePath='../EPIJudge-master/epi_judge_python'+'/'+result[0].python + '.py'
@@ -198,7 +217,7 @@ router.post('/reserve', async (req, res, next) => {
     }
     try {
         var data = fs.readFileSync(filePath);
-        console.log(data)
+        // console.log(data)
         res.send(data)
     } catch (e) {
         res.send(e);
