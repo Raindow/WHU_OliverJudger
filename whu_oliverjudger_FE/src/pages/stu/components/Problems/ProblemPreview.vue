@@ -64,7 +64,7 @@ export default {
       get () {
         return this.tableData.filter(data => !this.search ||
           data.title.toLowerCase().includes(this.search.toLowerCase()) ||
-          data.index.includes(this.search))
+          data.proIndex === Number(this.search))
       }
     },
     // 设置当前页的显示
@@ -90,6 +90,7 @@ export default {
     setTableContent () {
       this.$axios.get('/problems/').then((res) => {
         this.tableData = res.data
+        console.log(this.tableData)
       }).catch((err) => {
         console.log(err)
       })
