@@ -80,8 +80,8 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
         // 异步调用py
         if (languageType==='python'){
             const exec = require('child_process').exec;
-            exec('python ../EPIJudge-master/aaa.py',function(error,stdout,stderr){
-            // exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py',function(error,stdout,stderr){
+            // exec('python ../EPIJudge-master/aaa.py',function(error,stdout,stderr){
+            exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py',function(error,stdout,stderr){
                 let result=''
                 if(error) {
                     // console.info('stderr : '+stderr);
@@ -108,7 +108,13 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
 
                 let a = submission.addSubmission(data)
                 console.log(a)
-                res.send(result);
+                if (isPassed){
+                    res.send('You have passed ALL tests');
+                }
+                else{
+                    res.send(result);
+                }
+
 
             })
 

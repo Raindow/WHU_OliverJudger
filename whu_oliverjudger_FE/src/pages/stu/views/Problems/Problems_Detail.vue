@@ -169,7 +169,8 @@ export default {
         }
       },
       // 上传文件列表
-      fileList: []
+      fileList: [],
+      fileUploadData: {ID: null, language: '', title: ''}
     }
   },
   mounted () {
@@ -220,7 +221,7 @@ export default {
         content: this.$refs.coder.codemirror.getValue()
       }
       this.$axios.post('/submission/submit', data).then((res) => {
-        console.log('abcdefg', res.data)
+        // console.log('abcdefg', res.data)
       })
     },
     beforeUpload (file, fileList) {
@@ -247,7 +248,7 @@ export default {
       // console.log(fileList)
       // console.log(this)
       // console.log(this.fileUploadData)
-      console.log('abcdefg', response)
+      // console.log('abcdefg', response)
     },
     // eslint-disable-next-line handle-callback-err
     handleFileErr (err, file, fileList) {
@@ -278,7 +279,7 @@ export default {
       let that = this
       this.$axios.post('/submission/reserve', data
       ).then(function (res) {
-        console.log(res.data)
+        // console.log(res.data)
         that.code = res.data
       }).catch(function (error) {
         console.log(error)
