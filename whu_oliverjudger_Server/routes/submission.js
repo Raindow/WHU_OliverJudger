@@ -10,8 +10,52 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: './uploads',
+    // destination: function(req,callback){
+    //
+    //     let filePath=''
+    //     console.log('filePath')
+    //     if (req.body.language==='py'){
+    //         filePath='../EPIJudge-master/epi_judge_python_solutions'
+    //         // languageType='python'
+    //     }else if(req.body.language==='java'){
+    //         filePath='../EPIJudge-master/epi_judge_java_solutions'+'/epi'
+    //         // languageType='java'
+    //     }else if(req.body.language==='cpp'){
+    //         filePath='../EPIJudge-master/epi_judge_cpp_solutions'
+    //         // languageType='cpp'
+    //     }
+    //     console.log('fileRoot',filePath)
+    //     // return filePath
+    //     callback(null,filePath);
+    // },
+
     filename: function(req, file, callback) {
-        callback(null, req.body.ID + '_' + new Date().toLocaleDateString() + '_' + req.body.title + '.' + req.body.language);
+        let filePath=''
+        let oldPath='test' + '.' + req.body.language
+        console.log(req.body.language)
+        if (req.body.language==='py'){
+            filePath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' + '.' + req.body.language
+            // languageType='python'
+        }else if(req.body.language==='java'){
+            filePath='../EPIJudge-master/epi_judge_java_solutions'+'/epi/'+'test' + '.' + req.body.language
+            // languageType='java'
+        }else if(req.body.language==='cpp'){
+            filePath='../EPIJudge-master/epi_judge_cpp_solutions'+'/'+'test' + '.' + req.body.language
+            // languageType='cpp'
+        }
+        console.log('fileRoot',oldPath)
+        callback(null, oldPath);
+        // oldPath=
+        // fs.copyFile(oldPath, filePath, (err) =>{
+        //     if(err) {
+        //         console.log(err);
+        //     }else {
+        //         console.log('copy success');
+        //
+        //     }
+        // })
+        // fileRoot=req.body.ID + '_' + new Date().toLocaleDateString() + '_' + req.body.title + '.' + req.body.language
+
 
     }
 })
@@ -20,9 +64,41 @@ const upload = multer({storage: storage});
 // 处理添加记录请求
 router.post('/submit', upload.single('file'), async (req, res, next) => {
     try {
+        let result=''
+        // let newPath=''
+        // let oldPath=''
+        let languageType=''
+
         let filePath=''
+        // console.log(req.body.content)
         if(req.body.content){
-            filePath = './uploads'+'/' + req.body.ID + '_' + new Date().toLocaleDateString() + '_' + req.body.title + '.' + req.body.language;
+            // console.log('aaaaa')
+            // const path = require('path');
+            // let extname = path.extname(req.file.filename);
+            // console.log('extname',extname)
+            // oldPath=req.file.path
+            // if (extname==='.py'){
+            //     filePath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' +extname
+            //     //languageType='python'
+            // }else if(extname==='.java'){
+            //     filePath='../EPIJudge-master/epi_judge_java_solutions'+'/epi/'+'AbsentValueArray' +extname
+            //     languageType='java'
+            // }else if(extname==='.cpp'){
+            //     filePath='../EPIJudge-master/epi_judge_cpp_solutions'+'/'+'test' +extname
+            //     languageType='cpp'
+            // }
+            if (req.body.language==='py'){
+                filePath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' + '.' + req.body.language
+                // languageType='python'
+            }else if(req.body.language==='java'){
+                filePath='../EPIJudge-master/epi_judge_java_solutions'+'/epi/'+'test' + '.' + req.body.language
+                // languageType='java'
+            }else if(req.body.language==='cpp'){
+                filePath='../EPIJudge-master/epi_judge_cpp_solutions'+'/'+'test' + '.' + req.body.language
+                // languageType='cpp'
+            }
+            console.log('languageType',languageType);
+            // filePath = './uploads'+'/' + req.body.ID + '_' + new Date().toLocaleDateString() + '_' + req.body.title + '.' + req.body.language;
             // console.log('aaa',filePath);
             fs.writeFile(filePath, req.body.content, (err) =>{
                 if(err) {
@@ -33,53 +109,52 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
             })
         }
         // console.log(req.body)
-        let result=''
-        let newPath=''
-        let oldPath=''
-        let languageType=''
+
         if (filePath===''){
             // console.log(req.file)
             const path = require('path');
             let extname = path.extname(req.file.filename);
-            oldPath=req.file.path
+            // oldPath=req.file.path
             if (extname==='.py'){
-                newPath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' +extname
+                // newPath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' +extname
                 languageType='python'
             }else if(extname==='.java'){
-                newPath='../EPIJudge-master/epi_judge_java_solutions'+'/epi/'+'AbsentValueArray' +extname
+                // newPath='../EPIJudge-master/epi_judge_java_solutions'+'/epi/'+'AbsentValueArray' +extname
                 languageType='java'
             }else if(extname==='.cpp'){
-                newPath='../EPIJudge-master/epi_judge_cpp_solutions'+'/'+'test' +extname
+                // newPath='../EPIJudge-master/epi_judge_cpp_solutions'+'/'+'test' +extname
                 languageType='cpp'
             }
 
         } else {
             // console.log('bbb',req.body.language)
-            oldPath=filePath
+            // oldPath=filePath
             if (req.body.language==='py'){
-                newPath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' + '.' + req.body.language
+                // newPath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' + '.' + req.body.language
                 languageType='python'
             }else if(req.body.language==='java'){
-                newPath='../EPIJudge-master/epi_judge_java_solutions'+'/epi/'+'AbsentValueArray' + '.' + req.body.language
+                // newPath='../EPIJudge-master/epi_judge_java_solutions'+'/epi/'+'AbsentValueArray' + '.' + req.body.language
                 languageType='java'
             }else if(req.body.language==='cpp'){
-                newPath='../EPIJudge-master/epi_judge_cpp_solutions'+'/'+'test' + '.' + req.body.language
+                // newPath='../EPIJudge-master/epi_judge_cpp_solutions'+'/'+'test' + '.' + req.body.language
                 languageType='cpp'
             }
 
         }
         // console.log('qq',newPath)
-        fs.copyFile(oldPath, newPath, (err) =>{
-            if(err) {
-                console.log(err);
-            }else {
-                console.log('copy success');
-
-            }
-        })
+        // fs.copyFile(oldPath, newPath, (err) =>{
+        //     if(err) {
+        //         console.log(err);
+        //     }else {
+        //         console.log('copy success');
+        //
+        //     }
+        // })
         // 异步调用pyconst
+        console.log(languageType)
         exec = require('child_process').exec;
         if (languageType==='python'){
+            console.log(111)
 
             // exec('python ../EPIJudge-master/aaa.py',function(error,stdout,stderr){
             exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py',function(error,stdout,stderr){
