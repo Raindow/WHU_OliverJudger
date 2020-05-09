@@ -225,9 +225,6 @@ export default {
       })
     },
     beforeUpload (file, fileList) {
-      // console.log('beforeUpload' + 'aaaaa')
-      // console.log(fileList)
-      // console.log(this.fileList)
       this.fileUploadData.ID = localStorage.getItem('userID')
       this.fileUploadData.language = (file.name.split('.')).pop()
       this.fileUploadData.title = this.$route.params.id
@@ -252,19 +249,13 @@ export default {
     },
     // eslint-disable-next-line handle-callback-err
     handleFileErr (err, file, fileList) {
-      // console.log('err')
-      // console.log(err)
-      // console.log(file)
     },
     getContent () {
-      // console.log('getContent')
-      // console.log(this.$route.params.id)
       this.$axios.get('/problems/detail', {
         params: {
           title: this.$route.params.id
         }
       }).then((res) => {
-        // console.log(res.data)
         this.problem = this.getDetail((res.data[0]).content)
         this.example = this.getDetail((res.data[0]).exampleInandOut)
       }).catch((err) => {
@@ -274,12 +265,11 @@ export default {
     initProblem () {
       let data = {
         'language': this.codeLang,
-        'title': 'a_b_sqrt2'
+        'title': this.$route.params.id
       }
       let that = this
       this.$axios.post('/submission/reserve', data
       ).then(function (res) {
-        // console.log(res.data)
         that.code = res.data
       }).catch(function (error) {
         console.log(error)

@@ -8,7 +8,7 @@ ProblemPreview.vue
       <el-input
         class="problemSearch"
         v-model="search"
-        placeholder="搜索题目 名称、内容 或 编号"
+        placeholder="搜索题目序号，名称，难度"
         clearable
       ></el-input>
     </span>
@@ -63,6 +63,7 @@ export default {
       // 计算需要显示的的条目总量
       get () {
         return this.tableData.filter(data => !this.search ||
+          data.proLevel.toLowerCase().includes(this.search.toLowerCase()) ||
           data.title.toLowerCase().includes(this.search.toLowerCase()) ||
           data.proIndex === Number(this.search))
       }
