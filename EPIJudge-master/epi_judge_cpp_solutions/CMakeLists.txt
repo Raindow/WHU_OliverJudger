@@ -10,6 +10,9 @@ else()
     link_libraries(pthread)
 endif()
 
+
+add_executable(test111 test111.cc)
+
 add_executable(a_b_sqrt2 a_b_sqrt2.cc)
 add_executable(absent_value_array absent_value_array.cc)
 add_executable(adding_credits adding_credits.cc)

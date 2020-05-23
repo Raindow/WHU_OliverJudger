@@ -41,21 +41,6 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
         let filePath=''
         // console.log(req.body.content)
         if(req.body.content){
-            // console.log('aaaaa')
-            // const path = require('path');
-            // let extname = path.extname(req.file.filename);
-            // console.log('extname',extname)
-            // oldPath=req.file.path
-            // if (extname==='.py'){
-            //     filePath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' +extname
-            //     //languageType='python'
-            // }else if(extname==='.java'){
-            //     filePath='../EPIJudge-master/epi_judge_java_solutions'+'/epi/'+'AbsentValueArray' +extname
-            //     languageType='java'
-            // }else if(extname==='.cpp'){
-            //     filePath='../EPIJudge-master/epi_judge_cpp_solutions'+'/'+'test' +extname
-            //     languageType='cpp'
-            // }
             if (req.body.language==='py'){
                 filePath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' + '.' + req.body.language
                 // languageType='python'
@@ -110,20 +95,11 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
             }
 
         }
-        // console.log('qq',newPath)
-        // fs.copyFile(oldPath, newPath, (err) =>{
-        //     if(err) {
-        //         console.log(err);
-        //     }else {
-        //         console.log('copy success');
-        //
-        //     }
-        // })
+
         // 异步调用pyconst
         console.log(languageType)
         exec = require('child_process').exec;
         if (languageType==='python'){
-
             // exec('python ../EPIJudge-master/aaa.py',function(error,stdout,stderr){
             exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py',function(error,stdout,stderr){
                 if(error) {
@@ -139,19 +115,14 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
                         failReason:stderr
                         // failReason:isPassed?0:result.replace('\'', '"')
                     }
-
                     let a = submission.addSubmission(data)
                     console.log(a)
                     res.send(stderr);
-
                 }
                 else {
-
                     console.log('stdout',stdout)
                     stdout=stdout.replace(new RegExp('\'','g'), '"')
-
                     let isPassed = stdout.includes('You\"ve passed ALL tests');
-
                     // console.log('result',result)
                     let data={
                         studentID: req.body.ID ,
@@ -171,28 +142,39 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
                         res.send(stdout);
                     }
                 }
-
-
-
             })
-
         }// 异步调用java
         else if(languageType==='java'){
-            // const exec = require('child_process').exec;
-            // exec('javac ../EPIJudge-master/epi_judge_java_solutions/epi/AbsentValueArray.java',function(error,stdout,stderr){
-            //     if(error) {
-            //         console.info('stderr : '+stderr);
-            //     }
-            //     // console.log('exec: ' + stdout);
-            //     result=stdout
-            //     console.log('result',result)
-            //     // res.send(result);
+            var cmd='cd ../EPIJudge-master/epi_judge_java_solutions && javac ./epi/test.java && java epi.test';
 
-            // })
+            // const exec = require('child_process').exec;
+            exec(cmd ,function(error,stdout,stderr){
+                if(error) {
+                    console.info('stderr : '+stderr);
+                }
+                else{
+                    console.log('cd success')
+                    result=stdout
+                    console.log('result',result)
+                    // exec('javac ./epi/ABSqrt2.java',{ encoding: 'UNICODE' },function(error,stdout,stderr) {
+                    //     if(error) {
+                    //         console.info('stderr : '+stderr);
+                    //     }
+                    //     else{
+                    //         console.log('compiled');
+                    //         result=stdout
+                    //         console.log('result',result)
+                    //     }
+                    //
+                    // })
+                }
+
+            })
         }// 异步调用cpp
         else if(languageType==='cpp'){
             const exec = require('child_process').exec;
-            exec('javac ../EPIJudge-master/epi_judge_java_solutions/epi/AbsentValueArray.java',function(error,stdout,stderr){
+            var cmd='cd ../EPIJudge-master/epi_judge_cpp_solutions && cmake . && cmake --build ./ --target test111 && cd debug && test111.exe'
+            exec(cmd ,function(error,stdout,stderr){
                 if(error) {
                     console.info('stderr : '+stderr);
                 }

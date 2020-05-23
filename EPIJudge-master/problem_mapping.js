@@ -1880,11 +1880,11 @@ problem_mapping = {
         },
         "14.07 Enumerate extended integers": {
             "C++: a_b_sqrt2.cc": {
-                "passed": 0,
+                "passed": 13,
                 "total": 13
             },
             "Java: ABSqrt2.java": {
-                "passed": 0,
+                "passed": 13,
                 "total": 13
             },
             "Python: a_b_sqrt2.py": {
