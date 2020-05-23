@@ -236,7 +236,7 @@ problem_mapping = {
                 "total": 2004
             },
             "Python: advance_by_offsets.py": {
-                "passed": 2004,
+                "passed": 0,
                 "total": 2004
             }
         },
