@@ -11,7 +11,7 @@
  Target Server Version : 80016
  File Encoding         : 65001
 
- Date: 02/05/2020 08:43:23
+ Date: 09/05/2020 10:05:11
 */
 
 SET NAMES utf8mb4;
@@ -149,6 +149,9 @@ CREATE TABLE `problems` (
   `content` varchar(1000) DEFAULT NULL,
   `exampleInandOut` varchar(500) DEFAULT NULL,
   `status` int(255) DEFAULT NULL,
+  `python` varchar(255) DEFAULT NULL,
+  `cpp` varchar(255) DEFAULT NULL,
+  `java` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`title`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -156,8 +159,26 @@ CREATE TABLE `problems` (
 -- Records of problems
 -- ----------------------------
 BEGIN;
-INSERT INTO `problems` VALUES (1, 'a+b*b', '简单', '计算形如a+b*b的值', 'int	array(float) \\n 	[0.0]	TODO', 0);
-INSERT INTO `problems` VALUES (2, 'absent value array', '中等', 'Find the missing element in the value array', 'array(int)	void \\n\n[1,3,5,4]TODO', 1);
+INSERT INTO `problems` VALUES (1, 'a_b_sqrt2', '简单', '计算形如(a+b)^2的值', 'array(float) \\n 	void', 0, 'a_b_sqrt2', 'a_b_sqrt2', 'ABSqrt2');
+INSERT INTO `problems` VALUES (2, 'absent_value_array', '中等', 'Find the missing element in the value array', 'array(int)	void \\n  void', 1, 'absent_value_array', 'absent_value_array', 'AbsentValueArray');
+INSERT INTO `problems` VALUES (3, 'adding_credits', '中等', '1', 'array(tuple(string[operation], string[string arg], int[int arg])) \\n  void', 0, 'adding_credits', 'adding_credits', 'AddingCredits');
+INSERT INTO `problems` VALUES (4, 'advance_by_offsets', '中等', '1', 'array(int) \\n bool', 0, 'advance_by_offsets', 'advance_by_offsets', 'AdvanceByOffsets');
+INSERT INTO `problems` VALUES (5, 'alternating_array', '中等', '1', 'array(int) \\n void', 0, 'alternating_array', 'alternating_array', 'AlternatingArray');
+INSERT INTO `problems` VALUES (6, 'anagrams', '中等', '1', 'array(string) \\n array(array(string))', 0, 'anagrams', 'anagrams', 'Anagrams');
+INSERT INTO `problems` VALUES (7, 'apply_permutation', '中等', '1', 'array(int)[permutation] \\n array(int)[data]', 0, 'apply_permutation', 'apply_permutation', 'ApplyPermutation');
+INSERT INTO `problems` VALUES (8, 'arbitrage', '中等', '1', 'array(array(float)) \\n bool', 0, 'arbitrage', 'arbitrage', 'Arbitrage');
+INSERT INTO `problems` VALUES (9, 'binomial_coefficients', '中等', '1', 'int \\n int', 0, 'binomial_coefficients', 'binomial_coefficients', 'BinomialCoefficients');
+INSERT INTO `problems` VALUES (10, 'bonus', '中等', '1', 'array(int) \\n int', 0, 'bonus', 'bonus', 'Bonus');
+INSERT INTO `problems` VALUES (11, 'bst_from_preorder', '中等', '1', 'array(int) \\n binary_tree(int)', 0, 'bst_from_preorder', 'bst_from_preorder', 'BstFromPreorder');
+INSERT INTO `problems` VALUES (12, 'bst_from_sorted_array', '中等', '1', 'array(int) \\n int', 0, 'bst_from_sorted_array', 'bst_from_sorted_array', 'BstFromSortedArray');
+INSERT INTO `problems` VALUES (13, 'bst_merge', '中等', '1', 'binary_tree(int) \\n binary_tree(int)', 0, 'bst_merge', 'bst_merge', 'BstMerge');
+INSERT INTO `problems` VALUES (14, 'bst_to_sorted_list', '中等', '1', 'binary_tree(int) \\n array(int)', 0, 'bst_to_sorted_list', 'bst_to_sorted_list', 'BstToSortedList');
+INSERT INTO `problems` VALUES (17, 'buy_and_sell_stock', '中等', '1', 'array(float) \\n float', 0, 'buy_and_sell_stock', 'buy_and_sell_stock', 'BuyAndSellStock');
+INSERT INTO `problems` VALUES (15, 'buy_and_sell_stock_k_times', '中等', '1', 'array(float) \\n int float', 0, 'buy_and_sell_stock_k_times', 'buy_and_sell_stock_k_times', 'BuyAndSellStock');
+INSERT INTO `problems` VALUES (16, 'buy_and_sell_stock_twice', '中等', '1', 'array(float) \\n float', 0, 'buy_and_sell_stock_twice', 'buy_and_sell_stock_twice', 'BuyAndSellStockTwice');
+INSERT INTO `problems` VALUES (18, 'calendar_rendering', '中等', '1', 'array(tuple(int[start], int[finish])) \\n int', 0, 'calendar_rendering', 'calendar_rendering', 'CalendarRendering');
+INSERT INTO `problems` VALUES (19, 'circular_queue', '中等', '1', 'array(tuple(string[op], int[argument])) \\n void', 0, 'circular_queue', 'circular_queue', 'CircularQueue');
+INSERT INTO `problems` VALUES (20, 'closest_int_same_weight', '中等', '1', ' long \\n long', NULL, 'closest_int_same_weight', 'closest_int_same_weight', 'ClosestIntSameWeight');
 COMMIT;
 
 -- ----------------------------
@@ -195,7 +216,6 @@ CREATE TABLE `submission` (
   `problemIndex` varchar(255) DEFAULT NULL,
   `problemName` varchar(255) DEFAULT NULL,
   `usingTime` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `usingMemory` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `usingLanguage` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `failReason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -204,8 +224,8 @@ CREATE TABLE `submission` (
 -- Records of submission
 -- ----------------------------
 BEGIN;
-INSERT INTO `submission` VALUES ('1', '2', '3', '8', '4', '5', '6', '7', '9');
-INSERT INTO `submission` VALUES ('1', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i');
+INSERT INTO `submission` VALUES ('1', '2', '3', '8', '4', '5', '7', '9');
+INSERT INTO `submission` VALUES ('1', 'b', 'c', 'd', 'e', 'f', 'h', 'i');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

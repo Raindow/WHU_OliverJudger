@@ -222,6 +222,15 @@ export default {
       }
       this.$axios.post('/submission/submit', data).then((res) => {
         // console.log('abcdefg', res.data)
+        if (res.data === 'You have passed ALL tests') {
+          alert('恭喜，回答正确')
+          console.log('true', res.data)
+          // this.$router.push('/Problems')
+        } else {
+          alert('不正确', res.data)
+          console.log('false', res.data)
+          // this.$router.push('/Problems')
+        }
       })
     },
     beforeUpload (file, fileList) {

@@ -126,10 +126,8 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
 
             // exec('python ../EPIJudge-master/aaa.py',function(error,stdout,stderr){
             exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py',function(error,stdout,stderr){
-
                 if(error) {
                     // console.info('stderr : '+stderr);
-
                     console.log('stderr',error)
                     let data={
                         studentID: req.body.ID ,
@@ -144,8 +142,6 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
 
                     let a = submission.addSubmission(data)
                     console.log(a)
-
-
                     res.send(stderr);
 
                 }
