@@ -7,7 +7,6 @@ const multer = require('multer');
 const storage = multer.diskStorage({
     destination: function(req,file,callback){
         let filePath=''
-        console.log('filePath')
         if (req.body.language==='py'){
             filePath='../EPIJudge-master/epi_judge_python_solutions'
         }else if(req.body.language==='java'){
@@ -20,11 +19,22 @@ const storage = multer.diskStorage({
         callback(null,filePath);
     },
 
-    filename: function(req, file, callback) {
-        let filePath='test' + '.' + req.body.language
-        console.log(req.body.language)
-        console.log('fileRoot',filePath)
-        callback(null, filePath);
+    filename: async function (req, file, callback) {
+
+        let result = await submission.showTitle(req.body.language,req.body.title);
+        let finalName=''
+        if (req.body.language==='py'){
+            finalName=result[0].python+'.'+req.body.language
+        }else if(req.body.language==='java'){
+            finalName=result[0].java+'.'+req.body.language
+        }else if(req.body.language==='cpp'){
+            finalName=result[0].cpp+'.'+'cc'
+        }
+        console.log('finalName', finalName)
+
+        // let finalName = 'test' + '.' + req.body.language
+
+        callback(null,  finalName);
 
     }
 })
@@ -33,75 +43,62 @@ const upload = multer({storage: storage});
 // 处理添加记录请求
 router.post('/submit', upload.single('file'), async (req, res, next) => {
     try {
-        let result=''
-        // let newPath=''
-        // let oldPath=''
-        let languageType=''
 
+        let languageType=''
         let filePath=''
-        // console.log(req.body.content)
+
+        let finalName=''
+        //将在线编写代码转化为文件 保存其信息
         if(req.body.content){
+
+            let fileNames = await submission.showTitle(req.body.language,req.body.title);
+
             if (req.body.language==='py'){
-                filePath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' + '.' + req.body.language
-                // languageType='python'
+                finalName=fileNames[0].python+'.'+req.body.language
+                filePath='../EPIJudge-master/epi_judge_python_solutions'+'/'+finalName
+                languageType='python'
             }else if(req.body.language==='java'){
-                filePath='../EPIJudge-master/epi_judge_java_solutions'+'/epi/'+'test' + '.' + req.body.language
-                // languageType='java'
+                finalName=fileNames[0].java+'.'+req.body.language
+                filePath='../EPIJudge-master/epi_judge_java_solutions'+'/epi/'+finalName
+                languageType='java'
             }else if(req.body.language==='cpp'){
-                filePath='../EPIJudge-master/epi_judge_cpp_solutions'+'/'+'test' + '.' + req.body.language
-                // languageType='cpp'
+                finalName=fileNames[0].cpp+'.'+'cc'
+                filePath='../EPIJudge-master/epi_judge_cpp_solutions'+'/'+finalName
+                languageType='cpp'
             }
-            console.log('languageType',languageType);
-            // filePath = './uploads'+'/' + req.body.ID + '_' + new Date().toLocaleDateString() + '_' + req.body.title + '.' + req.body.language;
-            // console.log('aaa',filePath);
+
             fs.writeFile(filePath, req.body.content, (err) =>{
                 if(err) {
                     console.log(err);
                 }else {
-                    console.log('get file success');
+                    console.log('write file success');
                 }
             })
         }
-        // console.log(req.body)
 
+        //获取上传文件信息
         if (filePath===''){
-            // console.log(req.file)
+            console.log('upload',req.file.filename)
             const path = require('path');
             let extname = path.extname(req.file.filename);
-            // oldPath=req.file.path
             if (extname==='.py'){
-                // newPath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' +extname
+                finalName=req.file.filename
                 languageType='python'
             }else if(extname==='.java'){
-                // newPath='../EPIJudge-master/epi_judge_java_solutions'+'/epi/'+'AbsentValueArray' +extname
+                finalName=req.file.filename
                 languageType='java'
-            }else if(extname==='.cpp'){
-                // newPath='../EPIJudge-master/epi_judge_cpp_solutions'+'/'+'test' +extname
-                languageType='cpp'
-            }
-
-        } else {
-            // console.log('bbb',req.body.language)
-            // oldPath=filePath
-            if (req.body.language==='py'){
-                // newPath='../EPIJudge-master/epi_judge_python_solutions'+'/'+'test' + '.' + req.body.language
-                languageType='python'
-            }else if(req.body.language==='java'){
-                // newPath='../EPIJudge-master/epi_judge_java_solutions'+'/epi/'+'AbsentValueArray' + '.' + req.body.language
-                languageType='java'
-            }else if(req.body.language==='cpp'){
-                // newPath='../EPIJudge-master/epi_judge_cpp_solutions'+'/'+'test' + '.' + req.body.language
+            }else if(extname==='.cpp' || extname==='.cc'){
+                finalName=req.file.filename
                 languageType='cpp'
             }
 
         }
+        console.log('languageType',languageType)
 
-        // 异步调用pyconst
-        console.log(languageType)
+        // 异步调用py
         exec = require('child_process').exec;
         if (languageType==='python'){
-            // exec('python ../EPIJudge-master/aaa.py',function(error,stdout,stderr){
-            exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py',function(error,stdout,stderr){
+            exec('python ../EPIJudge-master/epi_judge_python_solutions/'+ finalName,function(error,stdout,stderr){
                 if(error) {
                     // console.info('stderr : '+stderr);
                     console.log('stderr',error)
@@ -113,7 +110,6 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
                         usingTime:0,
                         usingLanguage:req.body.language,
                         failReason:stderr
-                        // failReason:isPassed?0:result.replace('\'', '"')
                     }
                     let a = submission.addSubmission(data)
                     console.log(a)
@@ -129,10 +125,9 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
                         submissionTime:Date.now(),
                         submissionStatus:isPassed?1:0,
                         problemName:req.body.title,
-                        usingTime:isPassed?stdout.match(/Median running time(.*?)us/g)[0].split(':')[1]:0,
+                        usingTime:isPassed?stdout.match(/Median running time(.*?)\n/g)[0].split(':')[1]:0,
                         usingLanguage:req.body.language,
                         failReason:isPassed?0:stdout
-                        // failReason:isPassed?0:result.replace('\'', '"')
                     }
                     let a = submission.addSubmission(data)
                     console.log(a)
@@ -145,71 +140,94 @@ router.post('/submit', upload.single('file'), async (req, res, next) => {
             })
         }// 异步调用java
         else if(languageType==='java'){
-            var cmd='cd ../EPIJudge-master/epi_judge_java_solutions && javac ./epi/test.java && java epi.test';
-
-            // const exec = require('child_process').exec;
+            // finalName='Anagrams.java'
+            let cmd='cd ../EPIJudge-master/epi_judge_java_solutions && javac ./epi/'+finalName+ ' && java epi.'+ finalName.split('.')[0];
             exec(cmd ,function(error,stdout,stderr){
                 if(error) {
-                    console.info('stderr : '+stderr);
+                    console.log('stderr',error)
+                    let data={
+                        studentID: req.body.ID ,
+                        submissionTime:Date.now(),
+                        submissionStatus:0,
+                        problemName:req.body.title,
+                        usingTime:0,
+                        usingLanguage:req.body.language,
+                        failReason:stderr
+                        // failReason:isPassed?0:result.replace('\'', '"')
+                    }
+                    let a = submission.addSubmission(data)
+                    console.log(a)
+                    res.send(stderr);
                 }
                 else{
-                    console.log('cd success')
-                    result=stdout
-                    console.log('result',result)
-                    // exec('javac ./epi/ABSqrt2.java',{ encoding: 'UNICODE' },function(error,stdout,stderr) {
-                    //     if(error) {
-                    //         console.info('stderr : '+stderr);
-                    //     }
-                    //     else{
-                    //         console.log('compiled');
-                    //         result=stdout
-                    //         console.log('result',result)
-                    //     }
-                    //
-                    // })
+                    console.log('stdout',stdout)
+                    stdout=stdout.replace(new RegExp('\'','g'), '"')
+                    let isPassed = stdout.includes('You\"ve passed ALL tests');
+                    // console.log('result',result)
+                    let data={
+                        studentID: req.body.ID ,
+                        submissionTime:Date.now(),
+                        submissionStatus:isPassed?1:0,
+                        problemName:req.body.title,
+                        usingTime:isPassed?stdout.match(/Median running time(.*?)\n/g)[0].split(':')[1]:0,
+                        usingLanguage:req.body.language,
+                        failReason:isPassed?0:stdout
+                    }
+                    let a = submission.addSubmission(data)
+                    console.log(a)
+                    if (isPassed){
+                        res.send('You have passed ALL tests');
+                    }else {
+                        res.send(stdout);
+                    }
+
                 }
 
             })
         }// 异步调用cpp
         else if(languageType==='cpp'){
-            const exec = require('child_process').exec;
-            var cmd='cd ../EPIJudge-master/epi_judge_cpp_solutions && cmake . && cmake --build ./ --target test111 && cd debug && test111.exe'
+            let temp=finalName.split('.')[0]
+            var cmd = 'cd ../EPIJudge-master/epi_judge_cpp_solutions && cmake . && cmake --build ./ --target '+temp+' && cd debug && '+temp+'.exe'
             exec(cmd ,function(error,stdout,stderr){
                 if(error) {
-                    console.info('stderr : '+stderr);
+                    console.log('stderr',error)
+                    let data={
+                        studentID: req.body.ID ,
+                        submissionTime:Date.now(),
+                        submissionStatus:0,
+                        problemName:req.body.title,
+                        usingTime:0,
+                        usingLanguage:req.body.language,
+                        failReason:stderr
+                    }
+                    let a = submission.addSubmission(data)
+                    console.log(a)
+                    res.send(stderr);
                 }
-                // console.log('exec: ' + stdout);
-                result=stdout
-                console.log('result',result)
-                // res.send(result);
-
+                else{
+                    console.log('stdout',stdout)
+                    stdout=stdout.replace(new RegExp('\'','g'), '"')
+                    let isPassed = stdout.includes('You\"ve passed ALL tests');
+                    // console.log('result',result)
+                    let data={
+                        studentID: req.body.ID ,
+                        submissionTime:Date.now(),
+                        submissionStatus:isPassed?1:0,
+                        problemName:req.body.title,
+                        usingTime:isPassed?stdout.match(/Median running time(.*?)\n/g)[0].split(':')[1]:0,
+                        usingLanguage:req.body.language,
+                        failReason:isPassed?0:stdout
+                    }
+                    let a = submission.addSubmission(data)
+                    console.log(a)
+                    if (isPassed){
+                        res.send('You have passed ALL tests');
+                    }else {
+                        res.send(stdout);
+                    }
+               }
             })
         }
-
-        // new Promise((resolve, reject)=>{
-        //     exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py', (error,stdout,stderr) =>{
-        //         if(error){
-        //             reject('fail')
-        //         }
-        //         console.log('exec: ' + stdout);
-        //         result=stdout
-        //         resolve('success')
-        //     })
-        // }).then(() => {
-        //     console.log('Promise result')
-        //     console.log(result)
-        //     res.send(result);
-        // }).catch((err) => {
-        //     console.log(err)
-        // })
-
-        // req.body.文件
-        // 文件键入判题器，返回结果记录在judge
-        // 添加到数据库
-        //let isAdd = await submission.addSubmission(req.body)
-        // res返回相关信息，包括 是否接受，内存信息，运行时间，错误原因
-        //res.send(isAdd)
-
 
     } catch (e) {
         res.send(e);
@@ -247,14 +265,6 @@ router.post('/reserve', async (req, res, next) => {
 
 // 处理查询记录请求
 router.post('/searchSubmission', async (req, res, next) => {
-    // 异步调用py
-    // const exec = require('child_process').exec;
-    // exec('python ../EPIJudge-master/epi_judge_python_solutions/test.py',function(error,stdout,stderr){
-    //     if(error) {
-    //         console.info('stderr : '+stderr);
-    //     }
-    //     console.log('exec: ' + stdout);
-    // })
     try {
         let result = await submission.searchSubmission(req.body.ID);
         res.send(result)

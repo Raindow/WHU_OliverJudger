@@ -20,7 +20,7 @@ exports.addSubmission = addSubmission;
 
 // 添加记录函数
 let searchSubmission = (ID) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         db.query(`select * from submission where StudentID = '${ID}'`, (err, submission) => {
             if(err) {
                 resolve(err)
@@ -44,20 +44,20 @@ exports.searchSubmission = searchSubmission;
 let showTitle = (attr,attr1) => {
     return new Promise((resolve, reject) => {
         console.log('showTitle');
-        if(attr==='Python'){
+        if(attr==='Python' || attr==='py'){
         db.query(`select python from problems where title = '${attr1}'`, (err, rows) => {
             if(err) {
                 reject(err);
             }
             resolve(rows);
-        })}else if(attr==='Java'){
+        })}else if(attr==='Java' || attr==='java'){
             db.query(`select java from problems where title = '${attr1}'`, (err, rows) => {
                 if(err) {
                     reject(err);
                 }
                 resolve(rows);
             })
-        }else  if(attr==='C++'){
+        }else  if(attr==='C++' || attr==='cpp'){
             db.query(`select cpp from problems where title = '${attr1}'`, (err, rows) => {
                 if(err) {
                     reject(err);
