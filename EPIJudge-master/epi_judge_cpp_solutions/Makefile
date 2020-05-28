@@ -26,13 +26,13 @@ $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
 
-# test.cc
-$(BUILD_DIR)/test111: $(SRC_DIR)/test111.cc | $(BUILD_DIR)
+# myTest.cc
+$(BUILD_DIR)/myTest: $(SRC_DIR)/myTest.cc | $(BUILD_DIR)
 	$(CXX_COMPILER) $(CXX_FLAGS_DEBUG) -o $@ $<
-test111: $(BUILD_DIR)/test111
+myTest: $(BUILD_DIR)/myTest
 	$< $(PROGRAM_ARGS)
 
-.PHONY: test111
+.PHONY: myTest
 
 
 # a_b_sqrt2.cc

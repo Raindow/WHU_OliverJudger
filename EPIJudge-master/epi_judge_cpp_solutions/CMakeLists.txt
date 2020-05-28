@@ -11,7 +11,7 @@ else()
 endif()
 
 
-add_executable(test111 test111.cc)
+add_executable(myTest myTest.cc)
 
 add_executable(a_b_sqrt2 a_b_sqrt2.cc)
 add_executable(absent_value_array absent_value_array.cc)
