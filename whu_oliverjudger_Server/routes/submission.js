@@ -6,7 +6,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function(req,file,callback){
-        let filePath=''
+        let filePath='';
         if (req.body.language==='py'){
             filePath='../EPIJudge-master/epi_judge_python_solutions'
         }else if(req.body.language==='java'){
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
         }else if(req.body.language==='cpp'){
             filePath='../EPIJudge-master/epi_judge_cpp_solutions'
         }
-        console.log('fileRoot',filePath)
+        console.log('fileRoot',filePath);
         // return filePath
         callback(null,filePath);
     },
@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
     filename: async function (req, file, callback) {
 
         let result = await submission.showTitle(req.body.language,req.body.title);
-        let finalName=''
+        let finalName='';
         if (req.body.language==='py'){
             finalName=result[0].python+'.'+req.body.language
         }else if(req.body.language==='java'){
