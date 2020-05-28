@@ -29,7 +29,7 @@
       background
       layout="prev, pager, next"
       :page-size="pageSize"
-      :total="totalTableLength"
+      :total="showTableData.length"
       :current-page.sync="currentPage"
       @current-change="handleCurrentChange"></el-pagination>
   </div>
@@ -49,7 +49,6 @@ export default {
         height: ''
       },
       ID: localStorage.getItem('userID'),
-      isSeeYourself: false,
       totalTableLength: 0, // 获取通告总数目
       pageSize: 7, // page-size 每页显示条目个数
       currentPage: 1,
@@ -92,14 +91,7 @@ export default {
     },
 
     pageData: function () {
-      // console.log(this.isSeeYourself)
       return this.showTableData.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
-
-      // if (!this.isSeeYourself) {
-      //   return this.showTableData.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
-      // } else {
-      //   return this.switchOnTableData.slice(((this.currentPage) - 1) * this.pageSize, this.currentPage * this.pageSize)
-      // }
     }
   },
   watch: {
@@ -123,7 +115,6 @@ export default {
       let that = this
       this.$axios.post('/submission/searchSubmission', data
       ).then(function (res) {
-        console.log(res.data)
         that.dealRes(res.data)
       }).catch(function (error) {
         console.log(error)

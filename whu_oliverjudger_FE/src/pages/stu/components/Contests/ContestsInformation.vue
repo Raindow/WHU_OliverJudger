@@ -47,7 +47,6 @@ export default {
       pageSize: 7, // page-size 每页显示条目个数
       currentPage: 1,
       search: '',
-      searchChanged: false,
       columnHeaders: [ // 列表的头标签
         {prop: 'contestName', label: '比赛名'},
         {prop: 'date', label: '日期'},
