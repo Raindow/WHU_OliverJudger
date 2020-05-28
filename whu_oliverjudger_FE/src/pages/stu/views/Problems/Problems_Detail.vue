@@ -228,7 +228,7 @@ export default {
           // this.$router.push('/Problems')
         } else {
           // eslint-disable-next-line eqeqeq
-          alert(res.data == '' ? '未通过所有样例' : res.data)
+          alert(res.data === '' ? '未通过所有样例' : res.data)
           console.log('false', res.data)
           // this.$router.push('/Problems')
         }
@@ -249,13 +249,17 @@ export default {
       // console.log(file)
     },
     handleFileSuccess (response, file, fileList) {
-      // console.log('success')
-      // console.log(response)
-      // console.log(file)
-      // console.log(fileList)
-      // console.log(this)
-      // console.log(this.fileUploadData)
-      // console.log('abcdefg', response)
+      // console.log('abcdefg', res.data)
+      if (response.data === 'You have passed ALL tests') {
+        alert(response.data)
+        console.log('true', response.data)
+        // this.$router.push('/Problems')
+      } else {
+        // eslint-disable-next-line eqeqeq
+        alert(response.data === '' ? '未通过所有样例' : response.data)
+        console.log('false', response.data)
+        // this.$router.push('/Problems')
+      }
     },
     // eslint-disable-next-line handle-callback-err
     handleFileErr (err, file, fileList) {
