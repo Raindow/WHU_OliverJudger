@@ -249,15 +249,16 @@ export default {
       // console.log(file)
     },
     handleFileSuccess (response, file, fileList) {
+      console.log('handleFileSuccess')
       // console.log('abcdefg', res.data)
-      if (response.data === 'You have passed ALL tests') {
-        alert(response.data)
-        console.log('true', response.data)
+      if (response === 'You have passed ALL tests') {
+        alert(response)
+        console.log('true', response)
         // this.$router.push('/Problems')
       } else {
         // eslint-disable-next-line eqeqeq
-        alert(response.data === '' ? '未通过所有样例' : response.data)
-        console.log('false', response.data)
+        alert(response === '' ? '未通过所有样例' : response)
+        console.log('false', response)
         // this.$router.push('/Problems')
       }
     },
