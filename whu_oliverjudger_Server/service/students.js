@@ -2,7 +2,7 @@ const db = require('../config/db')
 // 登录验证函数
 let verifyLogin = (ID,password) => {
     return new Promise((resolve, reject) => {
-        db.query(`select * from students where StudentID = ${ID}`, (err, user) => {
+        db.query(`select * from students where StudentID = '${ID}'`, (err, user) => {
             if(err) {
                 resolve(err)
             }
@@ -28,7 +28,7 @@ exports.verifyLogin = verifyLogin;
 // 判断账户是否存在
 let isStudentExist = (ID) => {
     return new Promise((resolve, reject) => {
-        db.query(`select * from students where StudentID = ${ID}`, (err, user) => {
+        db.query(`select * from students where StudentID = '${ID}'`, (err, user) => {
             if(err) {
                 resolve(err)
             }
